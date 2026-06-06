@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhinav Goel — Robotics Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090d;--bg2:#0b0f14;--bg3:#0f1520;--card:#0d141c;
+  --border:rgba(77,141,255,0.12);--border2:rgba(77,141,255,0.28);
+  --accent:#4d8dff;--accent2:#8cc7ff;--adim:rgba(77,141,255,0.07);
+  --text:#dff2ea;--text2:#7aa898;--text3:#3d6658;
+  --mono:'Space Mono',monospace;--sans:'Syne',sans-serif;
+  --red:#ff4d6d;--yellow:#ffd166;--blue:#4db8ff;--purple:#a78bfa;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.7;overflow-x:hidden;}
+
+/* GRID BG */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(77,141,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(77,141,255,0.025) 1px,transparent 1px);background-size:44px 44px;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;background:rgba(7,9,13,0.88);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:var(--mono);font-size:13px;color:var(--accent);text-decoration:none;display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-family:var(--mono);font-size:11px;color:var(--text2);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s;}
+.nav-links a:hover{color:var(--accent);}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;padding:7rem 3rem 4rem;max-width:1140px;margin:0 auto;position:relative;z-index:1;}
+.hero-layout{display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;width:100%;}
+.hero-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.5rem;display:flex;align-items:center;gap:10px;}
+.hero-tag::before{content:'';display:inline-block;width:28px;height:1px;background:var(--accent);}
+h1{font-family:var(--mono);font-size:clamp(2.8rem,5.5vw,4.6rem);font-weight:700;line-height:1.05;letter-spacing:-.02em;color:var(--text);margin-bottom:1.4rem;}
+h1 .acc{color:var(--accent);}
+.hero-bio{font-size:1.05rem;color:var(--text2);max-width:520px;line-height:1.8;margin-bottom:2.5rem;font-weight:300;}
+.hero-ctas{display:flex;gap:.8rem;flex-wrap:wrap;}
+.btn-p{font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:.8rem 1.8rem;background:var(--accent);color:#07090d;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s,transform .15s,box-shadow .2s;font-weight:700;border-radius:4px;box-shadow:0 4px 12px rgba(77,141,255,.2);}
+.btn-p:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(77,141,255,.3);}
+.btn-o{font-family:var(--mono);font-size:12px;letter-spacing:.06em;padding:.8rem 1.8rem;background:transparent;color:var(--accent);border:1px solid var(--border2);cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;border-radius:4px;}
+.btn-o:hover{border-color:var(--accent);background:var(--adim);transform:translateY(-2px);box-shadow:0 4px 12px rgba(77,141,255,.1);}
+.hero-stats{display:flex;gap:2rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;}
+.stat-item .num{font-family:var(--mono);font-size:1.7rem;font-weight:700;color:var(--accent);display:block;}
+.stat-item .lbl{font-size:11px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;font-family:var(--mono);}
+
+/* HERO VISUAL — animated robot schematic */
+.hero-visual{position:relative;}
+.hero-svg-wrap{position:relative;display:flex;justify-content:center;align-items:center;}
+.drone-svg{width:100%;max-width:400px;filter:drop-shadow(0 0 24px rgba(77,141,255,0.2));}
+.pulse-ring{animation:pulse-ring 2.4s ease-out infinite;}
+@keyframes pulse-ring{0%{transform:scale(.8);opacity:.7;}70%{transform:scale(1.15);opacity:0;}100%{transform:scale(1.15);opacity:0;}}
+.rotor{animation:spin 1.1s linear infinite;}
+.rotor2{animation:spin 1.1s linear infinite reverse;}
+@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+.signal-dot{animation:blink-dot 1.6s ease-in-out infinite;}
+.signal-dot:nth-child(2){animation-delay:.4s;}
+.signal-dot:nth-child(3){animation-delay:.8s;}
+@keyframes blink-dot{0%,100%{opacity:.2;}50%{opacity:1;}}
+.scan-line{animation:scan 3s linear infinite;}
+@keyframes scan{0%{transform:translateY(-60px);opacity:0;}10%{opacity:.7;}90%{opacity:.7;}100%{transform:translateY(60px);opacity:0;}}
+
+/* SECTION */
+section{position:relative;z-index:1;}
+.container{max-width:1140px;margin:0 auto;padding:6rem 3rem;}
+.sec-hdr{display:flex;align-items:center;gap:1rem;margin-bottom:3.5rem;}
+.sec-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap;font-weight:600;}
+.sec-line{flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);}
+h2{font-family:var(--mono);font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:700;letter-spacing:-.01em;color:var(--text);margin-bottom:.3rem;}
+
+/* ABOUT */
+#about .ag{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;}
+.about-text p{color:var(--text2);margin-bottom:1rem;font-weight:300;font-size:1rem;}
+.edu-block{padding:1.5rem 1.6rem;border:1px solid var(--border);background:linear-gradient(135deg,rgba(77,141,255,.04),rgba(77,141,255,.01));margin-top:1.5rem;border-radius:6px;transition:all .3s;}
+.edu-block:hover{border-color:var(--border2);background:linear-gradient(135deg,rgba(77,141,255,.08),rgba(77,141,255,.03));box-shadow:0 4px 12px rgba(77,141,255,.08);}
+.edu-d{font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--text);}
+.edu-i{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.04em;margin:.15rem 0;}
+.edu-t{font-family:var(--mono);font-size:11px;color:var(--text3);}
+
+/* SKILLS — tabbed interactive */
+.skills-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1.5rem;overflow-x:auto;}
+.stab{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.08em;text-transform:uppercase;padding:.6rem 1rem;cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent;transition:color .2s,border-color .2s;white-space:nowrap;}
+.stab:hover{color:var(--text2);}
+.stab.active{color:var(--accent);border-bottom-color:var(--accent);}
+.skills-panel{display:none;}
+.skills-panel.active{display:block;}
+.skill-pills{display:flex;flex-wrap:wrap;gap:.4rem;}
+.pill{font-family:var(--mono);font-size:11px;padding:5px 10px;border:1px solid var(--border);color:var(--text2);letter-spacing:.04em;cursor:default;transition:border-color .2s,color .2s,background .2s;}
+.pill:hover{border-color:var(--accent);color:var(--accent);background:var(--adim);}
+.pill.hi{border-color:rgba(77,141,255,.35);color:var(--accent);background:var(--adim);}
+
+/* PROJECTS */
+#projects{background:var(--bg2);}
+.proj-filter{display:flex;gap:.5rem;margin-bottom:2rem;flex-wrap:wrap;}
+.filt-btn{font-family:var(--mono);font-size:11px;padding:8px 16px;border:1px solid var(--border);color:var(--text3);background:transparent;cursor:pointer;letter-spacing:.06em;text-transform:uppercase;transition:all .2s;border-radius:4px;}
+.filt-btn:hover,.filt-btn.active{border-color:var(--accent);color:var(--accent);background:var(--adim);box-shadow:0 0 12px rgba(77,141,255,.1);}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;}
+.pcard{background:var(--card);border:1px solid var(--border);overflow:hidden;transition:border-color .3s,transform .25s,box-shadow .3s;cursor:pointer;position:relative;border-radius:6px;}
+.pcard:hover{border-color:var(--border2);transform:translateY(-6px);box-shadow:0 12px 24px rgba(77,141,255,.12);}
+.pcard-img{width:100%;height:180px;overflow:hidden;position:relative;background:var(--bg3);border-radius:6px 6px 0 0;}
+.pcard-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.pcard-img svg{width:100%;height:100%;}
+.pcard-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 50%,var(--card) 100%);pointer-events:none;}
+.pcard.featured .pcard-img{height:220px;}
+.pcard-body{padding:1.4rem;}
+.pcard-num{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.08em;margin-bottom:.6rem;text-transform:uppercase;}
+.pcard h3{font-family:var(--mono);font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:.3rem;}
+.pcard-venue{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.05em;margin-bottom:.7rem;text-transform:uppercase;}
+.pcard-desc{font-size:.875rem;color:var(--text2);font-weight:300;line-height:1.65;margin-bottom:1rem;}
+.pcard-bullets{list-style:none;margin-bottom:1rem;}
+.pcard-bullets li{font-size:.825rem;color:var(--text2);padding:.2rem 0 .2rem 1rem;position:relative;font-weight:300;}
+.pcard-bullets li::before{content:'›';position:absolute;left:0;color:var(--accent);}
+.ptags{display:flex;flex-wrap:wrap;gap:.3rem;}
+.ptag{font-family:var(--mono);font-size:10px;padding:4px 10px;background:rgba(77,141,255,.05);color:var(--accent);border:1px solid var(--border);letter-spacing:.04em;border-radius:3px;transition:all .2s;}
+.ptag:hover{background:rgba(77,141,255,.12);border-color:var(--accent);}
+.pcard-links{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;}
+.plink{font-family:var(--mono);font-size:10px;color:var(--accent);text-decoration:none;border:1px solid var(--border);padding:5px 12px;letter-spacing:.06em;transition:all .2s;border-radius:3px;display:inline-flex;align-items:center;}
+.plink:hover{color:var(--accent);border-color:var(--accent);background:var(--adim);box-shadow:0 0 8px rgba(77,141,255,.15);}
+/* expand modal */
+.pcard-expand{display:none;position:fixed;inset:0;z-index:500;background:rgba(7,9,13,.92);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:2rem;}
+.pcard-expand.open{display:flex;}
+.expand-inner{background:var(--bg3);border:1px solid var(--border2);max-width:700px;width:100%;max-height:85vh;overflow-y:auto;padding:2.5rem;position:relative;}
+.expand-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--text2);cursor:pointer;font-size:1.2rem;font-family:var(--mono);}
+.expand-close:hover{color:var(--accent);}
+
+/* EXPERIENCE */
+.exp-list{display:flex;flex-direction:column;}
+.exp-item{display:grid;grid-template-columns:160px 1fr;gap:2rem;padding:2rem 0;border-bottom:1px solid var(--border);}
+.exp-item:last-child{border-bottom:none;}
+.exp-date{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;padding-top:2px;line-height:1.5;}
+.exp-role{font-family:var(--mono);font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:.15rem;}
+.exp-org{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:.05em;margin-bottom:.7rem;}
+.exp-bullets{list-style:none;}
+.exp-bullets li{font-size:.875rem;color:var(--text2);padding:.2rem 0 .2rem 1rem;position:relative;font-weight:300;}
+.exp-bullets li::before{content:'—';position:absolute;left:0;color:var(--text3);font-size:9px;top:7px;}
+
+/* ACHIEVEMENTS */
+#achievements{background:var(--bg2);}
+.ach-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2.5rem;}
+.ach-card{background:var(--card);border:1px solid var(--border);padding:1.8rem;transition:all .3s;border-radius:6px;cursor:default;}
+.ach-card:hover{border-color:var(--border2);background:linear-gradient(135deg,rgba(77,141,255,.05),rgba(77,141,255,.01));box-shadow:0 8px 16px rgba(77,141,255,.1);}
+.ach-icon{font-size:1.8rem;margin-bottom:1rem;display:block;}
+.ach-card h3{font-family:var(--mono);font-size:.9rem;color:var(--text);font-weight:700;margin-bottom:.5rem;}
+.ach-card p{font-size:.85rem;color:var(--text2);font-weight:300;line-height:1.6;}
+.ach-badge{display:inline-block;font-family:var(--mono);font-size:10px;padding:5px 10px;background:rgba(77,141,255,.15);color:var(--accent);border:1px solid rgba(77,141,255,.4);margin-top:.8rem;letter-spacing:.05em;border-radius:3px;}
+.cert-list{display:flex;flex-direction:column;gap:.8rem;}
+.cert-item{display:flex;align-items:center;gap:1rem;padding:.9rem 1.1rem;border:1px solid var(--border);background:var(--card);transition:border-color .2s;}
+.cert-item:hover{border-color:var(--border2);}
+.cert-dot{width:7px;height:7px;background:var(--accent);flex-shrink:0;}
+.cert-name{font-family:var(--mono);font-size:.84rem;color:var(--text);font-weight:700;flex:1;}
+.cert-detail{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.05em;}
+
+/* CONTACT */
+#contact{border-top:1px solid var(--border);}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+.contact-text h2{margin-bottom:1rem;}
+.contact-text p{color:var(--text2);font-weight:300;margin-bottom:2rem;}
+.contact-links{display:flex;flex-direction:column;gap:.6rem;}
+.clink{display:flex;align-items:center;gap:.8rem;text-decoration:none;color:var(--text2);font-family:var(--mono);font-size:12px;transition:color .2s;padding:.55rem 0;border-bottom:1px solid var(--border);}
+.clink:hover{color:var(--accent);}
+.clink .icon{width:18px;color:var(--text3);font-size:13px;flex-shrink:0;}
+.clink:hover .icon{color:var(--accent);}
+
+/* FOOTER */
+footer{padding:2rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;background:rgba(77,141,255,.02);}
+footer p{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.06em;}
+.ft-acc{color:var(--accent);}
+
+/* ANIMATIONS */
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
+.fade-up.vis{opacity:1;transform:translateY(0);}
+.blink{animation:blink 1.1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* SCROLL INDICATOR */
+.scroll-hint{position:absolute;bottom:2.5rem;left:2.5%;font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:.1em;display:flex;flex-direction:column;align-items:center;gap:.5rem;text-transform:uppercase;z-index:2;}
+.scroll-arrow{width:1px;height:30px;background:linear-gradient(to bottom,var(--accent),transparent);animation:sd 1.8s ease-in-out infinite;}
+@keyframes sd{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+
+/* TYPEWRITER */
+.typewriter{overflow:hidden;border-right:.1em solid var(--accent);white-space:nowrap;animation:typing 2.8s steps(40,end) forwards,cursor-blink .75s step-end infinite;}
+@keyframes typing{from{max-width:0;}to{max-width:100%;}}
+@keyframes cursor-blink{0%,100%{border-color:var(--accent);}50%{border-color:transparent;}}
+
+/* skill bar animation */
+.sbar-wrap{margin-top:.25rem;}
+.sbar-row{display:flex;align-items:center;gap:.8rem;margin-bottom:.5rem;}
+.sbar-label{font-family:var(--mono);font-size:11px;color:var(--text2);width:110px;flex-shrink:0;}
+.sbar-bg{flex:1;height:3px;background:var(--border2);overflow:hidden;}
+.sbar-fill{height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform 1s ease;}
+.sbar-fill.animated{transform:scaleX(1);}
+.sbar-pct{font-family:var(--mono);font-size:10px;color:var(--text3);width:32px;text-align:right;}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{gap:1rem;}
+  #hero{padding:6rem 1.5rem 3rem;}
+  .hero-layout{grid-template-columns:1fr;}
+  .hero-visual{display:none;}
+  .container{padding:3.5rem 1.5rem;}
+  #about .ag{grid-template-columns:1fr;}
+  .exp-item{grid-template-columns:1fr;gap:.3rem;}
+  .ach-grid{grid-template-columns:1fr;}
+  .contact-inner{grid-template-columns:1fr;gap:2rem;}
+  .projects-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;gap:.5rem;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><polygon points="9,1 17,5 17,13 9,17 1,13 1,5" stroke="#4d8dff" stroke-width="1.2" fill="none"/><circle cx="9" cy="9" r="2.5" fill="#4d8dff"/></svg>
+    AG<span class="blink">_</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" style="position:relative;">
+  <div class="hero-layout">
+    <div class="hero-left">
+      <div class="hero-tag">Robotics Engineer · Autonomous Systems · UAV</div>
+      <h1>Abhinav<br><span class="acc">Goel.</span></h1>
+      <p class="hero-bio">Building machines that perceive, decide, and act. ROS2 navigation, SLAM, sensor fusion, and drone systems — from simulation to real-world deployment.</p>
+      <div class="hero-ctas">
+        <a href="#projects" class="btn-p">View Projects</a>
+        <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5" target="_blank" rel="noopener" class="btn-o">LinkedIn ↗</a>
+        <a href="https://github.com/Humobot1812" target="_blank" rel="noopener" class="btn-o">GitHub ↗</a>
+        <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener" class="btn-o">YouTube ↗</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="num">Top 10</span><span class="lbl">e-Yantra 2025-26</span></div>
+        <div class="stat-item"><span class="num">400+</span><span class="lbl">teams beaten</span></div>
+        <div class="stat-item"><span class="num">5</span><span class="lbl">major projects</span></div>
+        <div class="stat-item"><span class="num">9</span><span class="lbl">GitHub repos</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:1.5rem;">
+        <div style="width:280px;height:280px;border-radius:50%;border:2px solid rgba(77,141,255,.3);overflow:hidden;box-shadow:0 0 48px rgba(77,141,255,.25);">
+          <img src="profile.jpg" alt="Abhinav Goel" style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center;font-size:12px;color:var(--text3);">
+          <span style="display:flex;align-items:center;gap:4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L3 7v10c0 8 9 13 9 13s9-5 9-13V7l-9-5z"/></svg>Robotic Arm</span>
+          <span style="display:flex;align-items:center;gap:4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m0-13c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg>Drone</span>
+          <span style="display:flex;align-items:center;gap:4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 7V5M18 7V5M6 17v2M18 17v2"/></svg>AMR Bots</span>
+        </div>
+      </div>
+      <div class="hero-svg-wrap" style="display:none;">
+        <!-- Animated Drone Schematic SVG -->
+        <svg class="drone-svg" viewBox="0 0 400 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#4d8dff" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#4d8dff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- glow bg -->
+          <circle cx="200" cy="190" r="140" fill="url(#glow1)"/>
+          <!-- pulse rings -->
+          <circle cx="200" cy="190" r="90" stroke="#4d8dff" stroke-width=".5" fill="none" opacity=".15" class="pulse-ring"/>
+          <circle cx="200" cy="190" r="110" stroke="#4d8dff" stroke-width=".3" fill="none" opacity=".1" class="pulse-ring" style="animation-delay:.8s"/>
+          <!-- main body frame -->
+          <rect x="168" y="162" width="64" height="56" rx="6" fill="#0d141c" stroke="#4d8dff" stroke-width="1.2"/>
+          <!-- cross arms -->
+          <line x1="72" y1="190" x2="168" y2="190" stroke="#4d8dff" stroke-width="1.8" opacity=".6"/>
+          <line x1="232" y1="190" x2="328" y2="190" stroke="#4d8dff" stroke-width="1.8" opacity=".6"/>
+          <line x1="200" y1="80" x2="200" y2="162" stroke="#4d8dff" stroke-width="1.8" opacity=".6"/>
+          <line x1="200" y1="218" x2="200" y2="305" stroke="#4d8dff" stroke-width="1.8" opacity=".6"/>
+          <!-- diagonal arms (quadcopter X config) -->
+          <line x1="108" y1="108" x2="168" y2="168" stroke="#4d8dff" stroke-width="1.4" opacity=".4"/>
+          <line x1="232" y1="168" x2="292" y2="108" stroke="#4d8dff" stroke-width="1.4" opacity=".4"/>
+          <line x1="108" y1="272" x2="168" y2="214" stroke="#4d8dff" stroke-width="1.4" opacity=".4"/>
+          <line x1="232" y1="214" x2="292" y2="272" stroke="#4d8dff" stroke-width="1.4" opacity=".4"/>
+          <!-- motor mounts -->
+          <circle cx="88" cy="120" r="24" fill="#0d141c" stroke="#4d8dff" stroke-width="1.2"/>
+          <circle cx="312" cy="120" r="24" fill="#0d141c" stroke="#4d8dff" stroke-width="1.2"/>
+          <circle cx="88" cy="262" r="24" fill="#0d141c" stroke="#4d8dff" stroke-width="1.2"/>
+          <circle cx="312" cy="262" r="24" fill="#0d141c" stroke="#4d8dff" stroke-width="1.2"/>
+          <!-- rotors -->
+          <g transform="translate(88,120)" class="rotor">
+            <ellipse rx="40" ry="5" fill="none" stroke="#4d8dff" stroke-width="1" opacity=".55"/>
+            <ellipse rx="20" ry="3" fill="none" stroke="#4d8dff" stroke-width=".7" opacity=".35" transform="rotate(45)"/>
+          </g>
+          <g transform="translate(312,120)" class="rotor2">
+            <ellipse rx="40" ry="5" fill="none" stroke="#4d8dff" stroke-width="1" opacity=".55"/>
+            <ellipse rx="20" ry="3" fill="none" stroke="#4d8dff" stroke-width=".7" opacity=".35" transform="rotate(45)"/>
+          </g>
+          <g transform="translate(88,262)" class="rotor2">
+            <ellipse rx="40" ry="5" fill="none" stroke="#4d8dff" stroke-width="1" opacity=".55"/>
+          </g>
+          <g transform="translate(312,262)" class="rotor">
+            <ellipse rx="40" ry="5" fill="none" stroke="#4d8dff" stroke-width="1" opacity=".55"/>
+          </g>
+          <!-- motor dots -->
+          <circle cx="88" cy="120" r="5" fill="#4d8dff"/>
+          <circle cx="312" cy="120" r="5" fill="#4d8dff"/>
+          <circle cx="88" cy="262" r="5" fill="#4d8dff"/>
+          <circle cx="312" cy="262" r="5" fill="#4d8dff"/>
+          <!-- body internals -->
+          <rect x="176" y="170" width="48" height="4" rx="1" fill="#4d8dff" opacity=".25"/>
+          <rect x="176" y="178" width="32" height="4" rx="1" fill="#4d8dff" opacity=".15"/>
+          <rect x="176" y="186" width="40" height="4" rx="1" fill="#4d8dff" opacity=".2"/>
+          <!-- center chip -->
+          <rect x="184" y="200" width="32" height="16" rx="2" fill="#4d8dff" opacity=".12" stroke="#4d8dff" stroke-width=".8"/>
+          <line x1="188" y1="200" x2="188" y2="196" stroke="#4d8dff" stroke-width=".7" opacity=".5"/>
+          <line x1="194" y1="200" x2="194" y2="196" stroke="#4d8dff" stroke-width=".7" opacity=".5"/>
+          <line x1="200" y1="200" x2="200" y2="196" stroke="#4d8dff" stroke-width=".7" opacity=".5"/>
+          <line x1="206" y1="200" x2="206" y2="196" stroke="#4d8dff" stroke-width=".7" opacity=".5"/>
+          <line x1="212" y1="200" x2="212" y2="196" stroke="#4d8dff" stroke-width=".7" opacity=".5"/>
+          <!-- scan line -->
+          <rect x="168" y="163" width="64" height="2" fill="#4d8dff" opacity=".5" class="scan-line"/>
+          <!-- signal dots (telemetry) -->
+          <circle cx="145" cy="155" r="3" fill="#4d8dff" class="signal-dot"/>
+          <circle cx="155" cy="155" r="3" fill="#4d8dff" class="signal-dot"/>
+          <circle cx="165" cy="155" r="3" fill="#4d8dff" class="signal-dot"/>
+          <!-- labels -->
+          <text x="88" y="100" font-family="Space Mono" font-size="9" fill="#3d6658" text-anchor="middle">MOTOR_FL</text>
+          <text x="312" y="100" font-family="Space Mono" font-size="9" fill="#3d6658" text-anchor="middle">MOTOR_FR</text>
+          <text x="88" y="298" font-family="Space Mono" font-size="9" fill="#3d6658" text-anchor="middle">MOTOR_BL</text>
+          <text x="312" y="298" font-family="Space Mono" font-size="9" fill="#3d6658" text-anchor="middle">MOTOR_BR</text>
+          <text x="200" y="248" font-family="Space Mono" font-size="8" fill="#4d8dff" text-anchor="middle" opacity=".6">FLIGHT_CTR</text>
+          <!-- grid ref lines -->
+          <line x1="40" y1="190" x2="60" y2="190" stroke="#4d8dff" stroke-width=".4" opacity=".2"/>
+          <line x1="340" y1="190" x2="360" y2="190" stroke="#4d8dff" stroke-width=".4" opacity=".2"/>
+          <line x1="200" y1="40" x2="200" y2="58" stroke="#4d8dff" stroke-width=".4" opacity=".2"/>
+          <line x1="200" y1="322" x2="200" y2="340" stroke="#4d8dff" stroke-width=".4" opacity=".2"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">// 01 — about</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="ag">
+      <div class="about-text">
+        <p>I'm a Robotics Engineer and B.Tech student at PDPM Indian Institute of Information Technology, Design and Manufacturing, Jabalpur, pursuing Electronics and Communication Engineering. My work spans the full stack — from hardware fabrication to ROS2 navigation pipelines.</p>
+        <p>Core expertise in ROS2-based navigation and SLAM, sensor fusion, computer vision, and drone autopilot systems. I've ranked Top 10 nationally in the e-Yantra Robotics Competition against 400+ teams.</p>
+        <p>Currently leading robotics initiatives at the Electronics & Robotics Society and contributing to UAV development at the Aero Fabrication Club at IIITDM.</p>
+        <div class="edu-block">
+          <div class="edu-d">Bachelor of Technology (B.Tech)</div>
+          <div class="edu-i">PDPM Indian Institute of Information Technology, Design and Manufacturing, Jabalpur</div>
+          <div class="edu-m" style="font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.04em;margin:.15rem 0;">Electronics and Communication Engineering</div>
+          <div class="edu-t">Aug 2024 — Aug 2028 · Jabalpur, Madhya Pradesh</div>
+          <div style="margin-top:.8rem;"><a href="https://www.iiitdmj.ac.in/" target="_blank" rel="noopener" style="font-family:var(--mono);font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">iiitdmj.ac.in ↗</a></div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE SKILLS PANEL -->
+      <div>
+        <div class="skills-tabs" id="skillTabs">
+          <button class="stab active" data-panel="p-prog">Languages</button>
+          <button class="stab" data-panel="p-ros">Frameworks</button>
+          <button class="stab" data-panel="p-uav">UAV/Drone</button>
+          <button class="stab" data-panel="p-vision">Vision</button>
+          <button class="stab" data-panel="p-hw">Hardware</button>
+          <button class="stab" data-panel="p-tools">Tools</button>
+        </div>
+
+        <div class="skills-panel active" id="p-prog">
+          <div class="skill-pills">
+            <span class="pill hi">C++</span>
+            <span class="pill hi">Python</span>
+          </div>
+          <div class="sbar-wrap" style="margin-top:1.2rem;">
+            <div class="sbar-row"><span class="sbar-label">C++</span><div class="sbar-bg"><div class="sbar-fill" style="--w:.85" data-w=".85"></div></div><span class="sbar-pct">85%</span></div>
+            <div class="sbar-row"><span class="sbar-label">Python</span><div class="sbar-bg"><div class="sbar-fill" style="--w:.9" data-w=".9"></div></div><span class="sbar-pct">90%</span></div>
+            <div class="sbar-row"><span class="sbar-label">Matlab</span><div class="sbar-bg"><div class="sbar-fill" style="--w:.65" data-w=".65"></div></div><span class="sbar-pct">65%</span></div>
+          </div>
+        </div>
+
+        <div class="skills-panel" id="p-ros">
+          <div class="skill-pills">
+            <span class="pill hi">ROS2 Humble</span><span class="pill hi">ROS2 Control</span>
+            <span class="pill hi">Nav2</span><span class="pill hi">SLAM Toolbox</span>
+            <span class="pill">MoveIt2</span><span class="pill">AMCL</span>
+            <span class="pill">TF2</span><span class="pill">URDF</span><span class="pill">xacro</span>
+            <span class="pill">EKF</span><span class="pill">PID Control</span><span class="pill">Sensor Fusion</span>
+          </div>
+        </div>
+
+        <div class="skills-panel" id="p-uav">
+          <div class="skill-pills">
+            <span class="pill hi">ArduPilot</span><span class="pill hi">MAVLink</span>
+            <span class="pill hi">DroneKit</span><span class="pill hi">ArduPilot SITL</span>
+            <span class="pill">MAVSDK</span><span class="pill">PX4</span>
+            <span class="pill">Visual Servoing</span><span class="pill">Geofencing</span>
+            <span class="pill">RTL Failsafe</span><span class="pill">KML</span>
+            <span class="pill">Custom ESC Design</span><span class="pill">Motor Drivers</span>
+            <span class="pill">Embedded Firmware</span>
+          </div>
+        </div>
+
+        <div class="skills-panel" id="p-vision">
+          <div class="skill-pills">
+            <span class="pill hi">OpenCV</span><span class="pill hi">YOLO</span>
+            <span class="pill hi">ArUco Marker Detection</span>
+            <span class="pill">Pixel-to-GPS Conversion</span>
+            <span class="pill">Visual Servoing</span>
+            <span class="pill">Object Detection</span>
+            <span class="pill">Depth Estimation</span>
+          </div>
+        </div>
+
+        <div class="skills-panel" id="p-hw">
+          <div class="skill-pills">
+            <span class="pill hi">Raspberry Pi</span><span class="pill hi">ESP32 / ESP32-S3</span>
+            <span class="pill hi">Jetson</span><span class="pill hi">Arduino</span>
+            <span class="pill">LiDAR</span><span class="pill">IMU (MPU6050)</span>
+            <span class="pill">Barometer</span><span class="pill">Ultrasonic Sensors</span>
+            <span class="pill">Servo Motors</span><span class="pill">Wheel Encoders</span>
+            <span class="pill">NRF24L01</span><span class="pill">OLED Display</span>
+            <span class="pill">LCD Display</span><span class="pill">Matrix Display</span>
+          </div>
+        </div>
+
+        <div class="skills-panel" id="p-tools">
+          <div class="skill-pills">
+            <span class="pill hi">Gazebo</span><span class="pill hi">RViz2</span>
+            <span class="pill hi">Git</span><span class="pill hi">Ubuntu 22.04</span>
+            <span class="pill">Fusion 360</span><span class="pill">Arduino IDE</span>
+            <span class="pill">Matlab &amp; Simulink</span><span class="pill">Matplotlib</span>
+            <span class="pill">NumPy</span><span class="pill">Pandas</span>
+            <span class="pill">KML</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">// 02 — projects</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="proj-filter">
+      <button class="filt-btn active" data-filter="all">All</button>
+      <button class="filt-btn" data-filter="uav">UAV / Drone</button>
+      <button class="filt-btn" data-filter="ros">ROS2 / SLAM</button>
+      <button class="filt-btn" data-filter="hardware">Hardware</button>
+    </div>
+
+    <div class="projects-grid" id="projGrid">
+
+      <!-- Project 1 — KrishiCobot -->
+      <div class="pcard featured fade-up" data-cats="ros">
+        <div class="pcard-img">
+          <img src="eyantra.png" alt="e-Yantra KrishiCobot" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">01 — FEATURED · ⭐ TOP 10 / 400+</div>
+          <h3>e-Yantra KrishiCobot</h3>
+          <div class="pcard-venue">IIT Bombay · Aug 2025 – May 2026</div>
+          <p class="pcard-desc">Autonomous agricultural robot for crop monitoring and manipulation — ranked Top 10 nationally out of 400+ teams.</p>
+          <ul class="pcard-bullets">
+            <li>Collision-free navigation with multi-sensor perception pipeline</li>
+            <li>Fruit localization and classification using computer vision</li>
+            <li>UR5 robotic arm integration for pick-and-place automation</li>
+          </ul>
+          <div class="ptags"><span class="ptag">ROS2</span><span class="ptag">SLAM</span><span class="ptag">Nav2</span><span class="ptag">OpenCV</span><span class="ptag">MoveIt2</span><span class="ptag">YOLO</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Krishi_Cobot" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXre4uqwJgKRXPLFkSnAbvKIY&si=e7F3CfF8ZO15Nm7-" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 — Diff Drive -->
+      <div class="pcard fade-up" data-cats="ros">
+        <div class="pcard-img">
+          <img src="Differential_drive_bot.png" alt="Differential Drive Robot" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">02</div>
+          <h3>Differential Drive Robot — ROS2</h3>
+          <div class="pcard-venue">Jun – Jul 2025 · ★ 7 GitHub Stars</div>
+          <p class="pcard-desc">Full SLAM, localization, and autonomous nav pipeline. Includes a YouTube tutorial series covering the complete build.</p>
+          <ul class="pcard-bullets">
+            <li>2D occupancy map generation with SLAM Toolbox in Gazebo maze</li>
+            <li>AMCL localization + Nav2 path planning with obstacle avoidance</li>
+            <li>Tutorial series published: full pipeline from URDF to nav2</li>
+          </ul>
+          <div class="ptags"><span class="ptag">ROS2 Humble</span><span class="ptag">SLAM Toolbox</span><span class="ptag">Nav2</span><span class="ptag">Gazebo</span><span class="ptag">AMCL</span><span class="ptag">EKF</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrdPEn6yGiKLtTjNABXvn0qj" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 — Disaster Drone -->
+      <div class="pcard fade-up" data-cats="uav">
+        <div class="pcard-img">
+          <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="480" height="180" fill="#0a1118"/>
+            <!-- Satellite map style background -->
+            <rect x="0" y="0" width="480" height="180" fill="#0c1a14" opacity=".5"/>
+            <!-- Terrain patches -->
+            <rect x="20" y="30" width="80" height="50" rx="4" fill="#1a2e1c" opacity=".8"/>
+            <rect x="110" y="20" width="60" height="80" rx="4" fill="#162416" opacity=".8"/>
+            <rect x="180" y="50" width="100" height="40" rx="4" fill="#1e301e" opacity=".7"/>
+            <rect x="300" y="30" width="80" height="60" rx="4" fill="#142012" opacity=".8"/>
+            <rect x="60" y="110" width="100" height="50" rx="4" fill="#1a2a1a" opacity=".8"/>
+            <rect x="350" y="110" width="100" height="50" rx="4" fill="#1a2a1a" opacity=".7"/>
+            <!-- Survey polygon -->
+            <polygon points="80,50 380,50 380,140 80,140" fill="none" stroke="#4d8dff" stroke-width="1.2" stroke-dasharray="6 3" opacity=".7"/>
+            <!-- Lawnmower survey path -->
+            <g stroke="#4d8dff" stroke-width=".8" opacity=".45" fill="none">
+              <line x1="95" y1="65" x2="365" y2="65"/>
+              <line x1="365" y1="65" x2="365" y2="82"/>
+              <line x1="365" y1="82" x2="95" y2="82"/>
+              <line x1="95" y1="82" x2="95" y2="99"/>
+              <line x1="95" y1="99" x2="365" y2="99"/>
+              <line x1="365" y1="99" x2="365" y2="116"/>
+              <line x1="365" y1="116" x2="95" y2="116"/>
+              <line x1="95" y1="116" x2="95" y2="130"/>
+              <line x1="95" y1="130" x2="365" y2="130"/>
+            </g>
+            <!-- Drone position mid-survey -->
+            <g transform="translate(230,82)">
+              <circle r="14" fill="none" stroke="#4d8dff" stroke-width=".8" opacity=".35"/>
+              <circle r="5" fill="#4d8dff" opacity=".9"/>
+              <!-- mini rotors -->
+              <ellipse rx="12" ry="2" fill="none" stroke="#4d8dff" stroke-width=".7" opacity=".5" transform="translate(-9,-9) rotate(-30)"/>
+              <ellipse rx="12" ry="2" fill="none" stroke="#4d8dff" stroke-width=".7" opacity=".5" transform="translate(9,-9) rotate(30)"/>
+            </g>
+            <!-- Area covered highlight -->
+            <rect x="95" y="65" width="270" height="17" fill="#4d8dff" opacity=".06"/>
+            <rect x="95" y="82" width="270" height="17" fill="#4d8dff" opacity=".04"/>
+            <!-- Distance label -->
+            <line x1="80" y1="50" x2="80" y2="140" stroke="#ffd166" stroke-width=".8" opacity=".5"/>
+            <text x="68" y="95" font-family="Space Mono" font-size="7" fill="#ffd166" text-anchor="middle" opacity=".7">~75</text>
+            <text x="68" y="103" font-family="Space Mono" font-size="7" fill="#ffd166" text-anchor="middle" opacity=".7">acres</text>
+            <!-- Status HUD -->
+            <rect x="8" y="8" width="120" height="20" rx="2" fill="#07090d" opacity=".7"/>
+            <text x="14" y="20" font-family="Space Mono" font-size="7" fill="#4d8dff">MISSION: ACTIVE</text>
+            <circle cx="110" cy="18" r="3" fill="#4d8dff" opacity=".8"><animate attributeName="opacity" values=".8;.2;.8" dur="1.4s" repeatCount="indefinite"/></circle>
+            <!-- RTL label -->
+            <text x="390" y="175" font-family="Space Mono" font-size="7" fill="#3d6658" text-anchor="end">GEOFENCE + RTL ENABLED</text>
+          </svg>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">03</div>
+          <h3>Disaster Surveillance Drone</h3>
+          <div class="pcard-venue">NIDAR Challenge · Jul 2025 – Jan 2026</div>
+          <p class="pcard-desc">Autonomous UAV for area surveying and disaster response, covering ~75 acres with polygon-based mission planning.</p>
+          <ul class="pcard-bullets">
+            <li>Polygon-based survey mission with ~75 acre coverage</li>
+            <li>Geofence protection, auto RTL failsafe, human YOLO detection</li>
+            <li>Full mission lifecycle automation: takeoff → survey → RTL</li>
+          </ul>
+          <div class="ptags"><span class="ptag">ArduPilot</span><span class="ptag">DroneKit</span><span class="ptag">YOLO</span><span class="ptag">MAVLink</span><span class="ptag">Python</span></div>
+           <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrco9mI7xbGSEP1FIZtFDI6o&si=xrpweUrkJfku5C6P" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 — SAE Drone -->
+      <div class="pcard fade-up" data-cats="uav">
+        <div class="pcard-img">
+          <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <rect width="480" height="180" fill="#0a1118"/>
+            <!-- Camera view simulation -->
+            <rect x="30" y="20" width="200" height="145" fill="#0b0f14" stroke="#4d8dff" stroke-width=".6" opacity=".4"/>
+            <!-- Crosshair -->
+            <line x1="130" y1="20" x2="130" y2="165" stroke="#4d8dff" stroke-width=".5" stroke-dasharray="4 3" opacity=".35"/>
+            <line x1="30" y1="92" x2="230" y2="92" stroke="#4d8dff" stroke-width=".5" stroke-dasharray="4 3" opacity=".35"/>
+            <!-- Target detection box -->
+            <rect x="95" y="65" width="70" height="55" fill="none" stroke="#ff4d6d" stroke-width="1.4" opacity=".9"/>
+            <!-- corner marks -->
+            <g stroke="#ff4d6d" stroke-width="1.4" opacity=".9">
+              <line x1="95" y1="65" x2="105" y2="65"/><line x1="95" y1="65" x2="95" y2="75"/>
+              <line x1="165" y1="65" x2="155" y2="65"/><line x1="165" y1="65" x2="165" y2="75"/>
+              <line x1="95" y1="120" x2="105" y2="120"/><line x1="95" y1="120" x2="95" y2="110"/>
+              <line x1="165" y1="120" x2="155" y2="120"/><line x1="165" y1="120" x2="165" y2="110"/>
+            </g>
+            <text x="97" y="63" font-family="Space Mono" font-size="7" fill="#ff4d6d">TARGET</text>
+            <!-- simple person silhouette -->
+            <circle cx="130" cy="80" r="8" fill="#4d8dff" opacity=".25"/>
+            <line x1="130" y1="88" x2="130" y2="108" stroke="#4d8dff" stroke-width="2" opacity=".3"/>
+            <line x1="118" y1="95" x2="142" y2="95" stroke="#4d8dff" stroke-width="2" opacity=".3"/>
+            <line x1="130" y1="108" x2="120" y2="120" stroke="#4d8dff" stroke-width="2" opacity=".3"/>
+            <line x1="130" y1="108" x2="140" y2="120" stroke="#4d8dff" stroke-width="2" opacity=".3"/>
+            <!-- GPS panel right -->
+            <rect x="250" y="20" width="200" height="145" fill="#0b1219" stroke="#4d8dff" stroke-width=".4" opacity=".25"/>
+            <text x="258" y="38" font-family="Space Mono" font-size="7" fill="#4d8dff" opacity=".5">GPS COORDINATE CONVERSION</text>
+            <line x1="258" y1="43" x2="440" y2="43" stroke="#4d8dff" stroke-width=".3" opacity=".2"/>
+            <text x="258" y="62" font-family="Space Mono" font-size="7" fill="#3d6658">pixel_x: 234</text>
+            <text x="258" y="74" font-family="Space Mono" font-size="7" fill="#3d6658">pixel_y: 102</text>
+            <text x="258" y="90" font-family="Space Mono" font-size="7" fill="#4d8dff">→ lat: 23.1765</text>
+            <text x="258" y="102" font-family="Space Mono" font-size="7" fill="#4d8dff">→ lon: 79.9534</text>
+            <text x="258" y="118" font-family="Space Mono" font-size="7" fill="#3d6658">alt: 35.2m</text>
+            <text x="258" y="130" font-family="Space Mono" font-size="7" fill="#3d6658">heading: 267°</text>
+            <text x="258" y="150" font-family="Space Mono" font-size="7" fill="#ffd166">centering_error: 3.2px</text>
+            <text x="258" y="162" font-family="Space Mono" font-size="7" fill="#4d8dff">PID_output: correcting</text>
+          </svg>
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">04</div>
+          <h3>Autonomous Survey &amp; Target Detection Drone</h3>
+          <div class="pcard-venue">SAE Aerothon · Jan – Jun 2025</div>
+          <p class="pcard-desc">ROS2-based drone for area surveying and real-time target detection using pixel-to-GPS coordinate conversion.</p>
+          <ul class="pcard-bullets">
+            <li>GPS coordinate conversion from camera pixel coordinates</li>
+            <li>PID centering control loop for precision lock-on during flight</li>
+            <li>Complete ROS2 autonomous drone stack with ArduPilot integration</li>
+          </ul>
+          <div class="ptags"><span class="ptag">ROS2</span><span class="ptag">MAVLink</span><span class="ptag">GPS</span><span class="ptag">PID</span><span class="ptag">OpenCV</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrco9mI7xbGSEP1FIZtFDI6o&si=xrpweUrkJfku5C6P" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 5 — ESP32 Quadcopter -->
+      <div class="pcard fade-up" data-cats="hardware uav">
+        <div class="pcard-img">
+          <img src="esp32_drone.jpeg" alt="ESP32 Quadcopter" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">05</div>
+          <h3>ESP32-S3 Quadcopter Drone</h3>
+          <div class="pcard-venue">Jan – Feb 2026</div>
+          <p class="pcard-desc">Custom quadcopter built from scratch with a MOSFET-based ESC design and manual flight firmware on ESP32-S3.</p>
+          <ul class="pcard-bullets">
+            <li>Custom MOSFET-based ESC design with optimized motor thrust</li>
+            <li>Altitude sensing with barometric pressure sensor</li>
+            <li>Manual flight control firmware flashed on ESP32-S3</li>
+          </ul>
+          <div class="ptags"><span class="ptag">ESP32-S3</span><span class="ptag">Custom ESC</span><span class="ptag">Firmware</span><span class="ptag">Barometer</span><span class="ptag">Motor Drivers</span></div>
+          <div class="pcard-links">
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrcVR0A4IEijRmWpTvdtAOpG&si=FmyR1rqhcqY7-uyH" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 6 — Modular Robotic Arm -->
+      <div class="pcard fade-up" data-cats="hardware">
+        <div class="pcard-img">
+          <img src="Robotic_arm.jpeg" alt="Modular Robotic Arm" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">06</div>
+          <h3>Modular Robotic Arm</h3>
+          <div class="pcard-venue">Personal Project · Electronics & Hardware</div>
+          <p class="pcard-desc">Custom modular robotic arm prototype for precision pick-and-place operations with joint-level motion control and real-world manipulation capabilities.</p>
+          <ul class="pcard-bullets">
+            <li>5-DOF modular arm with servo motor control</li>
+            <li>Inverse kinematics and trajectory planning</li>
+            <li>Real-time position feedback and adaptive gripper control</li>
+          </ul>
+          <div class="ptags"><span class="ptag">Servo Motors</span><span class="ptag">Arduino</span><span class="ptag">Kinematics</span><span class="ptag">3D Design</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Robotic_arm" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrfH8nIemp8dex-iXVDAhFrE&si=xd14ZPkgHzhpryBj" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 7 — Wireless Transmitter/Receiver System -->
+      <div class="pcard fade-up" data-cats="hardware">
+        <div class="pcard-img">
+          <img src="custom_transmitter_receiver.jpeg" alt="Wireless Transmitter Receiver System" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">07</div>
+          <h3>Wireless Transmitter-Receiver System</h3>
+          <div class="pcard-venue">Personal Project · RF & Embedded Systems</div>
+          <p class="pcard-desc">Custom RF communication system with long-range wireless control for autonomous robotics using 433MHz RF modules and Arduino microcontrollers.</p>
+          <ul class="pcard-bullets">
+            <li>433MHz RF module integration and protocol design</li>
+            <li>Reliable packet transmission with error detection</li>
+            <li>Range testing and signal strength optimization</li>
+          </ul>
+          <div class="ptags"><span class="ptag">RF Modules</span><span class="ptag">Arduino</span><span class="ptag">Protocol Design</span><span class="ptag">Embedded C</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Custom_Transmitter_Receiver_system" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrcIQ--fLJ0yJLYn_Ju9vp3u&si=Dvn5uvtKMw8JZxeg" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 8 — Snake Robot Prototype -->
+      <div class="pcard fade-up" data-cats="ros">
+        <div class="pcard-img">
+          <img src="snake_robot.png" alt="Snake Robot Prototype" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">08</div>
+          <h3>Snake Robot Prototype</h3>
+          <div class="pcard-venue">Personal Project · Biologically-Inspired Robotics</div>
+          <p class="pcard-desc">Modular snake-like robot inspired by biological serpent locomotion for traversing confined spaces and complex terrain with serial link mechanisms.</p>
+          <ul class="pcard-bullets">
+            <li>Modular segmented design with servo actuators</li>
+            <li>Sinusoidal gait pattern generation for locomotion</li>
+            <li>Terrain adaptation and obstacle traversal</li>
+          </ul>
+          <div class="ptags"><span class="ptag">Servo Motors</span><span class="ptag">Arduino</span><span class="ptag">Biomimetics</span><span class="ptag">Locomotion</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Snake_Robot" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrfZkettRaDpBSPST9bW0gwt&si=dhCV2RtG4I8fGrmc" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 9 — Hostel Attendance System -->
+      <div class="pcard fade-up" data-cats="hardware">
+        <div class="pcard-img">
+          <img src="hostel_attendance_sysytem.jpeg" alt="Hostel Attendance System" />
+        </div>
+        <div class="pcard-body">
+          <div class="pcard-num">09</div>
+          <h3>Hostel Attendance System</h3>
+          <div class="pcard-venue">Campus Project · IoT & Automation</div>
+          <p class="pcard-desc">RFID-based automated hostel attendance and visitor tracking system with secure authentication and real-time occupancy monitoring dashboard.</p>
+          <ul class="pcard-bullets">
+            <li>RFID card reader with student database integration</li>
+            <li>Web dashboard for attendance reports and occupancy</li>
+            <li>Visitor check-in workflow with secure verification</li>
+          </ul>
+          <div class="ptags"><span class="ptag">RFID</span><span class="ptag">IoT</span><span class="ptag">Python</span><span class="ptag">Flask</span><span class="ptag">Database</span></div>
+          <div class="pcard-links">
+            <a href="https://github.com/Humobot1812/Hostel_Attendance_system" target="_blank" rel="noopener" class="plink">GitHub ↗</a>
+            <a href="https://youtube.com/playlist?list=PLQcgql__dXrdcgOFiZDvgCmWUzh8-lwnc&si=dHdzUSWQC3W3dL-Y" target="_blank" rel="noopener" class="plink">YouTube Tutorial ↗</a>  
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">// 03 — experience</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item fade-up">
+        <div class="exp-date">Aug 2024<br>Present</div>
+        <div>
+          <div class="exp-role">Coordinator — Electronics &amp; Robotics Society</div>
+          <div class="exp-org">PDPM IIITDM Jabalpur</div>
+          <ul class="exp-bullets">
+            <li>Organized robotics workshops, hands-on lab sessions, and technical events for 200+ student members</li>
+            <li>Mentored junior students on ROS2, embedded systems, and autonomous robot development</li>
+            <li>Coordinated team participation in national competitions including e-Yantra at IIT Bombay</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item fade-up">
+        <div class="exp-date">Aug 2024<br>Present</div>
+        <div>
+          <div class="exp-role">Core Committee Member — Aero Fabrication Club</div>
+          <div class="exp-org">PDPM IIITDM Jabalpur</div>
+          <ul class="exp-bullets">
+            <li>Contributed to UAV design, fabrication, and flight testing activities within the club</li>
+            <li>Collaborated on drone hardware: frame assembly, ESC wiring, flight controller setup</li>
+            <li>Participated in SAE Aerothon 2025 and NIDAR 2026 as part of team UAV development</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">// 04 — achievements</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="ach-grid">
+      <div class="ach-card fade-up">
+        <span class="ach-icon">🏆</span>
+        <h3>e-Yantra Robotics Competition</h3>
+        <p>Ranked Top 10 out of 400+ teams nationally in e-Yantra 2025–26 at IIT Bombay with KrishiCobot project.</p>
+        <span class="ach-badge">Top 10 / 400+ Teams</span>
+      </div>
+      <div class="ach-card fade-up">
+        <span class="ach-icon">🚁</span>
+        <h3>SAE Aerothon 2025</h3>
+        <p>Developed and presented an autonomous drone survey and target detection system. Earned Phase 2 Certificate.</p>
+        <span class="ach-badge">Phase 2 Certificate</span>
+      </div>
+      <div class="ach-card fade-up">
+        <span class="ach-icon">⚡</span>
+        <h3>NIDAR 2026 — UAV Challenge</h3>
+        <p>Participated in national UAV innovation challenge with a disaster surveillance drone for emergency response.</p>
+        <span class="ach-badge">National Challenge</span>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;">// Certifications</div>
+    <div class="cert-list">
+      <div class="cert-item"><div class="cert-dot"></div><div class="cert-name">e-Yantra Robotics Competition (eYRC 2025–26)</div><div class="cert-detail">Certificate of Completion · Level 2</div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div class="cert-name">NIDAR — National Innovation Challenge for Drone Application and Research</div><div class="cert-detail">Participant</div></div>
+      <div class="cert-item"><div class="cert-dot"></div><div class="cert-name">Aerothon 2025</div><div class="cert-detail">Phase 2 Certificate · SAE India</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-text">
+        <div class="sec-hdr"><span class="sec-tag">// 05 — contact</span><div class="sec-line"></div></div>
+        <h2>Let's build<br>something real.</h2>
+        <p>Open to research collaborations, robotics internships, UAV projects, and interesting problems in autonomous systems.</p>
+        <a href="mailto:abhinav.goel.robotics@gmail.com" class="btn-p">Send Email</a>
+      </div>
+      <div>
+        <div class="contact-links">
+          <a href="mailto:abhinav.goel.robotics@gmail.com" class="clink"><span class="icon">✉</span>abhinav.goel.robotics@gmail.com</a>
+          <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5" target="_blank" rel="noopener" class="clink"><span class="icon">in</span>linkedin.com/in/abhinav-g-1b878a2b5</a>
+          <a href="https://github.com/Humobot1812" target="_blank" rel="noopener" class="clink"><span class="icon">⌥</span>github.com/Humobot1812</a>
+          <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener" class="clink"><span class="icon">▶</span>youtube.com/@The_IIITians_World</a>
+          <a href="tel:+918384857368" class="clink"><span class="icon">#</span>+91 83848 57368</a>
+          <div class="clink" style="cursor:default;"><span class="icon">◎</span>Muzaffarnagar, Uttar Pradesh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 <span class="ft-acc">Abhinav Goel</span></p>
+  <p>Robotics Engineer · PDPM IIITDM Jabalpur · <span class="ft-acc">Muzaffarnagar, UP</span></p>
+</footer>
+
+<script>
+// Scroll fade-in
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('vis'), i*90); });
+}, {threshold:.08});
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Skill bars animate when visible
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.sbar-fill').forEach(bar => {
+        bar.style.transform = `scaleX(${bar.dataset.w})`;
+      });
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.skills-panel').forEach(p => barObs.observe(p));
+
+// Skills tabs
+document.getElementById('skillTabs').addEventListener('click', e => {
+  const btn = e.target.closest('.stab');
+  if(!btn) return;
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.skills-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = document.getElementById(btn.dataset.panel);
+  panel.classList.add('active');
+  // trigger bar animation for newly shown panel
+  panel.querySelectorAll('.sbar-fill').forEach(bar => {
+    bar.style.transform = 'scaleX(0)';
+    setTimeout(()=>{ bar.style.transform = `scaleX(${bar.dataset.w})`; },50);
+  });
+});
+
+// Project filter
+document.querySelectorAll('.filt-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filt-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('.pcard').forEach(card => {
+      if(f === 'all' || card.dataset.cats.includes(f)){
+        card.style.display = '';
+        setTimeout(()=>card.style.opacity='1',10);
+      } else {
+        card.style.opacity = '0';
+        setTimeout(()=>card.style.display='none',300);
+      }
+    });
+  });
+});
+
+// Nav active state on scroll
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) cur = s.id; });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === `#${cur}` ? 'var(--accent)' : '';
+  });
+}, {passive:true});
+</script>
+</body>
+</html>
