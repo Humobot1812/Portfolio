@@ -172,6 +172,11 @@ h2{font-family:var(--mono);font-size:clamp(2.1rem,3.8vw,3.3rem);font-weight:700;
 .cert-dot{width:7px;height:7px;background:var(--accent);flex-shrink:0;}
 .cert-name{font-family:var(--mono);font-size:.95rem;color:var(--text);font-weight:700;flex:1;}
 .cert-detail{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.05em;}
+.cert-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1.5rem;}
+.cert-link{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text2);font-family:var(--mono);font-size:11px;text-decoration:none;transition:all .2s;}
+.cert-link:hover{border-color:var(--accent);background:rgba(77,141,255,.05);color:var(--accent);}
+.cert-link span{display:block;}
+.cert-link strong{font-weight:700;color:var(--accent);}
 
 /* CONTACT */
 #contact{border-top:1px solid var(--border);}
@@ -870,6 +875,16 @@ footer p{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacin
       <div class="cert-item"><div class="cert-dot"></div><div class="cert-name">e-Yantra Robotics Competition (eYRC 2025–26)</div><div class="cert-detail">Certificate of Completion · Level 2</div></div>
       <div class="cert-item"><div class="cert-dot"></div><div class="cert-name">NIDAR — National Innovation Challenge for Drone Application and Research</div><div class="cert-detail">Participant</div></div>
       <div class="cert-item"><div class="cert-dot"></div><div class="cert-name">Aerothon 2025</div><div class="cert-detail">Phase 2 Certificate · SAE India</div></div>
+    </div>
+    <div class="cert-gallery">
+      <a href="eyantra_certificate.pdf" target="_blank" rel="noopener" class="cert-link">
+        <span>e-Yantra Certificate</span>
+        <strong>View PDF</strong>
+      </a>
+      <a href="Nidar_certificate.jpeg" target="_blank" rel="noopener" class="cert-link">
+        <span>NIDAR Certificate</span>
+        <strong>View Image</strong>
+      </a>
     </div>
   </div>
 </section>
