@@ -19,12 +19,12 @@ Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fus
 ---
 
 ## 🛠️ TECHNICAL SKILLS
-- **Autonomous Systems & Control:** Autonomous Systems, PID Control, Sensor Fusion, EKF (Extended Kalman Filter), Visual Servoing, Trajectory Planning, Kinematics & D-H Modeling.
+- **Autonomous Systems & Control:** Autonomous Systems, PID Control, Sensor Fusion, EKF (Extended Kalman Filter), RANSAC, ROS2 Control, Visual Servoing, Trajectory Planning, Kinematics & D-H Modeling.
 - **UAV & Multirotor Flight Systems:** MultiRotor UAVs, Pixhawk Flight Controller, ArduPilot, PX4 Autopilot, QGroundControl, Mission Planner, MAVLink, MAVSDK, DroneKit.
-- **Robotics Frameworks & Middleware:** ROS2 (Humble / Foxy), Nav2 Navigation Stack, MoveIt2, SLAM Toolbox, AMCL Localization, TF2 Transformation Tree, URDF / xacro modeling.
+- **Robotics Frameworks & SLAM:** ROS2 (Humble / Foxy), Nav2 Navigation Stack, MoveIt2, SLAM Toolbox, ORB-SLAM3, AMCL Localization, TF2 Transformation Tree, URDF / xacro modeling.
 - **Computer Vision & Perception:** OpenCV, YOLOv8 / YOLOv4-Tiny Object Detection, ArUco Marker Geolocation, Pinhole Camera Models.
-- **Languages & Simulation:** C++, Python, Embedded C, Gazebo (Harmonic / Classic), RViz2, ArduPilot SITL, MATLAB / Simulink.
-- **Hardware, EDA & Tools:** ESP32-S3, Arduino, MPU6050 IMU, LiDAR, Barometer Sensors, MOSFET ESC Design, TinkerCad, Git, Linux (Ubuntu 22.04), KML / GIS.
+- **Languages & Simulation:** C++, Python, Gazebo, RViz2, ArduPilot SITL, MATLAB / Simulink.
+- **Hardware, CAD & Tools:** ESP32-S3, Arduino, LiDAR, MPU9250 / MPU6050 IMU, Encoder Motors, Barometer Sensors, NRF24L01, LoRa Module, ST7920 Display, Custom MOSFET ESC, Fusion 360, 3D Printing, TinkerCad, Git, Linux (Ubuntu 22.04), KML / GIS.
 
 ---
 
