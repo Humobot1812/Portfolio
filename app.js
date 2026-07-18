@@ -64,9 +64,9 @@ function initRobot() {
   const getW = () => container.clientWidth || 400;
   const getH = () => container.clientHeight || 480;
   
-  // Adjusted camera to see the wider fleet, slightly lower and further back
-  const camera = new THREE.PerspectiveCamera(45, getW() / getH(), 0.1, 1000);
-  camera.position.set(0, 0.5, 11);
+  // Camera for full-screen canvas — wider FOV, pulled back
+  const camera = new THREE.PerspectiveCamera(60, getW() / getH(), 0.1, 1000);
+  camera.position.set(0, 0.5, 14);
   
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(getW(), getH());
@@ -90,7 +90,7 @@ function initRobot() {
   scene.add(magLight);
 
   // Materials
-  const matDark = new THREE.MeshStandardMaterial({ color: 0x151515, metalness: 0.8, roughness: 0.2 });
+  const matDark = new THREE.MeshStandardMaterial({ color: 0x1a2e3a, metalness: 0.8, roughness: 0.2 });
   const matMetal = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.9, roughness: 0.4 });
   const matCyan = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.5 });
   const matMag = new THREE.MeshStandardMaterial({ color: 0xbf5af2, emissive: 0xbf5af2, emissiveIntensity: 0.5 });
@@ -104,8 +104,8 @@ function initRobot() {
 
   // --- 1. DRONE (Quadrotor) ---
   const drone = new THREE.Group();
-  drone.position.set(0, 2, -1);
-  drone.userData = { targetX: 0, targetY: 2, isSelected: false };
+  drone.position.set(4, 3, -1);
+  drone.userData = { targetX: 4, targetY: 3, isSelected: false };
   interactableBots.push(drone);
   
   // Wrap drone body elements in a sub-group so we can apply the hover sine wave to the sub-group, leaving the root group free for lerping Y.
@@ -146,8 +146,8 @@ function initRobot() {
 
   // --- 2. ROBOTIC ARM ---
   const armBot = new THREE.Group();
-  armBot.position.set(-2.8, -1.2, 0);
-  armBot.userData = { targetX: -2.8, targetY: -1.2, isSelected: false };
+  armBot.position.set(-5, -2.5, 0);
+  armBot.userData = { targetX: -5, targetY: -2.5, isSelected: false };
   interactableBots.push(armBot);
   
   const aBase = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.7, 0.4, 16), matDark);
@@ -202,9 +202,9 @@ function initRobot() {
 
   // --- 3. ROBOTIC DOG (Quadruped) ---
   const dog = new THREE.Group();
-  dog.position.set(2.8, -1.5, 0.5);
+  dog.position.set(5, -2, 2);
   dog.rotation.y = -Math.PI / 6;
-  dog.userData = { targetX: 2.8, targetY: -1.5, isSelected: false };
+  dog.userData = { targetX: 5, targetZ: 2, isSelected: false };
   interactableBots.push(dog);
   
   const dogBody = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.4, 1.6), matDark);
@@ -253,8 +253,8 @@ function initRobot() {
 
   // --- 4. WHEELED ROVER ---
   const rover = new THREE.Group();
-  rover.position.set(0, -1.8, 2.5);
-  rover.userData = { targetX: 0, targetY: -1.8, isSelected: false };
+  rover.position.set(0, -2, 4);
+  rover.userData = { targetX: 0, targetZ: 4, isSelected: false };
   interactableBots.push(rover);
   
   const rChassis = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 1.4), matDark);
@@ -281,12 +281,20 @@ function initRobot() {
   });
   fleet.add(rover);
 
-  // --- Invisible Wall Plane for 2D Screen Raycasting ---
+  // --- Invisible Wall Plane for 2D Screen Raycasting (Drone, Arm) ---
   const wallGeo = new THREE.PlaneGeometry(200, 200);
   const wallMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
   const wall = new THREE.Mesh(wallGeo, wallMat);
   wall.position.z = 0; // Vertical wall facing camera
   scene.add(wall);
+
+  // --- Invisible Ground Plane for 3D Ground Raycasting (Dog, Rover) ---
+  const groundGeo = new THREE.PlaneGeometry(200, 200);
+  const groundMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
+  const ground = new THREE.Mesh(groundGeo, groundMat);
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -1.8;
+  scene.add(ground);
 
   // --- Interaction & Raycasting ---
   const raycaster = new THREE.Raycaster();
@@ -320,13 +328,22 @@ function initRobot() {
       }
     }
     
-    // Move selected robot to wall click position
+    // Move selected robot to click position
     if (selectedRobot) {
-      const intersectsWall = raycaster.intersectObject(wall);
-      if (intersectsWall.length > 0) {
-        const point = intersectsWall[0].point;
-        selectedRobot.userData.targetX = point.x;
-        selectedRobot.userData.targetY = point.y;
+      if (selectedRobot === dog || selectedRobot === rover) {
+        const intersectsGround = raycaster.intersectObject(ground);
+        if (intersectsGround.length > 0) {
+          const point = intersectsGround[0].point;
+          selectedRobot.userData.targetX = point.x;
+          selectedRobot.userData.targetZ = point.z;
+        }
+      } else {
+        const intersectsWall = raycaster.intersectObject(wall);
+        if (intersectsWall.length > 0) {
+          const point = intersectsWall[0].point;
+          selectedRobot.userData.targetX = point.x;
+          selectedRobot.userData.targetY = point.y;
+        }
       }
     }
   });
@@ -349,22 +366,40 @@ function initRobot() {
     // Interpolate robot positions
     interactableBots.forEach(bot => {
       bot.position.x += (bot.userData.targetX - bot.position.x) * 0.03;
-      bot.position.y += (bot.userData.targetY - bot.position.y) * 0.03;
       
-      // Face direction of movement (Left/Right)
-      const dx = bot.userData.targetX - bot.position.x;
-      if (Math.abs(dx) > 0.1) {
-        const targetAngle = dx > 0 ? Math.PI / 2 : -Math.PI / 2;
-        let diff = targetAngle - bot.rotation.y;
-        while (diff < -Math.PI) diff += Math.PI * 2;
-        while (diff > Math.PI) diff -= Math.PI * 2;
-        bot.rotation.y += diff * 0.05;
+      if (bot === dog || bot === rover) {
+        // Ground bots move in Z
+        bot.position.z += (bot.userData.targetZ - bot.position.z) * 0.03;
+        
+        // Face direction of movement (3D)
+        const dx = bot.userData.targetX - bot.position.x;
+        const dz = bot.userData.targetZ - bot.position.z;
+        if (Math.abs(dx) > 0.01 || Math.abs(dz) > 0.01) {
+          const targetAngle = Math.atan2(dx, dz);
+          let diff = targetAngle - bot.rotation.y;
+          while (diff < -Math.PI) diff += Math.PI * 2;
+          while (diff > Math.PI) diff -= Math.PI * 2;
+          bot.rotation.y += diff * 0.05;
+        }
       } else {
-        // Return to front-facing if idle
-        let diff = 0 - bot.rotation.y;
-        while (diff < -Math.PI) diff += Math.PI * 2;
-        while (diff > Math.PI) diff -= Math.PI * 2;
-        bot.rotation.y += diff * 0.05;
+        // Flying bots move in Y
+        bot.position.y += (bot.userData.targetY - bot.position.y) * 0.03;
+        
+        // Face direction of movement (Left/Right)
+        const dx = bot.userData.targetX - bot.position.x;
+        if (Math.abs(dx) > 0.1) {
+          const targetAngle = dx > 0 ? Math.PI / 2 : -Math.PI / 2;
+          let diff = targetAngle - bot.rotation.y;
+          while (diff < -Math.PI) diff += Math.PI * 2;
+          while (diff > Math.PI) diff -= Math.PI * 2;
+          bot.rotation.y += diff * 0.05;
+        } else {
+          // Return to front-facing if idle
+          let diff = 0 - bot.rotation.y;
+          while (diff < -Math.PI) diff += Math.PI * 2;
+          while (diff > Math.PI) diff -= Math.PI * 2;
+          bot.rotation.y += diff * 0.05;
+        }
       }
     });
 
@@ -387,7 +422,7 @@ function initRobot() {
     armBot.userData.fingerR.position.x = fingerOffset;
 
     // Robotic Dog Walk Animation
-    const isDogMoving = Math.abs(dog.userData.targetX - dog.position.x) > 0.1 || Math.abs(dog.userData.targetY - dog.position.y) > 0.1;
+    const isDogMoving = Math.abs(dog.userData.targetX - dog.position.x) > 0.1 || Math.abs(dog.userData.targetZ - dog.position.z) > 0.1;
     dogLegs.forEach(leg => {
       if (isDogMoving) {
         leg.hip.rotation.x = Math.sin(time * 12 + leg.offset) * 0.5;
@@ -400,7 +435,7 @@ function initRobot() {
 
     // Rover Animation
     rLidar.rotation.y -= 0.1;
-    const isRoverMoving = Math.abs(rover.userData.targetX - rover.position.x) > 0.1 || Math.abs(rover.userData.targetY - rover.position.y) > 0.1;
+    const isRoverMoving = Math.abs(rover.userData.targetX - rover.position.x) > 0.1 || Math.abs(rover.userData.targetZ - rover.position.z) > 0.1;
     if (isRoverMoving) {
       rWheels.forEach(w => w.rotation.x += 0.25);
     }
