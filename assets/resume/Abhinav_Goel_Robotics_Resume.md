@@ -88,7 +88,7 @@ Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fus
 ---
 
 ## 🏆 KEY ACHIEVEMENTS & CERTIFICATIONS
-- **e-Yantra Robotics Competition 2025–26 (IIT Bombay):** Top 10 / 400+ Teams. [[View Certificate]](https://Humobot1812.github.io/Portfolio/assets/documents/eyantra_certificate.pdf)
-- **DD Robocon 2025:** Stage-2 Qualification with Team Barbarick (Scored 86/100). [[View Certificate]](https://Humobot1812.github.io/Portfolio/assets/images/Robocon_certificate.jpeg)
+- **e-Yantra Robotics Competition 2025–26 (IIT Bombay):** Top 10 / 400+ Teams. [[View Certificate]](https://Humobot1812.github.io/Portfolio/assets/Certificates/eyantra_certificate.pdf)
+- **DD Robocon 2025:** Stage-2 Qualification with Team Barbarick (Scored 86/100). [[View Certificate]](https://Humobot1812.github.io/Portfolio/assets/Certificates/Robocon_certificate.jpeg)
 - **SAE Aerothon 2025:** Phase 2 Certificate for Autonomous Drone Survey System.
-- **NIDAR 2026 National UAV Challenge:** Project selected for National UAV Innovation Challenge. [[View Certificate]](https://Humobot1812.github.io/Portfolio/assets/images/Nidar_certificate.jpeg)
+- **NIDAR 2026 National UAV Challenge:** Project selected for National UAV Innovation Challenge. [[View Certificate]](https://Humobot1812.github.io/Portfolio/assets/Certificates/Nidar_certificate.jpeg)
