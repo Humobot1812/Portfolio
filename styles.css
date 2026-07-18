@@ -37,6 +37,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-links li a{font-family:var(--mono);font-size:11px;color:var(--text3);text-decoration:none;letter-spacing:.12em;text-transform:uppercase;padding:.7rem 1.2rem;position:relative;transition:color .3s;cursor:none;display:block;}
 .nav-links li a:hover,.nav-links li a.active{color:var(--accent);}
 .nav-links li a.active::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:60%;height:2px;background:var(--accent);box-shadow:0 0 10px var(--accent);}
+.nav-resume-btn{font-family:var(--mono);font-size:11px;color:#030014 !important;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:.45rem 1rem !important;border-radius:4px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;margin-left:.8rem;box-shadow:0 2px 12px rgba(0,240,255,0.25);transition:all .3s ease;display:inline-flex;align-items:center;gap:4px;}
+.nav-resume-btn:hover{transform:translateY(-2px);box-shadow:0 4px 18px rgba(0,240,255,0.45);}
 
 /* PAGES */
 .page{position:relative;z-index:1;min-height:100vh;display:none;opacity:0;transition:opacity .5s;}
