@@ -6,7 +6,7 @@ Muzaffarnagar, Uttar Pradesh, India | [+91-8384857368](tel:+918384857368) | [abh
 ---
 
 ## 🚀 PROFESSIONAL SUMMARY
-Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fusion, and vision-guided UAV systems**. Proven track record building autonomous mobile robots (AMRs) and multirotor drones from mathematical modeling and Gazebo SITL simulation to hardware integration and field testing. **Top 16 / 400+ teams (Top 4% nationally)** at IIT Bombay e-Yantra 2025–26. Experienced in ROS2 Humble, ArduPilot, PX4, MAVSDK, Pixhawk controllers, OpenCV, YOLO, and embedded hardware development.
+Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fusion, and vision-guided UAV systems**. Proven track record building autonomous mobile robots (AMRs) and multirotor drones from mathematical modeling and Gazebo SITL simulation to hardware integration and field testing. **Top 10 / 400+ teams (Top 4% nationally)** at IIT Bombay e-Yantra 2025–26. Experienced in ROS2 Humble, ArduPilot, PX4, MAVSDK, Pixhawk controllers, OpenCV, YOLO, and embedded hardware development.
 
 ---
 
@@ -35,7 +35,7 @@ Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fus
 *PDPM IIITDM Jabalpur* | Aug 2024 – Present  
 - Led technical programs for **200+ active student members**, organizing 10+ hands-on workshops per semester on ROS2, microcontrollers, and autonomous systems.
 - Mentored **30+ junior students** in ROS2, SLAM, and embedded C++, accelerating team readiness for national competitions.
-- Coordinated multi-team participation for e-Yantra at IIT Bombay, achieving a **Top 16 national ranking**.
+- Coordinated multi-team participation for e-Yantra at IIT Bombay, achieving a **Top 10 national ranking**.
 
 **Core Committee Member — Aero Fabrication Club**  
 *PDPM IIITDM Jabalpur* | Aug 2024 – Present  
@@ -49,7 +49,7 @@ Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fus
 ### 1. [e-Yantra KrishiCobot — IIT Bombay (e-YRC 2025–26) 🔗](https://github.com/Humobot1812/Krishi_Cobot) | [YouTube Demo](https://youtube.com/playlist?list=PLQcgql__dXre4uqwJgKRXPLFkSnAbvKIY&si=e7F3CfF8ZO15Nm7-)
 *GitHub Repository: [github.com/Humobot1812/Krishi_Cobot](https://github.com/Humobot1812/Krishi_Cobot)*  
 *Tech: ROS2 Humble, LiDAR, IMU, Encoders, OpenCV, ArUco Markers, MoveIt2, UR5 Arm, Visual Servoing*
-- Engineered a fully autonomous agricultural robot for crop monitoring and fruit harvesting; achieved **Top 16 out of 400+ teams (Top 4% nationally)**.
+- Engineered a fully autonomous agricultural robot for crop monitoring and fruit harvesting; achieved **Top 10 out of 400+ teams (Top 4% nationally)**.
 - Designed a multi-sensor perception pipeline (LiDAR + ultrasonic + IMU) enabling collision-free lane navigation across agricultural field rows.
 - Developed ArUco marker localization for fruit classification and automated pick-and-place operations using a UR5 robotic arm via MoveIt2 and visual servoing.
 
@@ -88,7 +88,7 @@ Robotics Engineer specializing in **ROS2 autonomous navigation, SLAM, sensor fus
 ---
 
 ## 🏆 KEY ACHIEVEMENTS & CERTIFICATIONS
-- **e-Yantra Robotics Competition 2025–26 (IIT Bombay):** Top 16 / 400+ Teams (Top 4% nationally). [[View Certificate]](https://Humobot1812.github.io/Portfolio/eyantra_certificate.pdf)
+- **e-Yantra Robotics Competition 2025–26 (IIT Bombay):** Top 10 / 400+ Teams (Top 4% nationally). [[View Certificate]](https://Humobot1812.github.io/Portfolio/eyantra_certificate.pdf)
 - **DD Robocon 2025:** Stage-2 Qualification with Team Barbarick (Scored 86/100). [[View Certificate]](https://Humobot1812.github.io/Portfolio/Robocon_certificate.jpeg)
 - **SAE Aerothon 2025:** Phase 2 Certificate for Autonomous Drone Survey System.
 - **NIDAR 2026 National UAV Challenge:** Project selected for National UAV Innovation Challenge. [[View Certificate]](https://Humobot1812.github.io/Portfolio/Nidar_certificate.jpeg)
