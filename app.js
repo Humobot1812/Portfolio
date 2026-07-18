@@ -283,7 +283,7 @@ function initRobot() {
 
   // --- Invisible Wall Plane for 2D Screen Raycasting ---
   const wallGeo = new THREE.PlaneGeometry(200, 200);
-  const wallMat = new THREE.MeshBasicMaterial({ visible: false });
+  const wallMat = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0 });
   const wall = new THREE.Mesh(wallGeo, wallMat);
   wall.position.z = 0; // Vertical wall facing camera
   scene.add(wall);
