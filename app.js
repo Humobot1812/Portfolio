@@ -63,92 +63,234 @@ function initRobot() {
   const scene = new THREE.Scene();
   const getW = () => container.clientWidth || 400;
   const getH = () => container.clientHeight || 480;
-  const camera = new THREE.PerspectiveCamera(50, getW() / getH(), 0.1, 1000);
-  camera.position.set(0, 1, 6);
+  
+  // Adjusted camera to see the wider fleet
+  const camera = new THREE.PerspectiveCamera(45, getW() / getH(), 0.1, 1000);
+  camera.position.set(0, 1.5, 9);
+  
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(getW(), getH());
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  const mat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true, transparent: true, opacity: 0.7 });
-  const matP = new THREE.MeshBasicMaterial({ color: 0xbf5af2, wireframe: true, transparent: true, opacity: 0.5 });
-  const matG = new THREE.MeshBasicMaterial({ color: 0x32d74b, wireframe: true, transparent: true, opacity: 0.4 });
-  const robot = new THREE.Group();
+  // Lighting
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
+  scene.add(ambientLight);
+  
+  const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+  dirLight.position.set(5, 10, 7);
+  scene.add(dirLight);
 
-  // Torso
-  const torso = new THREE.Mesh(new THREE.BoxGeometry(1.2, 1.6, 0.8), mat);
-  robot.add(torso);
-  // Head
-  const head = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.7, 0.7), mat);
-  head.position.y = 1.4;
-  robot.add(head);
-  // Eyes
-  const eyeL = new THREE.Mesh(new THREE.SphereGeometry(0.1, 8, 8), new THREE.MeshBasicMaterial({ color: 0xff2d55, wireframe: true }));
-  eyeL.position.set(-0.15, 1.45, 0.36);
-  robot.add(eyeL);
-  const eyeR = eyeL.clone(); eyeR.position.x = 0.15; robot.add(eyeR);
-  // Neck
-  const neck = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.3, 8), matP);
-  neck.position.y = 0.95; robot.add(neck);
-  // Shoulders
-  const shoulderL = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), matP);
-  shoulderL.position.set(-0.8, 0.6, 0); robot.add(shoulderL);
-  const shoulderR = shoulderL.clone(); shoulderR.position.x = 0.8; robot.add(shoulderR);
-  // Arms
-  const armL = new THREE.Mesh(new THREE.BoxGeometry(0.25, 1.2, 0.25), mat);
-  armL.position.set(-0.85, -0.2, 0); robot.add(armL);
-  const armR = armL.clone(); armR.position.x = 0.85; robot.add(armR);
-  // Hands
-  const handL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.3, 0.15), matG);
-  handL.position.set(-0.85, -0.9, 0); robot.add(handL);
-  const handR = handL.clone(); handR.position.x = 0.85; robot.add(handR);
-  // Waist
-  const waist = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.5, 0.3, 8), matP);
-  waist.position.y = -0.95; robot.add(waist);
-  // Legs
-  const legL = new THREE.Mesh(new THREE.BoxGeometry(0.3, 1.3, 0.3), mat);
-  legL.position.set(-0.3, -1.9, 0); robot.add(legL);
-  const legR = legL.clone(); legR.position.x = 0.3; robot.add(legR);
-  // Feet
-  const footL = new THREE.Mesh(new THREE.BoxGeometry(0.35, 0.15, 0.5), matG);
-  footL.position.set(-0.3, -2.6, 0.1); robot.add(footL);
-  const footR = footL.clone(); footR.position.x = 0.3; robot.add(footR);
-  // Chest detail
-  const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.25, 0), new THREE.MeshBasicMaterial({ color: 0xff2d55, wireframe: true, transparent: true, opacity: 0.8 }));
-  core.position.y = 0.2; robot.add(core);
-  // Antenna
-  const ant = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.5, 4), matP);
-  ant.position.set(0.2, 1.95, 0); robot.add(ant);
-  const antTip = new THREE.Mesh(new THREE.SphereGeometry(0.06, 6, 6), new THREE.MeshBasicMaterial({ color: 0x00f0ff }));
-  antTip.position.set(0.2, 2.2, 0); robot.add(antTip);
-  // Orbit rings
-  const ring1 = new THREE.Mesh(new THREE.TorusGeometry(2.2, 0.015, 8, 60), matP);
-  ring1.rotation.x = Math.PI / 3; robot.add(ring1);
-  const ring2 = new THREE.Mesh(new THREE.TorusGeometry(2.5, 0.01, 8, 60), matG);
-  ring2.rotation.x = -Math.PI / 4; ring2.rotation.z = 0.5; robot.add(ring2);
+  const cyanLight = new THREE.PointLight(0x00f0ff, 3, 15);
+  cyanLight.position.set(-4, 2, 2);
+  scene.add(cyanLight);
 
-  scene.add(robot);
-  robot.position.y = -0.3;
+  const magLight = new THREE.PointLight(0xbf5af2, 3, 15);
+  magLight.position.set(4, -1, 3);
+  scene.add(magLight);
 
+  // Materials
+  const matDark = new THREE.MeshStandardMaterial({ color: 0x151515, metalness: 0.8, roughness: 0.2 });
+  const matMetal = new THREE.MeshStandardMaterial({ color: 0x888888, metalness: 0.9, roughness: 0.4 });
+  const matCyan = new THREE.MeshStandardMaterial({ color: 0x00f0ff, emissive: 0x00f0ff, emissiveIntensity: 0.5 });
+  const matMag = new THREE.MeshStandardMaterial({ color: 0xbf5af2, emissive: 0xbf5af2, emissiveIntensity: 0.5 });
+  const matGlass = new THREE.MeshStandardMaterial({ color: 0x00f0ff, transparent: true, opacity: 0.2, metalness: 0.1, roughness: 0.1 });
+
+  const fleet = new THREE.Group();
+  scene.add(fleet);
+
+  // --- 1. DRONE (Quadrotor) ---
+  const drone = new THREE.Group();
+  drone.position.set(0, 2, -1);
+  
+  const dBody = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 0.8), matDark);
+  drone.add(dBody);
+  
+  const dCore = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 16), matCyan);
+  dCore.position.y = 0.2;
+  drone.add(dCore);
+
+  const props = [];
+  const armOffsets = [
+    { x: 0.6, z: 0.6 }, { x: -0.6, z: 0.6 },
+    { x: 0.6, z: -0.6 }, { x: -0.6, z: -0.6 }
+  ];
+  
+  armOffsets.forEach(pos => {
+    const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.4, 8), matMetal);
+    arm.rotation.x = Math.PI / 2;
+    arm.rotation.z = Math.atan2(pos.x, pos.z);
+    arm.position.set(pos.x / 2, 0, pos.z / 2);
+    drone.add(arm);
+    
+    const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.2, 16), matDark);
+    motor.position.set(pos.x, 0.1, pos.z);
+    drone.add(motor);
+    
+    const prop = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.02, 16), matGlass);
+    prop.position.set(pos.x, 0.2, pos.z);
+    drone.add(prop);
+    props.push(prop);
+  });
+  fleet.add(drone);
+
+  // --- 2. ROBOTIC ARM ---
+  const armBot = new THREE.Group();
+  armBot.position.set(-2.8, -1.2, 0);
+  
+  const aBase = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.7, 0.4, 16), matDark);
+  aBase.position.y = 0.2;
+  armBot.add(aBase);
+  
+  const shoulder = new THREE.Group();
+  shoulder.position.y = 0.4;
+  armBot.add(shoulder);
+  
+  const sJoint = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 16), matMetal);
+  shoulder.add(sJoint);
+  
+  const upperArm = new THREE.Group();
+  upperArm.position.y = 0;
+  shoulder.add(upperArm);
+  
+  const uBone = new THREE.Mesh(new THREE.BoxGeometry(0.3, 1.2, 0.3), matDark);
+  uBone.position.y = 0.6;
+  upperArm.add(uBone);
+  
+  const elbow = new THREE.Group();
+  elbow.position.y = 1.3;
+  upperArm.add(elbow);
+  
+  const eJoint = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.4, 16), matMetal);
+  eJoint.rotation.z = Math.PI / 2;
+  elbow.add(eJoint);
+  
+  const forearm = new THREE.Mesh(new THREE.BoxGeometry(0.25, 1.0, 0.25), matDark);
+  forearm.position.y = 0.5;
+  elbow.add(forearm);
+  
+  const gripper = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.2, 0.1), matCyan);
+  gripper.position.y = 1.1;
+  elbow.add(gripper);
+  
+  fleet.add(armBot);
+
+  // --- 3. ROBOTIC DOG (Quadruped) ---
+  const dog = new THREE.Group();
+  dog.position.set(2.8, -1.5, 0.5);
+  dog.rotation.y = -Math.PI / 6;
+  
+  const dogBody = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.4, 1.6), matDark);
+  dogBody.position.y = 0.8;
+  dog.add(dogBody);
+  
+  const dogHead = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.3, 0.5), matMetal);
+  dogHead.position.set(0, 1.1, 0.9);
+  dog.add(dogHead);
+  
+  const dogEye = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.15), matMag);
+  dogEye.position.set(0, 1.1, 1.16);
+  dog.add(dogEye);
+  
+  const dogLegs = [];
+  const legPos = [
+    { x: 0.45, z: 0.6 }, { x: -0.45, z: 0.6 },
+    { x: 0.45, z: -0.6 }, { x: -0.45, z: -0.6 }
+  ];
+  
+  legPos.forEach(pos => {
+    const hip = new THREE.Group();
+    hip.position.set(pos.x, 0.8, pos.z);
+    
+    const hipJoint = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.2, 16), matMetal);
+    hipJoint.rotation.z = Math.PI / 2;
+    hip.add(hipJoint);
+    
+    const thigh = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.6, 0.15), matDark);
+    thigh.position.y = -0.3;
+    hip.add(thigh);
+    
+    const knee = new THREE.Group();
+    knee.position.y = -0.6;
+    hip.add(knee);
+    
+    const calf = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.6, 0.1), matMetal);
+    calf.position.y = -0.3;
+    knee.add(calf);
+    
+    dog.add(hip);
+    dogLegs.push({ hip, knee, offset: pos.z > 0 ? 0 : Math.PI });
+  });
+  fleet.add(dog);
+
+  // --- 4. WHEELED ROVER ---
+  const rover = new THREE.Group();
+  rover.position.set(0, -1.8, 2.5);
+  
+  const rChassis = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 1.4), matDark);
+  rChassis.position.y = 0.4;
+  rover.add(rChassis);
+  
+  const rLidar = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.2, 16), matCyan);
+  rLidar.position.set(0, 0.7, 0);
+  rover.add(rLidar);
+  
+  const wheelOffsets = [
+    { x: 0.7, z: 0.5 }, { x: -0.7, z: 0.5 },
+    { x: 0.7, z: -0.5 }, { x: -0.7, z: -0.5 }
+  ];
+  
+  const rWheels = [];
+  wheelOffsets.forEach(pos => {
+    const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.15, 16), matMetal);
+    wheel.rotation.z = Math.PI / 2;
+    wheel.position.set(pos.x, 0.25, pos.z);
+    rover.add(wheel);
+    rWheels.push(wheel);
+  });
+  fleet.add(rover);
+
+  // --- Animation ---
   let mouseX = 0, mouseY = 0;
   document.addEventListener('mousemove', e => {
     mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
     mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
   });
 
-  function animateRobot() {
-    requestAnimationFrame(animateRobot);
-    robot.rotation.y += 0.005;
-    robot.rotation.y += (mouseX * 0.3 - robot.rotation.y) * 0.02;
-    robot.rotation.x += (-mouseY * 0.15 - robot.rotation.x) * 0.02;
-    core.rotation.y += 0.03;
-    core.rotation.x += 0.02;
-    ring1.rotation.z += 0.008;
-    ring2.rotation.z -= 0.005;
-    antTip.material.opacity = 0.5 + Math.sin(Date.now() * 0.005) * 0.5;
+  function animateFleet() {
+    requestAnimationFrame(animateFleet);
+    const time = Date.now() * 0.001;
+
+    // Mouse Parallax
+    fleet.rotation.y += (mouseX * 0.3 - fleet.rotation.y) * 0.05;
+    fleet.rotation.x += (-mouseY * 0.15 - fleet.rotation.x) * 0.05;
+
+    // Drone Animation (Hover & Props)
+    drone.position.y = 2 + Math.sin(time * 2) * 0.2;
+    drone.rotation.z = Math.sin(time * 1.5) * 0.05;
+    drone.rotation.x = Math.cos(time * 1.2) * 0.05;
+    props.forEach((prop, i) => {
+      prop.rotation.y += (i % 2 === 0 ? 0.3 : -0.3);
+    });
+
+    // Robotic Arm Animation
+    shoulder.rotation.y = Math.sin(time * 0.8) * 1.5;
+    upperArm.rotation.x = Math.sin(time * 1.2) * 0.5 + 0.5;
+    elbow.rotation.x = Math.cos(time * 1.2) * 0.8 - 0.5;
+
+    // Robotic Dog Walk Animation
+    dogLegs.forEach(leg => {
+      leg.hip.rotation.x = Math.sin(time * 4 + leg.offset) * 0.3;
+      leg.knee.rotation.x = Math.sin(time * 4 + leg.offset) * 0.3 + 0.2;
+    });
+
+    // Rover Animation
+    rLidar.rotation.y -= 0.1;
+    rWheels.forEach(w => w.rotation.x += 0.05);
+
     renderer.render(scene, camera);
   }
-  animateRobot();
+  animateFleet();
 
   function onResize() {
     const w = getW(), h = getH();
