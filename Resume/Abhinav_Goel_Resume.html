@@ -83,7 +83,7 @@
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--primary);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 2px solid #0a0e17;
     padding-bottom: 3px;
     margin-bottom: 0.6rem;
   }
@@ -122,10 +122,11 @@
   }
   
   .item-hdr a {
-    color: var(--primary);
-    text-decoration: none;
+    color: #0055bb;
+    text-decoration: underline;
+    font-weight: 600;
   }
-  .item-hdr a:hover { color: var(--accent); }
+  .item-hdr a:hover { color: #003388; }
   
   .item-sub {
     font-size: 12px;
@@ -263,76 +264,7 @@
     </div>
   </section>
 
-  <!-- FEATURED PROJECTS -->
-  <section>
-    <div class="sec-title">Featured Robotics Projects</div>
-
-    <div class="item">
-      <div class="item-hdr">
-        <span><a href="https://github.com/Humobot1812/Krishi_Cobot" target="_blank">e-Yantra KrishiCobot — IIT Bombay (e-YRC 2025–26)</a></span>
-        <span class="item-date">Aug 2025 – May 2026</span>
-      </div>
-      <div class="tech-tag">ROS2 Humble · LiDAR · IMU · OpenCV · ArUco · MoveIt2 · UR5 Arm · Visual Servoing</div>
-      <ul class="bullets">
-        <li>Engineered a fully autonomous agricultural robot for crop monitoring and fruit harvesting; achieved <strong>Top 16 / 400+ teams (Top 4% nationally)</strong>.</li>
-        <li>Built a multi-sensor perception pipeline (LiDAR + ultrasonic + IMU) enabling collision-free lane navigation across field rows.</li>
-        <li>Developed ArUco marker-based fruit classification and automated pick-and-place routines with a UR5 arm via MoveIt2 and visual servoing.</li>
-      </ul>
-    </div>
-
-    <div class="item">
-      <div class="item-hdr">
-        <span><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank">Disaster Surveillance Drone — NIDAR 2026</a></span>
-        <span class="item-date">Jan 2026 – Jun 2026</span>
-      </div>
-      <div class="tech-tag">Python · MAVSDK · ArduPilot SITL · MAVLink · QGroundControl · Mission Planner · YOLOv8 · KML</div>
-      <ul class="bullets">
-        <li>Architected a polygon-based autonomous survey UAV covering <strong>75+ acres in &lt;20 minutes</strong> at 25m altitude via optimized zigzag mission paths.</li>
-        <li>Integrated YOLOv8 real-time human detection with Return-To-Launch (RTL) failsafe, geofencing, and pause-center-resume target lock-on.</li>
-        <li>Fully automated mission lifecycle (upload → arm → takeoff → survey → RTL) via MAVSDK Python API, reducing operator workload to zero.</li>
-      </ul>
-    </div>
-
-    <div class="item">
-      <div class="item-hdr">
-        <span><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank">Autonomous Drone Survey &amp; Target Detection — SAE Aerothon 2025</a></span>
-        <span class="item-date">Jan 2025 – Jun 2025</span>
-      </div>
-      <div class="tech-tag">Python · ROS2 · DroneKit · Pixhawk · ArduPilot · MAVLink · Gazebo · YOLOv4-Tiny · PID Control</div>
-      <ul class="bullets">
-        <li>Assembled a ROS2 autonomous drone for survey and target detection; selected for national-level competition presentation.</li>
-        <li>Implemented pinhole camera model pixel-to-GPS conversion enabling sub-meter target geolocation from aerial imagery.</li>
-        <li>Engineered a visual PID centering loop for precise autonomous target alignment and lock-on during hover operations.</li>
-      </ul>
-    </div>
-
-    <div class="item">
-      <div class="item-hdr">
-        <span><a href="https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project" target="_blank">Differential Drive Robot — ROS2 Navigation &amp; SLAM</a> (★ 7 GitHub Stars)</span>
-        <span class="item-date">Jan 2024 – Jun 2024</span>
-      </div>
-      <div class="tech-tag">C++ · Python · ROS2 Humble · Gazebo · Nav2 · SLAM Toolbox · AMCL · URDF/xacro · EKF</div>
-      <ul class="bullets">
-        <li>Modeled and simulated a 4-wheeled differential drive robot with URDF/xacro physics model in Gazebo environment.</li>
-        <li>Achieved SLAM-based 2D occupancy mapping using SLAM Toolbox and AMCL pose tracking for GPS-denied indoor localization.</li>
-        <li>Deployed fully autonomous path planning, obstacle avoidance, and goal navigation using Nav2 stack with EKF sensor fusion.</li>
-      </ul>
-    </div>
-
-    <div class="item">
-      <div class="item-hdr">
-        <span><a href="https://youtube.com/playlist?list=PLQcgql__dXrcVR0A4IEijRmWpTvdtAOpG&si=FmyR1rqhcqY7-uyH" target="_blank">ESP32-S3 Quadcopter Drone</a></span>
-        <span class="item-date">Jun 2024 – Dec 2024</span>
-      </div>
-      <div class="tech-tag">ESP32-S3 · MPU6050 IMU · Barometer · Custom MOSFET ESC · Embedded C · TinkerCad</div>
-      <ul class="bullets">
-        <li>Fabricated a quadcopter drone from scratch with IMU stabilization and barometer altitude sensing.</li>
-        <li>Designed a custom MOSFET-based Electronic Speed Controller (ESC) and flashed custom flight control firmware in Embedded C.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- EXPERIENCE & LEADERSHIP -->
+  <!-- LEADERSHIP & EXPERIENCE -->
   <section>
     <div class="sec-title">Leadership &amp; Experience</div>
     <div class="item">
@@ -355,6 +287,86 @@
       <div class="item-sub">PDPM IIITDM Jabalpur</div>
       <ul class="bullets">
         <li>Designed and fabricated UAV hardware (frame assembly, ESC wiring, Pixhawk flight controller integration) for national competitions.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS -->
+  <section>
+    <div class="sec-title">Featured Robotics Projects</div>
+
+    <div class="item">
+      <div class="item-hdr">
+        <span><a href="https://github.com/Humobot1812/Krishi_Cobot" target="_blank">e-Yantra KrishiCobot — IIT Bombay (e-YRC 2025–26) 🔗 [GitHub]</a></span>
+        <span class="item-date">Aug 2025 – May 2026</span>
+      </div>
+      <div class="tech-tag">ROS2 Humble · LiDAR · IMU · OpenCV · ArUco · MoveIt2 · UR5 Arm · Visual Servoing</div>
+      <ul class="bullets">
+        <li>Engineered a fully autonomous agricultural robot for crop monitoring and fruit harvesting; achieved <strong>Top 16 / 400+ teams (Top 4% nationally)</strong>.</li>
+        <li>Built a multi-sensor perception pipeline (LiDAR + ultrasonic + IMU) enabling collision-free lane navigation across field rows.</li>
+        <li>Developed ArUco marker-based fruit classification and automated pick-and-place routines with a UR5 arm via MoveIt2 and visual servoing.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hdr">
+        <span><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank">Disaster Surveillance Drone — NIDAR 2026 🔗 [GitHub]</a></span>
+        <span class="item-date">Jan 2026 – Jun 2026</span>
+      </div>
+      <div class="tech-tag">Python · MAVSDK · ArduPilot SITL · MAVLink · QGroundControl · Mission Planner · YOLOv8 · KML</div>
+      <ul class="bullets">
+        <li>Architected a polygon-based autonomous survey UAV covering <strong>75+ acres in &lt;20 minutes</strong> at 25m altitude via optimized zigzag mission paths.</li>
+        <li>Integrated YOLOv8 real-time human detection with Return-To-Launch (RTL) failsafe, geofencing, and pause-center-resume target lock-on.</li>
+        <li>Fully automated mission lifecycle (upload → arm → takeoff → survey → RTL) via MAVSDK Python API, reducing operator workload to zero.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hdr">
+        <span><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank">Autonomous Drone Survey &amp; Target Detection — SAE Aerothon 2025 🔗 [GitHub]</a></span>
+        <span class="item-date">Jan 2025 – Jun 2025</span>
+      </div>
+      <div class="tech-tag">Python · ROS2 · DroneKit · Pixhawk · ArduPilot · MAVLink · Gazebo · YOLOv4-Tiny · PID Control</div>
+      <ul class="bullets">
+        <li>Assembled a ROS2 autonomous drone for survey and target detection; selected for national-level competition presentation.</li>
+        <li>Implemented pinhole camera model pixel-to-GPS conversion enabling sub-meter target geolocation from aerial imagery.</li>
+        <li>Engineered a visual PID centering loop for precise autonomous target alignment and lock-on during hover operations.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hdr">
+        <span><a href="https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project" target="_blank">Differential Drive Robot — ROS2 Navigation &amp; SLAM 🔗 [GitHub]</a> (★ 7 Stars)</span>
+        <span class="item-date">Jan 2024 – Jun 2024</span>
+      </div>
+      <div class="tech-tag">C++ · Python · ROS2 Humble · Gazebo · Nav2 · SLAM Toolbox · AMCL · URDF/xacro · EKF</div>
+      <ul class="bullets">
+        <li>Modeled and simulated a 4-wheeled differential drive robot with URDF/xacro physics model in Gazebo environment.</li>
+        <li>Achieved SLAM-based 2D occupancy mapping using SLAM Toolbox and AMCL pose tracking for GPS-denied indoor localization.</li>
+        <li>Deployed fully autonomous path planning, obstacle avoidance, and goal navigation using Nav2 stack with EKF sensor fusion.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hdr">
+        <span><a href="https://youtube.com/playlist?list=PLQcgql__dXrcVR0A4IEijRmWpTvdtAOpG&si=FmyR1rqhcqY7-uyH" target="_blank">ESP32-S3 Quadcopter Drone 🔗 [YouTube]</a></span>
+        <span class="item-date">Jun 2024 – Dec 2024</span>
+      </div>
+      <div class="tech-tag">ESP32-S3 · MPU6050 IMU · Barometer · Custom MOSFET ESC · Embedded C · TinkerCad</div>
+      <ul class="bullets">
+        <li>Fabricated a quadcopter drone from scratch with IMU stabilization and barometer altitude sensing.</li>
+        <li>Designed a custom MOSFET-based Electronic Speed Controller (ESC) and flashed custom flight control firmware in Embedded C.</li>
+      </ul>
+    </div>
+
+    <div class="item">
+      <div class="item-hdr">
+        <span><a href="https://github.com/Humobot1812/Robotic_arm" target="_blank">Modular Robotic Arm Platform 🔗 [GitHub]</a></span>
+        <span class="item-date">Aug 2024 – Present</span>
+      </div>
+      <div class="tech-tag">Servo Motors · Arduino · Kinematics · Trajectory Planning · 3D CAD</div>
+      <ul class="bullets">
+        <li>Developed a 5-DOF modular robotic arm with inverse kinematics for automated pick-and-place operations.</li>
       </ul>
     </div>
   </section>
