@@ -39,4 +39,3 @@ Open `http://localhost:8000` in your web browser.
 ## 📜 License & Copyright
 
 © 2026 Abhinav Goel. Created for personal portfolio showcase.
-
