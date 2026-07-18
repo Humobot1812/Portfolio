@@ -498,11 +498,29 @@ function initSkillsGraph() {
   const links = [];
   const nodeMap = {};
 
-  const catKeys = Object.keys(categories);
-  const totalCat = catKeys.length;
   const centerX = width / 2;
   const centerY = height / 2;
-  const ringRadius = 140;
+
+  // Central Node
+  const centralNode = {
+    id: 'central_node',
+    label: 'Robotics Skills',
+    cat: 'all',
+    isCentral: true,
+    r: 45,
+    x: centerX,
+    y: centerY,
+    vx: 0,
+    vy: 0,
+    color: '#0077B6',
+    subCount: 0
+  };
+  nodes.push(centralNode);
+  nodeMap[centralNode.id] = centralNode;
+
+  const catKeys = Object.keys(categories);
+  const totalCat = catKeys.length;
+  const hubRadius = 160;
 
   catKeys.forEach((key, idx) => {
     const angle = (idx / totalCat) * Math.PI * 2 - Math.PI / 2;
@@ -512,24 +530,32 @@ function initSkillsGraph() {
       label: cat.label,
       cat: key,
       isHub: true,
-      r: 34,
-      x: centerX + Math.cos(angle) * ringRadius + (Math.random() - 0.5) * 10,
-      y: centerY + Math.sin(angle) * ringRadius + (Math.random() - 0.5) * 10,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
+      r: 35,
+      x: centerX + Math.cos(angle) * hubRadius + (Math.random() - 0.5) * 20,
+      y: centerY + Math.sin(angle) * hubRadius + (Math.random() - 0.5) * 20,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
       color: cat.color,
-      glow: cat.glow,
       subCount: 0
     };
     nodes.push(hubNode);
     nodeMap[hubNode.id] = hubNode;
+
+    // Link Central to Hub
+    links.push({
+      source: centralNode,
+      target: hubNode,
+      length: 160 + Math.random() * 20,
+      label: 'HAS CATEGORY',
+      k: 0.02
+    });
   });
 
   rawSkills.forEach((skill, idx) => {
     const hub = nodeMap[`hub_${skill.cat}`];
     const cat = categories[skill.cat];
     const offsetAngle = Math.random() * Math.PI * 2;
-    const dist = 65 + Math.random() * 55;
+    const dist = 70 + Math.random() * 40;
 
     const childNode = {
       id: `leaf_${idx}`,
@@ -537,13 +563,12 @@ function initSkillsGraph() {
       cat: skill.cat,
       level: skill.level,
       isHub: false,
-      r: 18 + Math.min(skill.label.length * 0.35, 7),
+      r: 22 + Math.min(skill.label.length * 0.5, 10),
       x: hub.x + Math.cos(offsetAngle) * dist,
       y: hub.y + Math.sin(offsetAngle) * dist,
-      vx: (Math.random() - 0.5) * 0.5,
-      vy: (Math.random() - 0.5) * 0.5,
+      vx: (Math.random() - 0.5) * 0.8,
+      vy: (Math.random() - 0.5) * 0.8,
       color: cat.color,
-      glow: cat.glow,
       parentHub: hub
     };
 
@@ -551,29 +576,15 @@ function initSkillsGraph() {
     nodeMap[childNode.id] = childNode;
     hub.subCount++;
 
-    // Spring Link to Hub
+    // Link Hub to Skill
     links.push({
       source: hub,
       target: childNode,
-      length: 80 + Math.random() * 30,
-      pulsePos: Math.random(),
-      pulseSpeed: 0.003 + Math.random() * 0.004
+      length: 80 + Math.random() * 40,
+      label: 'INCLUDES',
+      k: 0.04
     });
   });
-
-  // Cross-link Ring between Category Hubs
-  for (let i = 0; i < totalCat; i++) {
-    const hubA = nodeMap[`hub_${catKeys[i]}`];
-    const hubB = nodeMap[`hub_${catKeys[(i + 1) % totalCat]}`];
-    links.push({
-      source: hubA,
-      target: hubB,
-      length: ringRadius * 1.05,
-      isRing: true,
-      pulsePos: Math.random(),
-      pulseSpeed: 0.002
-    });
-  }
 
   // Viewport & Interaction
   let camera = {
@@ -590,11 +601,6 @@ function initSkillsGraph() {
   let focusedNode = null;
   let draggedNode = null;
   let mouse = { x: 0, y: 0, canvasX: 0, canvasY: 0 };
-  let pulseRings = [];
-
-  function addShockwave(x, y, color) {
-    pulseRings.push({ x, y, r: 10, opacity: 1, color });
-  }
 
   function getCanvasCoords(e) {
     const rect = canvas.getBoundingClientRect();
@@ -629,28 +635,16 @@ function initSkillsGraph() {
 
     let found = null;
     for (let n of nodes) {
-      if (activeCategory !== 'all' && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`) continue;
+      if (activeCategory !== 'all' && !n.isCentral && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`) continue;
       const dx = mouse.x - n.x;
       const dy = mouse.y - n.y;
-      if (dx * dx + dy * dy <= (n.r + 6) * (n.r + 6)) {
+      if (dx * dx + dy * dy <= (n.r + 5) * (n.r + 5)) {
         found = n;
         break;
       }
     }
     hoveredNode = found;
-
-    if (hoveredNode) {
-      tooltip.classList.add('visible');
-      tooltip.style.left = mouse.canvasX + 'px';
-      tooltip.style.top = mouse.canvasY + 'px';
-      if (hoveredNode.isHub) {
-        tooltip.innerHTML = `<strong>${hoveredNode.label}</strong><br/><span style="color:var(--text3);font-size:10px;">Category Hub · ${hoveredNode.subCount} Nodes</span>`;
-      } else {
-        tooltip.innerHTML = `<strong>${hoveredNode.label}</strong><br/><span style="color:${hoveredNode.color}">${hoveredNode.level}</span>`;
-      }
-    } else {
-      tooltip.classList.remove('visible');
-    }
+    canvas.style.cursor = hoveredNode ? 'pointer' : 'crosshair';
   });
 
   canvas.addEventListener('mousedown', () => {
@@ -666,9 +660,7 @@ function initSkillsGraph() {
       focusedNode = hoveredNode;
       camera.targetX = hoveredNode.x;
       camera.targetY = hoveredNode.y;
-      camera.targetZoom = hoveredNode.isHub ? 1.6 : 2.1;
-      addShockwave(hoveredNode.x, hoveredNode.y, hoveredNode.color);
-      if (typeof awardPoints === 'function') awardPoints(10, `Inspected skill: ${hoveredNode.label}`);
+      camera.targetZoom = hoveredNode.isHub ? 1.5 : (hoveredNode.isCentral ? 1.2 : 1.8);
     } else {
       resetZoom();
     }
@@ -699,8 +691,7 @@ function initSkillsGraph() {
           focusedNode = hub;
           camera.targetX = hub.x;
           camera.targetY = hub.y;
-          camera.targetZoom = 1.55;
-          addShockwave(hub.x, hub.y, hub.color);
+          camera.targetZoom = 1.4;
         }
       }
     });
@@ -710,32 +701,35 @@ function initSkillsGraph() {
   function updatePhysics() {
     time += 0.015;
 
-    camera.x += (camera.targetX - camera.x) * 0.08;
-    camera.y += (camera.targetY - camera.y) * 0.08;
-    camera.zoom += (camera.targetZoom - camera.zoom) * 0.08;
+    camera.x += (camera.targetX - camera.x) * 0.1;
+    camera.y += (camera.targetY - camera.y) * 0.1;
+    camera.zoom += (camera.targetZoom - camera.zoom) * 0.1;
 
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
 
-      a.vx += Math.cos(time + i * 1.3) * 0.035;
-      a.vy += Math.sin(time + i * 1.7) * 0.035;
+      // Organic brownian drift
+      a.vx += Math.cos(time + i * 1.3) * 0.04;
+      a.vy += Math.sin(time + i * 1.7) * 0.04;
 
-      a.vx += (width / 2 - a.x) * 0.00012;
-      a.vy += (height / 2 - a.y) * 0.00012;
+      // Soft centroid gravity
+      a.vx += (width / 2 - a.x) * 0.0001;
+      a.vy += (height / 2 - a.y) * 0.0001;
 
+      // Repulsion between all nodes
       for (let j = i + 1; j < nodes.length; j++) {
         const b = nodes[j];
         const dx = b.x - a.x;
         const dy = b.y - a.y;
         let distSq = dx * dx + dy * dy || 1;
-        let minDist = a.r + b.r + 18;
+        let minDist = a.r + b.r + 25; // Space between nodes
 
-        if (distSq < minDist * minDist * 4) {
+        if (distSq < minDist * minDist * 2) {
           let dist = Math.sqrt(distSq);
           let force = (minDist - dist) / dist;
           if (force > 0) {
-            let fx = dx * force * 0.07;
-            let fy = dy * force * 0.07;
+            let fx = dx * force * 0.06;
+            let fy = dy * force * 0.06;
             if (a !== draggedNode) { a.vx -= fx; a.vy -= fy; }
             if (b !== draggedNode) { b.vx += fx; b.vy += fy; }
           }
@@ -743,6 +737,7 @@ function initSkillsGraph() {
       }
     }
 
+    // Spring links
     links.forEach(link => {
       const a = link.source;
       const b = link.target;
@@ -750,37 +745,30 @@ function initSkillsGraph() {
       const dy = b.y - a.y;
       const dist = Math.sqrt(dx * dx + dy * dy) || 1;
       const delta = dist - link.length;
-      const k = link.isRing ? 0.002 : 0.01;
+      const k = link.k;
 
       const fx = (dx / dist) * delta * k;
       const fy = (dy / dist) * delta * k;
 
       if (a !== draggedNode) { a.vx += fx; a.vy += fy; }
       if (b !== draggedNode) { b.vx -= fx; b.vy -= fy; }
-
-      link.pulsePos = (link.pulsePos + link.pulseSpeed) % 1;
     });
 
+    // Update positions
     nodes.forEach(n => {
       if (n === draggedNode) return;
-      n.vx *= 0.89;
-      n.vy *= 0.89;
+      n.vx *= 0.88; // damping
+      n.vy *= 0.88;
       n.x += n.vx;
       n.y += n.vy;
 
-      const m = 35;
+      // Boundaries
+      const m = 40;
       if (n.x < m) { n.x = m; n.vx *= -0.5; }
       if (n.x > width - m) { n.x = width - m; n.vx *= -0.5; }
       if (n.y < m) { n.y = m; n.vy *= -0.5; }
       if (n.y > height - m) { n.y = height - m; n.vy *= -0.5; }
     });
-
-    for (let i = pulseRings.length - 1; i >= 0; i--) {
-      const ring = pulseRings[i];
-      ring.r += 2.4;
-      ring.opacity -= 0.025;
-      if (ring.opacity <= 0) pulseRings.splice(i, 1);
-    }
   }
 
   function draw() {
@@ -793,22 +781,13 @@ function initSkillsGraph() {
     ctx.scale(camera.zoom, camera.zoom);
     ctx.translate(-camera.x, -camera.y);
 
-    pulseRings.forEach(ring => {
-      ctx.beginPath();
-      ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
-      ctx.strokeStyle = ring.color;
-      ctx.globalAlpha = Math.max(0, ring.opacity);
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-    });
-
+    // Draw Links
     links.forEach(link => {
       const a = link.source;
       const b = link.target;
 
       if (activeCategory !== 'all') {
-        if (a.cat !== activeCategory && b.cat !== activeCategory) return;
+        if (!a.isCentral && !b.isCentral && a.cat !== activeCategory && b.cat !== activeCategory) return;
       }
 
       const isFocused = focusedNode && (a === focusedNode || b === focusedNode);
@@ -817,112 +796,110 @@ function initSkillsGraph() {
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(b.x, b.y);
-
-      if (link.isRing) {
-        ctx.strokeStyle = 'rgba(0, 240, 255, 0.12)';
-        ctx.lineWidth = 1;
-        ctx.setLineDash([4, 4]);
-      } else {
-        ctx.setLineDash([]);
-        if (isFocused || isHovered) {
-          ctx.strokeStyle = a.color;
-          ctx.lineWidth = 2.4;
-          ctx.shadowColor = a.color;
-          ctx.shadowBlur = 10;
-        } else {
-          ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
-          ctx.lineWidth = 1.2;
-          ctx.shadowBlur = 0;
-        }
-      }
+      
+      ctx.strokeStyle = (isFocused || isHovered) ? '#888' : '#ccc';
+      ctx.lineWidth = (isFocused || isHovered) ? 2 : 1;
       ctx.stroke();
-      ctx.shadowBlur = 0;
-      ctx.setLineDash([]);
 
-      const px = a.x + (b.x - a.x) * link.pulsePos;
-      const py = a.y + (b.y - a.y) * link.pulsePos;
-      ctx.beginPath();
-      ctx.arc(px, py, link.isRing ? 2 : 2.5, 0, Math.PI * 2);
-      ctx.fillStyle = (isFocused || isHovered) ? a.color : '#ffffff';
-      ctx.shadowColor = a.color;
-      ctx.shadowBlur = 8;
-      ctx.fill();
-      ctx.shadowBlur = 0;
+      // Draw arrow head & text label
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      
+      if (dist > (a.r + b.r)) {
+        const midX = a.x + dx * 0.5;
+        const midY = a.y + dy * 0.5;
+        const angle = Math.atan2(dy, dx);
+        
+        // Arrow head near target
+        const targetBorderX = b.x - Math.cos(angle) * (b.r + 2);
+        const targetBorderY = b.y - Math.sin(angle) * (b.r + 2);
+        
+        ctx.save();
+        ctx.translate(targetBorderX, targetBorderY);
+        ctx.rotate(angle);
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(-6, -4);
+        ctx.lineTo(-6, 4);
+        ctx.closePath();
+        ctx.fillStyle = ctx.strokeStyle;
+        ctx.fill();
+        ctx.restore();
+
+        // Label text on line
+        ctx.save();
+        ctx.translate(midX, midY);
+        if (Math.abs(angle) > Math.PI / 2) {
+          ctx.rotate(angle + Math.PI);
+        } else {
+          ctx.rotate(angle);
+        }
+        ctx.fillStyle = '#999';
+        ctx.font = '8px "Space Mono", monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(link.label, 0, -2);
+        ctx.restore();
+      }
     });
 
+    // Draw Nodes
     nodes.forEach(n => {
-      const isFilteredOut = activeCategory !== 'all' && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`;
-      const alpha = isFilteredOut ? 0.2 : 1.0;
-
-      ctx.save();
-      ctx.globalAlpha = alpha;
+      if (activeCategory !== 'all' && !n.isCentral && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`) return;
 
       const isHovered = hoveredNode === n;
       const isFocused = focusedNode === n;
-      const scale = isHovered ? 1.15 : (isFocused ? 1.2 : 1.0);
+      const scale = isHovered ? 1.08 : (isFocused ? 1.15 : 1.0);
       const r = n.r * scale;
 
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, r + (isFocused ? 8 : (isHovered ? 6 : 2)), 0, Math.PI * 2);
-      ctx.fillStyle = n.glow;
-      ctx.shadowColor = n.color;
-      ctx.shadowBlur = isFocused ? 25 : (isHovered ? 18 : 8);
-      ctx.fill();
-
-      const grad = ctx.createRadialGradient(n.x - r * 0.3, n.y - r * 0.3, r * 0.1, n.x, n.y, r);
-      if (n.isHub) {
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.4, n.color);
-        grad.addColorStop(1, '#050015');
-      } else {
-        grad.addColorStop(0, n.color);
-        grad.addColorStop(0.7, '#0a0520');
-        grad.addColorStop(1, '#030014');
-      }
-
+      ctx.save();
+      
+      // Node Circle
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
-      ctx.fillStyle = grad;
-      ctx.strokeStyle = n.color;
-      ctx.lineWidth = n.isHub ? 3 : (isFocused ? 2.5 : 1.5);
+      ctx.fillStyle = n.color;
       ctx.fill();
+
+      // Thick white border
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#ffffff';
       ctx.stroke();
 
-      if (isFocused) {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, r + 6 + Math.sin(time * 5) * 3, 0, Math.PI * 2);
-        ctx.strokeStyle = n.color;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-      }
+      // Soft drop shadow
+      ctx.shadowColor = 'rgba(0,0,0,0.2)';
+      ctx.shadowBlur = 10;
+      ctx.shadowOffsetY = 4;
+      ctx.shadowOffsetX = 0;
+      ctx.stroke(); // stroke again to apply shadow cleanly around edge
+      
+      // Clear shadow for text
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetY = 0;
 
-      ctx.font = n.isHub ? 'bold 11px "Space Mono", monospace' : '10px "Inter", sans-serif';
+      // Node Text
+      ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-
-      if (n.isHub) {
-        ctx.fillStyle = '#ffffff';
-        ctx.shadowColor = '#000000';
-        ctx.shadowBlur = 4;
-        ctx.fillText(n.label, n.x, n.y);
+      
+      if (n.isCentral) {
+        ctx.font = 'bold 12px "Inter", sans-serif';
+      } else if (n.isHub) {
+        ctx.font = 'bold 10px "Inter", sans-serif';
       } else {
-        if (n.label.length <= 10) {
-          ctx.fillStyle = '#e2e8f0';
-          ctx.fillText(n.label, n.x, n.y);
-        } else {
-          const words = n.label.split(' ');
-          if (words.length > 1) {
-            const mid = Math.ceil(words.length / 2);
-            const line1 = words.slice(0, mid).join(' ');
-            const line2 = words.slice(mid).join(' ');
-            ctx.fillStyle = '#e2e8f0';
-            ctx.fillText(line1, n.x, n.y - 5);
-            ctx.fillText(line2, n.x, n.y + 7);
-          } else {
-            ctx.fillStyle = '#e2e8f0';
-            ctx.fillText(n.label, n.x, n.y);
-          }
-        }
+        ctx.font = '9px "Inter", sans-serif';
+      }
+
+      // Wrap text
+      const words = n.label.split(' ');
+      if (words.length > 1 && !n.isCentral) {
+        const mid = Math.ceil(words.length / 2);
+        const line1 = words.slice(0, mid).join(' ');
+        const line2 = words.slice(mid).join(' ');
+        ctx.fillText(line1, n.x, n.y - 6);
+        ctx.fillText(line2, n.x, n.y + 6);
+      } else {
+        ctx.fillText(n.label, n.x, n.y);
       }
 
       ctx.restore();
