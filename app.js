@@ -480,7 +480,7 @@ function initSkillsGraph() {
     { label: 'RPi Cam v3 NoIR', cat: 'vision', level: 'Night Vision Optics' },
     { label: 'ESP-CAM', cat: 'vision', level: 'Embedded Camera Stream' },
     { label: 'ArUco Markers', cat: 'vision', level: 'Visual Target Geolocation' },
-    { label: 'Pixel-to-GPS-Calculator', cat: 'vision', level: 'Geospatial Projection' },
+    { label: 'Pixel-to-GPS Calculator', cat: 'vision', level: 'Geospatial Projection' },
     { label: 'Pin-Hole Camera-Model', cat: 'vision', level: 'Geospatial Projection' },
 
     // HARDWARE
