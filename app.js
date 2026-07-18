@@ -434,8 +434,7 @@ function initSkillsGraph() {
     // LANGUAGES
     { label: 'C++', cat: 'prog', level: 'Core Architecture & Robotics' },
     { label: 'Python', cat: 'prog', level: 'AI, ROS2 & Scripting' },
-    { label: 'Matlab', cat: 'prog', level: 'Simulation & Analysis' },
-    { label: 'Embedded C', cat: 'prog', level: 'Firmware & Microcontrollers' },
+    { label: 'MATLAB / Simulink', cat: 'prog', level: 'Simulation & Analysis' },
 
     // FRAMEWORKS
     { label: 'ROS2 Humble', cat: 'ros', level: 'Robotics Middleware' },
@@ -482,8 +481,12 @@ function initSkillsGraph() {
     { label: 'Arduino', cat: 'hw', level: 'MCU Prototyping' },
     { label: 'LiDAR', cat: 'hw', level: 'Laser Distance Sensing' },
     { label: 'MPU9250 IMU', cat: 'hw', level: '9-DOF Inertial Sensor' },
+    { label: 'Barometer', cat: 'hw', level: 'Altitude Sensing' },
     { label: 'Encoder Motors', cat: 'hw', level: 'Wheel Odometry' },
+    { label: 'Coreless DC Motors', cat: 'hw', level: 'Micro UAV Actuators' },
+    { label: 'Custom MOSFET ESC', cat: 'hw', level: 'Motor Speed Control' },
     { label: 'ST7920 Display', cat: 'hw', level: 'SPI Graphics Display' },
+    { label: 'NRF24L01', cat: 'hw', level: 'RF Transceiver' },
     { label: '3D Printing', cat: 'hw', level: 'Rapid Structural Fabrication' },
 
     // TOOLS
