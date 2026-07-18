@@ -224,15 +224,15 @@ function navigateTo(pageId) {
   void target.offsetHeight;
   target.classList.add('active');
   window.scrollTo(0, 0);
-  
+
   // Always dispatch resize event after showing a new section so canvases initialize their buffers correctly
   setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
-  
+
   target.querySelectorAll('.fade-up').forEach(el => {
     el.classList.remove('vis');
     obs.observe(el);
   });
-  
+
   if (pageId === 'about') {
     setTimeout(() => {
       document.querySelectorAll('.skills-panel.active .sbar-fill').forEach(bar => {
@@ -240,7 +240,7 @@ function navigateTo(pageId) {
       });
     }, 300);
   }
-  
+
   currentPage = pageId;
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === pageId);
@@ -408,10 +408,20 @@ function initSkillsGraph() {
 
   const ctx = canvas.getContext('2d');
   let dpr = window.devicePixelRatio || 1;
-  let width = 0, height = 0;
+  let width = container.clientWidth || 800;
+  let height = container.clientHeight || 480;
 
   function resize() {
-    width = container.clientWidth;
+    let newWidth = container.clientWidth;
+    if (newWidth === 0) return; // Ignore resize if hidden
+
+    // Auto-center camera if it was initialized at a different width and no node is focused
+    if (width !== newWidth && !focusedNode && typeof camera !== 'undefined') {
+      camera.targetX = newWidth / 2;
+      camera.targetY = height / 2;
+    }
+
+    width = newWidth;
     height = container.clientHeight || 480;
     canvas.width = width * dpr;
     canvas.height = height * dpr;
@@ -770,7 +780,7 @@ function initSkillsGraph() {
 
       if (a !== draggedNode) { a.vx += fx; a.vy += fy; }
       if (b !== draggedNode) { b.vx -= fx; b.vy -= fy; }
-      
+
       // Advance light pulse along link
       link.pulsePos = (link.pulsePos + 0.005) % 1;
     });
@@ -790,7 +800,7 @@ function initSkillsGraph() {
       if (n.y < m) { n.y = m; n.vy *= -0.5; }
       if (n.y > height - m) { n.y = height - m; n.vy *= -0.5; }
     });
-    
+
     // Update shockwaves
     for (let i = pulseRings.length - 1; i >= 0; i--) {
       const ring = pulseRings[i];
@@ -836,7 +846,7 @@ function initSkillsGraph() {
       ctx.beginPath();
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(b.x, b.y);
-      
+
       // Cyberpunk glowing grey lines
       ctx.strokeStyle = (isFocused || isHovered) ? a.color : 'rgba(255, 255, 255, 0.2)';
       ctx.lineWidth = (isFocused || isHovered) ? 2 : 1;
@@ -862,16 +872,16 @@ function initSkillsGraph() {
       const dx = b.x - a.x;
       const dy = b.y - a.y;
       const dist = Math.sqrt(dx * dx + dy * dy);
-      
+
       if (dist > (a.r + b.r)) {
         const midX = a.x + dx * 0.5;
         const midY = a.y + dy * 0.5;
         const angle = Math.atan2(dy, dx);
-        
+
         // Arrow head near target
         const targetBorderX = b.x - Math.cos(angle) * (b.r + 2);
         const targetBorderY = b.y - Math.sin(angle) * (b.r + 2);
-        
+
         ctx.save();
         ctx.translate(targetBorderX, targetBorderY);
         ctx.rotate(angle);
@@ -912,7 +922,7 @@ function initSkillsGraph() {
       const r = n.r * scale;
 
       ctx.save();
-      
+
       // Neon glow aura for hovered/focused nodes in dark cyberpunk mode
       if (isHovered || isFocused) {
         ctx.beginPath();
@@ -925,7 +935,7 @@ function initSkillsGraph() {
         ctx.globalAlpha = 1.0;
         ctx.shadowBlur = 0;
       }
-      
+
       // Node Circle - Solid Color Fill
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
@@ -943,7 +953,7 @@ function initSkillsGraph() {
       ctx.shadowOffsetY = 4;
       ctx.shadowOffsetX = 0;
       ctx.stroke(); // stroke again to apply shadow cleanly around edge
-      
+
       // Clear shadow for text
       ctx.shadowBlur = 0;
       ctx.shadowOffsetY = 0;
@@ -952,7 +962,7 @@ function initSkillsGraph() {
       ctx.fillStyle = '#ffffff';
       ctx.textAlign = 'center';
       ctx.textBaseline = 'middle';
-      
+
       if (n.isCentral) {
         ctx.font = 'bold 12px "Inter", sans-serif';
       } else if (n.isHub) {
