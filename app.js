@@ -267,6 +267,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cursor (only desktop)
   if (window.innerWidth > 900) initCursor();
 
+  // Skills Knowledge Graph
+  initSkillsGraph();
+
   // Nav clicks
   document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
@@ -290,23 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Skills tabs
-  const skillTabs = document.getElementById('skillTabs');
-  if (skillTabs) {
-    skillTabs.addEventListener('click', e => {
-      const btn = e.target.closest('.stab');
-      if (!btn) return;
-      document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.skills-panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      const panel = document.getElementById(btn.dataset.panel);
-      panel.classList.add('active');
-      panel.querySelectorAll('.sbar-fill').forEach(bar => {
-        bar.style.transform = 'scaleX(0)';
-        setTimeout(() => { bar.style.transform = `scaleX(${bar.dataset.w})`; }, 50);
-      });
-    });
-  }
+
 
   // Project filter
   document.querySelectorAll('.filt-btn').forEach(btn => {
@@ -408,3 +395,542 @@ function unlockSectionBadge(id) {
 }
 loadGameState();
 setTimeout(updateGameUI, 500);
+
+// ===== INTERACTIVE SKILLS KNOWLEDGE GRAPH =====
+function initSkillsGraph() {
+  const canvas = document.getElementById('skillsGraphCanvas');
+  const container = document.getElementById('skillsGraphBox');
+  const tooltip = document.getElementById('graphTooltip');
+  if (!canvas || !container) return;
+
+  const ctx = canvas.getContext('2d');
+  let dpr = window.devicePixelRatio || 1;
+  let width = 0, height = 0;
+
+  function resize() {
+    width = container.clientWidth;
+    height = container.clientHeight || 480;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.scale(dpr, dpr);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Categories & Config
+  const categories = {
+    prog: { label: 'LANGUAGES', color: '#00f0ff', glow: 'rgba(0, 240, 255, 0.4)' },
+    ros: { label: 'FRAMEWORKS', color: '#bf5af2', glow: 'rgba(191, 90, 242, 0.4)' },
+    uav: { label: 'UAV / DRONE', color: '#0a84ff', glow: 'rgba(10, 132, 255, 0.4)' },
+    vision: { label: 'VISION', color: '#ff2d55', glow: 'rgba(255, 45, 85, 0.4)' },
+    hw: { label: 'HARDWARE', color: '#32d74b', glow: 'rgba(50, 215, 75, 0.4)' },
+    tools: { label: 'TOOLS', color: '#ffd166', glow: 'rgba(255, 209, 102, 0.4)' }
+  };
+
+  const rawSkills = [
+    // LANGUAGES
+    { label: 'C++', cat: 'prog', level: 'Core Architecture & Robotics' },
+    { label: 'Python', cat: 'prog', level: 'AI, ROS2 & Scripting' },
+    { label: 'Matlab', cat: 'prog', level: 'Simulation & Analysis' },
+    { label: 'Embedded C', cat: 'prog', level: 'Firmware & Microcontrollers' },
+
+    // FRAMEWORKS
+    { label: 'ROS2 Humble', cat: 'ros', level: 'Robotics Middleware' },
+    { label: 'ROS2 Control', cat: 'ros', level: 'Hardware Interfaces' },
+    { label: 'Nav2', cat: 'ros', level: 'Autonomous Navigation' },
+    { label: 'SLAM Toolbox', cat: 'ros', level: '2D Mapping' },
+    { label: 'ORB-SLAM3', cat: 'ros', level: 'Visual Feature SLAM' },
+    { label: 'MoveIt2', cat: 'ros', level: 'Arm Manipulation' },
+    { label: 'AMCL', cat: 'ros', level: 'Adaptive Monte Carlo' },
+    { label: 'TF2', cat: 'ros', level: 'Transform Tree' },
+    { label: 'URDF/xacro', cat: 'ros', level: 'Robot Kinematic Model' },
+    { label: 'EKF', cat: 'ros', level: 'Extended Kalman Filter' },
+    { label: 'PID Control', cat: 'ros', level: 'Feedback Control' },
+    { label: 'RANSAC', cat: 'ros', level: 'Outlier Rejection' },
+    { label: 'Sensor Fusion', cat: 'ros', level: 'IMU + Odometry + LiDAR' },
+
+    // UAV / DRONE
+    { label: 'MultiRotor UAVs', cat: 'uav', level: 'Drone Airframe & Flight' },
+    { label: 'Pixhawk', cat: 'uav', level: 'Flight Controller HW' },
+    { label: 'ArduPilot', cat: 'uav', level: 'Autopilot Firmware' },
+    { label: 'PX4', cat: 'uav', level: 'Autopilot Flight Stack' },
+    { label: 'QGroundControl', cat: 'uav', level: 'GCS Telemetry' },
+    { label: 'Mission Planner', cat: 'uav', level: 'Autonomous Waypoints' },
+    { label: 'MAVLink', cat: 'uav', level: 'Telemetry Protocol' },
+    { label: 'DroneKit', cat: 'uav', level: 'Python UAV Control' },
+    { label: 'ArduPilot SITL', cat: 'uav', level: 'Simulation-in-the-Loop' },
+    { label: 'Visual Servoing', cat: 'uav', level: 'Target Tracking' },
+    { label: 'LoRa Module', cat: 'uav', level: 'Long-Range RF Telemetry' },
+
+    // VISION
+    { label: 'OpenCV', cat: 'vision', level: 'Computer Vision Pipeline' },
+    { label: 'YOLOv8', cat: 'vision', level: 'Object Detection AI' },
+    { label: 'RPi Cam v3 NoIR', cat: 'vision', level: 'Night Vision Optics' },
+    { label: 'ESP-CAM', cat: 'vision', level: 'Embedded Camera Stream' },
+    { label: 'ArUco Markers', cat: 'vision', level: 'Visual Target Geolocation' },
+    { label: 'Pixel-to-GPS', cat: 'vision', level: 'Geospatial Projection' },
+
+    // HARDWARE
+    { label: 'Jetson AGX Xavier', cat: 'hw', level: 'Edge Supercomputer' },
+    { label: 'Jetson Nano', cat: 'hw', level: 'Edge Compute Node' },
+    { label: 'Raspberry Pi 4/5', cat: 'hw', level: 'SBC Processor' },
+    { label: 'ESP32-S3', cat: 'hw', level: 'Dual-Core Microcontroller' },
+    { label: 'Microprocessors', cat: 'hw', level: 'Digital Logic & Architecture' },
+    { label: 'Arduino', cat: 'hw', level: 'MCU Prototyping' },
+    { label: 'LiDAR', cat: 'hw', level: 'Laser Distance Sensing' },
+    { label: 'MPU9250 IMU', cat: 'hw', level: '9-DOF Inertial Sensor' },
+    { label: 'Encoder Motors', cat: 'hw', level: 'Wheel Odometry' },
+    { label: 'ST7920 Display', cat: 'hw', level: 'SPI Graphics Display' },
+    { label: '3D Printing', cat: 'hw', level: 'Rapid Structural Fabrication' },
+
+    // TOOLS
+    { label: 'Gazebo', cat: 'tools', level: '3D Robotics Simulator' },
+    { label: 'MuJoCo', cat: 'tools', level: 'Contact Physics Sim' },
+    { label: 'RViz2', cat: 'tools', level: 'ROS2 Data Visualization' },
+    { label: 'Fusion 360', cat: 'tools', level: 'CAD Mechanical Design' },
+    { label: 'TinkerCad', cat: 'tools', level: 'Schematic Prototyping' },
+    { label: 'Git / GitHub', cat: 'tools', level: 'Version Control' },
+    { label: 'Ubuntu Linux', cat: 'tools', level: 'OS Target' }
+  ];
+
+  // Build Graph Nodes & Links
+  const nodes = [];
+  const links = [];
+  const nodeMap = {};
+
+  const catKeys = Object.keys(categories);
+  const totalCat = catKeys.length;
+  const centerX = width / 2;
+  const centerY = height / 2;
+  const ringRadius = 140;
+
+  catKeys.forEach((key, idx) => {
+    const angle = (idx / totalCat) * Math.PI * 2 - Math.PI / 2;
+    const cat = categories[key];
+    const hubNode = {
+      id: `hub_${key}`,
+      label: cat.label,
+      cat: key,
+      isHub: true,
+      r: 34,
+      x: centerX + Math.cos(angle) * ringRadius + (Math.random() - 0.5) * 10,
+      y: centerY + Math.sin(angle) * ringRadius + (Math.random() - 0.5) * 10,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      color: cat.color,
+      glow: cat.glow,
+      subCount: 0
+    };
+    nodes.push(hubNode);
+    nodeMap[hubNode.id] = hubNode;
+  });
+
+  rawSkills.forEach((skill, idx) => {
+    const hub = nodeMap[`hub_${skill.cat}`];
+    const cat = categories[skill.cat];
+    const offsetAngle = Math.random() * Math.PI * 2;
+    const dist = 65 + Math.random() * 55;
+
+    const childNode = {
+      id: `leaf_${idx}`,
+      label: skill.label,
+      cat: skill.cat,
+      level: skill.level,
+      isHub: false,
+      r: 18 + Math.min(skill.label.length * 0.35, 7),
+      x: hub.x + Math.cos(offsetAngle) * dist,
+      y: hub.y + Math.sin(offsetAngle) * dist,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      color: cat.color,
+      glow: cat.glow,
+      parentHub: hub
+    };
+
+    nodes.push(childNode);
+    nodeMap[childNode.id] = childNode;
+    hub.subCount++;
+
+    // Spring Link to Hub
+    links.push({
+      source: hub,
+      target: childNode,
+      length: 80 + Math.random() * 30,
+      pulsePos: Math.random(),
+      pulseSpeed: 0.003 + Math.random() * 0.004
+    });
+  });
+
+  // Cross-link Ring between Category Hubs
+  for (let i = 0; i < totalCat; i++) {
+    const hubA = nodeMap[`hub_${catKeys[i]}`];
+    const hubB = nodeMap[`hub_${catKeys[(i + 1) % totalCat]}`];
+    links.push({
+      source: hubA,
+      target: hubB,
+      length: ringRadius * 1.05,
+      isRing: true,
+      pulsePos: Math.random(),
+      pulseSpeed: 0.002
+    });
+  }
+
+  // Viewport & Interaction
+  let camera = {
+    x: width / 2,
+    y: height / 2,
+    zoom: 1.0,
+    targetX: width / 2,
+    targetY: height / 2,
+    targetZoom: 1.0
+  };
+
+  let activeCategory = 'all';
+  let hoveredNode = null;
+  let focusedNode = null;
+  let draggedNode = null;
+  let mouse = { x: 0, y: 0, canvasX: 0, canvasY: 0 };
+  let pulseRings = [];
+
+  function addShockwave(x, y, color) {
+    pulseRings.push({ x, y, r: 10, opacity: 1, color });
+  }
+
+  function getCanvasCoords(e) {
+    const rect = canvas.getBoundingClientRect();
+    return {
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    };
+  }
+
+  function screenToWorld(sx, sy) {
+    return {
+      x: (sx - width / 2) / camera.zoom + camera.x,
+      y: (sy - height / 2) / camera.zoom + camera.y
+    };
+  }
+
+  canvas.addEventListener('mousemove', (e) => {
+    const c = getCanvasCoords(e);
+    mouse.canvasX = c.x;
+    mouse.canvasY = c.y;
+    const w = screenToWorld(c.x, c.y);
+    mouse.x = w.x;
+    mouse.y = w.y;
+
+    if (draggedNode) {
+      draggedNode.x = mouse.x;
+      draggedNode.y = mouse.y;
+      draggedNode.vx = 0;
+      draggedNode.vy = 0;
+      return;
+    }
+
+    let found = null;
+    for (let n of nodes) {
+      if (activeCategory !== 'all' && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`) continue;
+      const dx = mouse.x - n.x;
+      const dy = mouse.y - n.y;
+      if (dx * dx + dy * dy <= (n.r + 6) * (n.r + 6)) {
+        found = n;
+        break;
+      }
+    }
+    hoveredNode = found;
+
+    if (hoveredNode) {
+      tooltip.classList.add('visible');
+      tooltip.style.left = mouse.canvasX + 'px';
+      tooltip.style.top = mouse.canvasY + 'px';
+      if (hoveredNode.isHub) {
+        tooltip.innerHTML = `<strong>${hoveredNode.label}</strong><br/><span style="color:var(--text3);font-size:10px;">Category Hub · ${hoveredNode.subCount} Nodes</span>`;
+      } else {
+        tooltip.innerHTML = `<strong>${hoveredNode.label}</strong><br/><span style="color:${hoveredNode.color}">${hoveredNode.level}</span>`;
+      }
+    } else {
+      tooltip.classList.remove('visible');
+    }
+  });
+
+  canvas.addEventListener('mousedown', () => {
+    if (hoveredNode) draggedNode = hoveredNode;
+  });
+
+  window.addEventListener('mouseup', () => {
+    draggedNode = null;
+  });
+
+  canvas.addEventListener('click', () => {
+    if (hoveredNode) {
+      focusedNode = hoveredNode;
+      camera.targetX = hoveredNode.x;
+      camera.targetY = hoveredNode.y;
+      camera.targetZoom = hoveredNode.isHub ? 1.6 : 2.1;
+      addShockwave(hoveredNode.x, hoveredNode.y, hoveredNode.color);
+      if (typeof awardPoints === 'function') awardPoints(10, `Inspected skill: ${hoveredNode.label}`);
+    } else {
+      resetZoom();
+    }
+  });
+
+  function resetZoom() {
+    focusedNode = null;
+    camera.targetX = width / 2;
+    camera.targetY = height / 2;
+    camera.targetZoom = 1.0;
+  }
+
+  const resetBtn = document.getElementById('resetSkillZoom');
+  if (resetBtn) resetBtn.addEventListener('click', resetZoom);
+
+  const filterPills = document.querySelectorAll('#graphFilterPills .gpill[data-cat]');
+  filterPills.forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      e.stopPropagation();
+      filterPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeCategory = pill.dataset.cat;
+      if (activeCategory === 'all') {
+        resetZoom();
+      } else {
+        const hub = nodeMap[`hub_${activeCategory}`];
+        if (hub) {
+          focusedNode = hub;
+          camera.targetX = hub.x;
+          camera.targetY = hub.y;
+          camera.targetZoom = 1.55;
+          addShockwave(hub.x, hub.y, hub.color);
+        }
+      }
+    });
+  });
+
+  let time = 0;
+  function updatePhysics() {
+    time += 0.015;
+
+    camera.x += (camera.targetX - camera.x) * 0.08;
+    camera.y += (camera.targetY - camera.y) * 0.08;
+    camera.zoom += (camera.targetZoom - camera.zoom) * 0.08;
+
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+
+      a.vx += Math.cos(time + i * 1.3) * 0.035;
+      a.vy += Math.sin(time + i * 1.7) * 0.035;
+
+      a.vx += (width / 2 - a.x) * 0.00012;
+      a.vy += (height / 2 - a.y) * 0.00012;
+
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j];
+        const dx = b.x - a.x;
+        const dy = b.y - a.y;
+        let distSq = dx * dx + dy * dy || 1;
+        let minDist = a.r + b.r + 18;
+
+        if (distSq < minDist * minDist * 4) {
+          let dist = Math.sqrt(distSq);
+          let force = (minDist - dist) / dist;
+          if (force > 0) {
+            let fx = dx * force * 0.07;
+            let fy = dy * force * 0.07;
+            if (a !== draggedNode) { a.vx -= fx; a.vy -= fy; }
+            if (b !== draggedNode) { b.vx += fx; b.vy += fy; }
+          }
+        }
+      }
+    }
+
+    links.forEach(link => {
+      const a = link.source;
+      const b = link.target;
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      const delta = dist - link.length;
+      const k = link.isRing ? 0.002 : 0.01;
+
+      const fx = (dx / dist) * delta * k;
+      const fy = (dy / dist) * delta * k;
+
+      if (a !== draggedNode) { a.vx += fx; a.vy += fy; }
+      if (b !== draggedNode) { b.vx -= fx; b.vy -= fy; }
+
+      link.pulsePos = (link.pulsePos + link.pulseSpeed) % 1;
+    });
+
+    nodes.forEach(n => {
+      if (n === draggedNode) return;
+      n.vx *= 0.89;
+      n.vy *= 0.89;
+      n.x += n.vx;
+      n.y += n.vy;
+
+      const m = 35;
+      if (n.x < m) { n.x = m; n.vx *= -0.5; }
+      if (n.x > width - m) { n.x = width - m; n.vx *= -0.5; }
+      if (n.y < m) { n.y = m; n.vy *= -0.5; }
+      if (n.y > height - m) { n.y = height - m; n.vy *= -0.5; }
+    });
+
+    for (let i = pulseRings.length - 1; i >= 0; i--) {
+      const ring = pulseRings[i];
+      ring.r += 2.4;
+      ring.opacity -= 0.025;
+      if (ring.opacity <= 0) pulseRings.splice(i, 1);
+    }
+  }
+
+  function draw() {
+    updatePhysics();
+
+    ctx.save();
+    ctx.clearRect(0, 0, width, height);
+
+    ctx.translate(width / 2, height / 2);
+    ctx.scale(camera.zoom, camera.zoom);
+    ctx.translate(-camera.x, -camera.y);
+
+    pulseRings.forEach(ring => {
+      ctx.beginPath();
+      ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
+      ctx.strokeStyle = ring.color;
+      ctx.globalAlpha = Math.max(0, ring.opacity);
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
+
+    links.forEach(link => {
+      const a = link.source;
+      const b = link.target;
+
+      if (activeCategory !== 'all') {
+        if (a.cat !== activeCategory && b.cat !== activeCategory) return;
+      }
+
+      const isFocused = focusedNode && (a === focusedNode || b === focusedNode);
+      const isHovered = hoveredNode && (a === hoveredNode || b === hoveredNode);
+
+      ctx.beginPath();
+      ctx.moveTo(a.x, a.y);
+      ctx.lineTo(b.x, b.y);
+
+      if (link.isRing) {
+        ctx.strokeStyle = 'rgba(0, 240, 255, 0.12)';
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+      } else {
+        ctx.setLineDash([]);
+        if (isFocused || isHovered) {
+          ctx.strokeStyle = a.color;
+          ctx.lineWidth = 2.4;
+          ctx.shadowColor = a.color;
+          ctx.shadowBlur = 10;
+        } else {
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+          ctx.lineWidth = 1.2;
+          ctx.shadowBlur = 0;
+        }
+      }
+      ctx.stroke();
+      ctx.shadowBlur = 0;
+      ctx.setLineDash([]);
+
+      const px = a.x + (b.x - a.x) * link.pulsePos;
+      const py = a.y + (b.y - a.y) * link.pulsePos;
+      ctx.beginPath();
+      ctx.arc(px, py, link.isRing ? 2 : 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = (isFocused || isHovered) ? a.color : '#ffffff';
+      ctx.shadowColor = a.color;
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
+    });
+
+    nodes.forEach(n => {
+      const isFilteredOut = activeCategory !== 'all' && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`;
+      const alpha = isFilteredOut ? 0.2 : 1.0;
+
+      ctx.save();
+      ctx.globalAlpha = alpha;
+
+      const isHovered = hoveredNode === n;
+      const isFocused = focusedNode === n;
+      const scale = isHovered ? 1.15 : (isFocused ? 1.2 : 1.0);
+      const r = n.r * scale;
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r + (isFocused ? 8 : (isHovered ? 6 : 2)), 0, Math.PI * 2);
+      ctx.fillStyle = n.glow;
+      ctx.shadowColor = n.color;
+      ctx.shadowBlur = isFocused ? 25 : (isHovered ? 18 : 8);
+      ctx.fill();
+
+      const grad = ctx.createRadialGradient(n.x - r * 0.3, n.y - r * 0.3, r * 0.1, n.x, n.y, r);
+      if (n.isHub) {
+        grad.addColorStop(0, '#ffffff');
+        grad.addColorStop(0.4, n.color);
+        grad.addColorStop(1, '#050015');
+      } else {
+        grad.addColorStop(0, n.color);
+        grad.addColorStop(0.7, '#0a0520');
+        grad.addColorStop(1, '#030014');
+      }
+
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.strokeStyle = n.color;
+      ctx.lineWidth = n.isHub ? 3 : (isFocused ? 2.5 : 1.5);
+      ctx.fill();
+      ctx.stroke();
+
+      if (isFocused) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r + 6 + Math.sin(time * 5) * 3, 0, Math.PI * 2);
+        ctx.strokeStyle = n.color;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      ctx.font = n.isHub ? 'bold 11px "Space Mono", monospace' : '10px "Inter", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+
+      if (n.isHub) {
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = '#000000';
+        ctx.shadowBlur = 4;
+        ctx.fillText(n.label, n.x, n.y);
+      } else {
+        if (n.label.length <= 10) {
+          ctx.fillStyle = '#e2e8f0';
+          ctx.fillText(n.label, n.x, n.y);
+        } else {
+          const words = n.label.split(' ');
+          if (words.length > 1) {
+            const mid = Math.ceil(words.length / 2);
+            const line1 = words.slice(0, mid).join(' ');
+            const line2 = words.slice(mid).join(' ');
+            ctx.fillStyle = '#e2e8f0';
+            ctx.fillText(line1, n.x, n.y - 5);
+            ctx.fillText(line2, n.x, n.y + 7);
+          } else {
+            ctx.fillStyle = '#e2e8f0';
+            ctx.fillText(n.label, n.x, n.y);
+          }
+        }
+      }
+
+      ctx.restore();
+    });
+
+    ctx.restore();
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+}
