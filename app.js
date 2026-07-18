@@ -215,40 +215,35 @@ function initLoader() {
 // ===== PAGE NAVIGATION =====
 let currentPage = null;
 function navigateTo(pageId) {
+  if (!pageId) return;
+  const target = document.getElementById(pageId);
+  if (!target) return;
   const pages = document.querySelectorAll('.page');
   pages.forEach(p => { p.classList.remove('active'); p.style.display = 'none'; });
-  const target = document.getElementById(pageId);
-  if (target) {
-    target.style.display = pageId === 'home' ? 'block' : 'block';
-    // Force reflow before adding class for animation
-    void target.offsetHeight;
-    target.classList.add('active');
-    window.scrollTo(0, 0);
-    if (pageId === 'home') {
-      setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
-    }
-    // Re-observe fade-ups
-    target.querySelectorAll('.fade-up').forEach(el => {
-      el.classList.remove('vis');
-      obs.observe(el);
-    });
-    // Trigger skill bars if on about page
-    if (pageId === 'about') {
-      setTimeout(() => {
-        document.querySelectorAll('.skills-panel.active .sbar-fill').forEach(bar => {
-          bar.style.transform = `scaleX(${bar.dataset.w})`;
-        });
-      }, 300);
-    }
-    currentPage = pageId;
-    // Update nav active state
-    document.querySelectorAll('.nav-links a').forEach(a => {
-      a.classList.toggle('active', a.dataset.page === pageId);
-    });
-    // Game: unlock badge
-    if (typeof unlockSectionBadge === 'function' && pageId !== 'home') {
-      unlockSectionBadge(pageId);
-    }
+  target.style.display = 'block';
+  void target.offsetHeight;
+  target.classList.add('active');
+  window.scrollTo(0, 0);
+  if (pageId === 'home') {
+    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
+  }
+  target.querySelectorAll('.fade-up').forEach(el => {
+    el.classList.remove('vis');
+    obs.observe(el);
+  });
+  if (pageId === 'about') {
+    setTimeout(() => {
+      document.querySelectorAll('.skills-panel.active .sbar-fill').forEach(bar => {
+        bar.style.transform = `scaleX(${bar.dataset.w})`;
+      });
+    }, 300);
+  }
+  currentPage = pageId;
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.classList.toggle('active', a.dataset.page === pageId);
+  });
+  if (typeof unlockSectionBadge === 'function' && pageId !== 'home') {
+    unlockSectionBadge(pageId);
   }
 }
 
@@ -276,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initResumeModal();
 
   // Nav clicks
-  document.querySelectorAll('.nav-links a').forEach(link => {
+  document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
     link.addEventListener('click', e => {
       e.preventDefault();
       navigateTo(link.dataset.page);
@@ -420,16 +415,22 @@ setTimeout(updateGameUI, 500);
 // ===== RESUME MODAL CONTROLLER =====
 function initResumeModal() {
   const modal = document.getElementById('resumeModal');
-  const openBtn = document.getElementById('heroResumeBtn');
   const closeBtn = document.getElementById('closeResumeModal');
 
-  if (!modal || !openBtn) return;
+  if (!modal) return;
 
-  openBtn.addEventListener('click', (e) => {
-    e.preventDefault();
+  const openModal = (e) => {
+    if (e) e.preventDefault();
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
     if (typeof awardPoints === 'function') awardPoints(30, 'Viewed Robotics Resume');
+  };
+
+  document.addEventListener('click', (e) => {
+    const target = e.target.closest('#heroResumeBtn, .btn-resume');
+    if (target) {
+      openModal(e);
+    }
   });
 
   const closeModal = () => {
