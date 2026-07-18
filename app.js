@@ -601,6 +601,11 @@ function initSkillsGraph() {
   let focusedNode = null;
   let draggedNode = null;
   let mouse = { x: 0, y: 0, canvasX: 0, canvasY: 0 };
+  let pulseRings = [];
+
+  function addShockwave(x, y, color) {
+    pulseRings.push({ x, y, r: 10, opacity: 1, color });
+  }
 
   function getCanvasCoords(e) {
     const rect = canvas.getBoundingClientRect();
@@ -661,6 +666,8 @@ function initSkillsGraph() {
       camera.targetX = hoveredNode.x;
       camera.targetY = hoveredNode.y;
       camera.targetZoom = hoveredNode.isHub ? 1.5 : (hoveredNode.isCentral ? 1.2 : 1.8);
+      addShockwave(hoveredNode.x, hoveredNode.y, hoveredNode.color);
+      if (typeof awardPoints === 'function') awardPoints(10, `Inspected skill: ${hoveredNode.label}`);
     } else {
       resetZoom();
     }
@@ -692,12 +699,16 @@ function initSkillsGraph() {
           camera.targetX = hub.x;
           camera.targetY = hub.y;
           camera.targetZoom = 1.4;
+          addShockwave(hub.x, hub.y, hub.color);
         }
       }
     });
   });
 
   let time = 0;
+  // Initialize pulsePos for links
+  links.forEach(l => l.pulsePos = Math.random());
+
   function updatePhysics() {
     time += 0.015;
 
@@ -708,9 +719,9 @@ function initSkillsGraph() {
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
 
-      // Organic brownian drift
-      a.vx += Math.cos(time + i * 1.3) * 0.04;
-      a.vy += Math.sin(time + i * 1.7) * 0.04;
+      // Highly active Neural Network organic brownian drift
+      a.vx += Math.cos(time * 1.5 + i * 1.3) * 0.09;
+      a.vy += Math.sin(time * 1.5 + i * 1.7) * 0.09;
 
       // Soft centroid gravity
       a.vx += (width / 2 - a.x) * 0.0001;
@@ -722,14 +733,14 @@ function initSkillsGraph() {
         const dx = b.x - a.x;
         const dy = b.y - a.y;
         let distSq = dx * dx + dy * dy || 1;
-        let minDist = a.r + b.r + 25; // Space between nodes
+        let minDist = a.r + b.r + 35; // increased space between nodes
 
         if (distSq < minDist * minDist * 2) {
           let dist = Math.sqrt(distSq);
           let force = (minDist - dist) / dist;
           if (force > 0) {
-            let fx = dx * force * 0.06;
-            let fy = dy * force * 0.06;
+            let fx = dx * force * 0.08;
+            let fy = dy * force * 0.08;
             if (a !== draggedNode) { a.vx -= fx; a.vy -= fy; }
             if (b !== draggedNode) { b.vx += fx; b.vy += fy; }
           }
@@ -752,6 +763,9 @@ function initSkillsGraph() {
 
       if (a !== draggedNode) { a.vx += fx; a.vy += fy; }
       if (b !== draggedNode) { b.vx -= fx; b.vy -= fy; }
+      
+      // Advance light pulse along link
+      link.pulsePos = (link.pulsePos + 0.005) % 1;
     });
 
     // Update positions
@@ -769,6 +783,14 @@ function initSkillsGraph() {
       if (n.y < m) { n.y = m; n.vy *= -0.5; }
       if (n.y > height - m) { n.y = height - m; n.vy *= -0.5; }
     });
+    
+    // Update shockwaves
+    for (let i = pulseRings.length - 1; i >= 0; i--) {
+      const ring = pulseRings[i];
+      ring.r += 3;
+      ring.opacity -= 0.03;
+      if (ring.opacity <= 0) pulseRings.splice(i, 1);
+    }
   }
 
   function draw() {
@@ -780,6 +802,17 @@ function initSkillsGraph() {
     ctx.translate(width / 2, height / 2);
     ctx.scale(camera.zoom, camera.zoom);
     ctx.translate(-camera.x, -camera.y);
+
+    // Draw Shockwaves
+    pulseRings.forEach(ring => {
+      ctx.beginPath();
+      ctx.arc(ring.x, ring.y, ring.r, 0, Math.PI * 2);
+      ctx.strokeStyle = ring.color;
+      ctx.globalAlpha = Math.max(0, ring.opacity);
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    });
 
     // Draw Links
     links.forEach(link => {
@@ -797,9 +830,26 @@ function initSkillsGraph() {
       ctx.moveTo(a.x, a.y);
       ctx.lineTo(b.x, b.y);
       
-      ctx.strokeStyle = (isFocused || isHovered) ? '#888' : '#ccc';
+      // Cyberpunk glowing grey lines
+      ctx.strokeStyle = (isFocused || isHovered) ? a.color : 'rgba(255, 255, 255, 0.2)';
       ctx.lineWidth = (isFocused || isHovered) ? 2 : 1;
+      if (isFocused || isHovered) {
+        ctx.shadowColor = a.color;
+        ctx.shadowBlur = 8;
+      }
       ctx.stroke();
+      ctx.shadowBlur = 0;
+
+      // Draw light pulse moving across line
+      const px = a.x + (b.x - a.x) * link.pulsePos;
+      const py = a.y + (b.y - a.y) * link.pulsePos;
+      ctx.beginPath();
+      ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = (isFocused || isHovered) ? a.color : '#ffffff';
+      ctx.shadowColor = a.color;
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.shadowBlur = 0;
 
       // Draw arrow head & text label
       const dx = b.x - a.x;
@@ -835,7 +885,8 @@ function initSkillsGraph() {
         } else {
           ctx.rotate(angle);
         }
-        ctx.fillStyle = '#999';
+        // White text for dark background
+        ctx.fillStyle = 'rgba(255,255,255,0.7)';
         ctx.font = '8px "Space Mono", monospace';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'bottom';
@@ -855,7 +906,20 @@ function initSkillsGraph() {
 
       ctx.save();
       
-      // Node Circle
+      // Neon glow aura for hovered/focused nodes in dark cyberpunk mode
+      if (isHovered || isFocused) {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r + (isFocused ? 8 : 6), 0, Math.PI * 2);
+        ctx.fillStyle = n.color;
+        ctx.globalAlpha = 0.3;
+        ctx.shadowColor = n.color;
+        ctx.shadowBlur = 20;
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+        ctx.shadowBlur = 0;
+      }
+      
+      // Node Circle - Solid Color Fill
       ctx.beginPath();
       ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
       ctx.fillStyle = n.color;
@@ -867,7 +931,7 @@ function initSkillsGraph() {
       ctx.stroke();
 
       // Soft drop shadow
-      ctx.shadowColor = 'rgba(0,0,0,0.2)';
+      ctx.shadowColor = 'rgba(0,0,0,0.4)';
       ctx.shadowBlur = 10;
       ctx.shadowOffsetY = 4;
       ctx.shadowOffsetX = 0;
