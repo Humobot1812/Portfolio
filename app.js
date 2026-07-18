@@ -224,13 +224,15 @@ function navigateTo(pageId) {
   void target.offsetHeight;
   target.classList.add('active');
   window.scrollTo(0, 0);
-  if (pageId === 'home') {
-    setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
-  }
+  
+  // Always dispatch resize event after showing a new section so canvases initialize their buffers correctly
+  setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
+  
   target.querySelectorAll('.fade-up').forEach(el => {
     el.classList.remove('vis');
     obs.observe(el);
   });
+  
   if (pageId === 'about') {
     setTimeout(() => {
       document.querySelectorAll('.skills-panel.active .sbar-fill').forEach(bar => {
@@ -238,6 +240,7 @@ function navigateTo(pageId) {
       });
     }, 300);
   }
+  
   currentPage = pageId;
   document.querySelectorAll('.nav-links a').forEach(a => {
     a.classList.toggle('active', a.dataset.page === pageId);
