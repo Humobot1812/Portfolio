@@ -272,6 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Cursor (only desktop)
   if (window.innerWidth > 900) initCursor();
 
+  // Resume Modal
+  initResumeModal();
+
   // Nav clicks
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', e => {
@@ -413,3 +416,36 @@ function unlockSectionBadge(id) {
 }
 loadGameState();
 setTimeout(updateGameUI, 500);
+
+// ===== RESUME MODAL CONTROLLER =====
+function initResumeModal() {
+  const modal = document.getElementById('resumeModal');
+  const openBtn = document.getElementById('heroResumeBtn');
+  const closeBtn = document.getElementById('closeResumeModal');
+
+  if (!modal || !openBtn) return;
+
+  openBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    if (typeof awardPoints === 'function') awardPoints(30, 'Viewed Robotics Resume');
+  });
+
+  const closeModal = () => {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+}

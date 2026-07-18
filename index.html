@@ -39,6 +39,27 @@
 <!-- TOAST -->
 <div class="toast-container" id="toastContainer"></div>
 
+<!-- RESUME VIEWER MODAL -->
+<div class="resume-modal-overlay" id="resumeModal">
+  <div class="resume-modal-content">
+    <div class="resume-modal-header">
+      <div class="resume-modal-title">// SYSTEM ARCHIVE — ABHINAV_GOEL_RESUME.PDF</div>
+      <button class="resume-modal-close" id="closeResumeModal">&times;</button>
+    </div>
+    <div class="resume-modal-body">
+      <iframe src="Resume/Abhinav_Goel_Robotics_Engineer_Resume.pdf#toolbar=1&navpanes=0" title="Abhinav Goel Resume PDF" id="resumeIframe"></iframe>
+    </div>
+    <div class="resume-modal-footer">
+      <a href="Resume/Abhinav_Goel_Robotics_Engineer_Resume.pdf" download="Abhinav_Goel_Robotics_Engineer_Resume.pdf" class="btn-p" id="downloadResumeBtn">
+        Download Resume PDF 📥
+      </a>
+      <a href="Resume/Abhinav_Goel_Robotics_Engineer_Resume.pdf" target="_blank" rel="noopener" class="btn-o">
+        Open PDF Fullscreen ↗
+      </a>
+    </div>
+  </div>
+</div>
+
 <!-- ==================== HOME ==================== -->
 <section id="home" class="page">
   <div class="hero-layout">
@@ -48,7 +69,7 @@
       <p class="hero-bio">Building machines that perceive, decide, and act. ROS2 navigation, SLAM, sensor fusion, and drone systems — from simulation to real-world deployment.</p>
       <div class="hero-ctas">
         <a href="#" data-nav="projects" class="btn-p">View Projects</a>
-        <a href="Resume/Abhinav_Goel_Robotics_Engineer_Resume.pdf" target="_blank" rel="noopener" class="btn-o">Resume PDF 📄</a>
+        <a href="Resume/Abhinav_Goel_Robotics_Engineer_Resume.pdf" id="heroResumeBtn" class="btn-o">Resume PDF 📄</a>
         <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5" target="_blank" rel="noopener" class="btn-o">LinkedIn ↗</a>
         <a href="https://github.com/Humobot1812" target="_blank" rel="noopener" class="btn-o">GitHub ↗</a>
         <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener" class="btn-o">YouTube ↗</a>
