@@ -516,6 +516,12 @@ function navigateTo(pageId) {
   target.classList.add('active');
   window.scrollTo(0, 0);
 
+  // Close mobile navigation drawer if active
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle) navToggle.classList.remove('active');
+  if (navLinks) navLinks.classList.remove('open');
+
   // Always dispatch resize event after showing a new section so canvases initialize their buffers correctly
   setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
 
@@ -563,6 +569,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Skills Knowledge Graph
   initSkillsGraph();
+
+  // Mobile Navigation Toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navToggle.classList.toggle('active');
+      navLinks.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+        navToggle.classList.remove('active');
+        navLinks.classList.remove('open');
+      }
+    });
+  }
 
   // Nav clicks
   document.querySelectorAll('.nav-links a[data-page]').forEach(link => {
@@ -978,6 +1001,67 @@ function initSkillsGraph() {
   });
 
   window.addEventListener('mouseup', () => {
+    draggedNode = null;
+  });
+
+  // Touch event support for mobile devices
+  canvas.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      const c = getCanvasCoords(touch);
+      const w = screenToWorld(c.x, c.y);
+      mouse.x = w.x;
+      mouse.y = w.y;
+      let found = null;
+      for (let n of nodes) {
+        if (activeCategory !== 'all' && !n.isCentral && n.cat !== activeCategory && n.id !== `hub_${activeCategory}`) continue;
+        const dx = mouse.x - n.x;
+        const dy = mouse.y - n.y;
+        if (dx * dx + dy * dy <= (n.r + 15) * (n.r + 15)) {
+          found = n;
+          break;
+        }
+      }
+      if (found) {
+        hoveredNode = found;
+        draggedNode = found;
+        focusedNode = found;
+        camera.targetX = found.x;
+        camera.targetY = found.y;
+        camera.targetZoom = found.isHub ? 1.5 : (found.isCentral ? 1.2 : 1.8);
+        addShockwave(found.x, found.y, found.color);
+        if (tooltip) {
+          const screenX = (found.x - camera.x) * camera.zoom + width / 2;
+          const screenY = (found.y - camera.y) * camera.zoom + height / 2;
+          tooltip.innerHTML = `<strong>${found.label}</strong>${found.level ? `<br><span style="color:var(--accent2);">${found.level}</span>` : ''}`;
+          tooltip.style.left = `${screenX}px`;
+          tooltip.style.top = `${screenY}px`;
+          tooltip.classList.add('visible');
+        }
+      }
+    }
+  }, { passive: true });
+
+  canvas.addEventListener('touchmove', (e) => {
+    if (draggedNode && e.touches.length === 1) {
+      const touch = e.touches[0];
+      const c = getCanvasCoords(touch);
+      const w = screenToWorld(c.x, c.y);
+      draggedNode.x = w.x;
+      draggedNode.y = w.y;
+      draggedNode.vx = 0;
+      draggedNode.vy = 0;
+      if (tooltip) {
+        const screenX = (draggedNode.x - camera.x) * camera.zoom + width / 2;
+        const screenY = (draggedNode.y - camera.y) * camera.zoom + height / 2;
+        tooltip.style.left = `${screenX}px`;
+        tooltip.style.top = `${screenY}px`;
+      }
+      if (e.cancelable) e.preventDefault();
+    }
+  }, { passive: false });
+
+  window.addEventListener('touchend', () => {
     draggedNode = null;
   });
 
