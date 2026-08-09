@@ -758,7 +758,7 @@ function initSkillsGraph() {
     // LANGUAGES
     { label: 'C++', cat: 'prog', level: 'Core Architecture & Robotics' },
     { label: 'Python', cat: 'prog', level: 'AI, ROS2 & Scripting' },
-    { label: 'Multithreading & Async', cat: 'prog', level: 'High-Performance Concurrency' },
+    { label: 'Multithreading  & Async', cat: 'prog', level: 'High-Performance Concurrency' },
     { label: 'MATLAB / Simulink', cat: 'prog', level: 'Simulation & Analysis' },
 
     // FRAMEWORKS
@@ -781,7 +781,7 @@ function initSkillsGraph() {
     { label: 'Pixhawk', cat: 'uav', level: 'Flight Controller HW' },
     { label: 'ArduPilot', cat: 'uav', level: 'Autopilot Firmware' },
     { label: 'PX4', cat: 'uav', level: 'Autopilot Flight Stack' },
-    { label: 'QGroundControl', cat: 'uav', level: 'GCS Telemetry' },
+    { label: 'QGround  Control', cat: 'uav', level: 'GCS Telemetry' },
     { label: 'Mission Planner', cat: 'uav', level: 'Autonomous Waypoints' },
     { label: 'MAVLink', cat: 'uav', level: 'Telemetry Protocol' },
     { label: 'DroneKit', cat: 'uav', level: 'Python UAV Control' },
@@ -803,7 +803,7 @@ function initSkillsGraph() {
     { label: 'Jetson Nano', cat: 'hw', level: 'Edge Compute Node' },
     { label: 'Raspberry Pi 4/5', cat: 'hw', level: 'SBC Processor' },
     { label: 'ESP32-S3', cat: 'hw', level: 'Dual-Core Microcontroller' },
-    { label: 'Microprocessors', cat: 'hw', level: 'Digital Logic & Architecture' },
+    { label: 'Microprocessor', cat: 'hw', level: 'Digital Logic & Architecture' },
     { label: 'Arduino', cat: 'hw', level: 'MCU Prototyping' },
     { label: 'RPLidar A1M8', cat: 'hw', level: 'Laser Scanner & 2D SLAM' },
     { label: 'LiDAR', cat: 'hw', level: 'Laser Distance Sensing' },
@@ -811,7 +811,7 @@ function initSkillsGraph() {
     { label: 'Barometer', cat: 'hw', level: 'Altitude Sensing' },
     { label: 'Encoder Motors', cat: 'hw', level: 'Wheel Odometry' },
     { label: 'Coreless DC Motors', cat: 'hw', level: 'Micro UAV Actuators' },
-    { label: 'Custom MOSFET ESC', cat: 'hw', level: 'Motor Speed Control' },
+    { label: 'Custom  MOSFET ESC', cat: 'hw', level: 'Motor Speed Control' },
     { label: 'ST7920 Display', cat: 'hw', level: 'SPI Graphics Display' },
     { label: 'NRF24L01', cat: 'hw', level: 'RF Transceiver' },
     { label: '3D Printing', cat: 'hw', level: 'Rapid Structural Fabrication' },
