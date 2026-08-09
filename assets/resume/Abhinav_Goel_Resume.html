@@ -27,28 +27,28 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       color: var(--text);
       background: #f1f5f9;
-      line-height: 1.45;
-      font-size: 13px;
-      padding: 2rem 0;
+      line-height: 1.35;
+      font-size: 11.5px;
+      padding: 1.5rem 0;
     }
 
     .page {
       max-width: 820px;
       margin: 0 auto;
       background: #ffffff;
-      padding: 2.5rem 3rem;
+      padding: 1.8rem 2.2rem;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
       border-radius: 4px;
     }
 
     header {
       border-bottom: 2px solid var(--primary);
-      padding-bottom: 1rem;
-      margin-bottom: 1.2rem;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.7rem;
     }
 
     h1 {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--primary);
@@ -56,11 +56,11 @@
     }
 
     .subtitle {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 600;
       color: var(--accent);
       margin-top: 2px;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }
@@ -68,8 +68,8 @@
     .contact-bar {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px 18px;
-      font-size: 12px;
+      gap: 6px 14px;
+      font-size: 11px;
       color: var(--text-muted);
     }
 
@@ -84,31 +84,31 @@
     }
 
     section {
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.65rem;
     }
 
     .sec-title {
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--primary);
       border-bottom: 2px solid #0a0e17;
-      padding-bottom: 3px;
-      margin-bottom: 0.6rem;
+      padding-bottom: 2px;
+      margin-bottom: 0.4rem;
     }
 
     .summary {
       color: var(--text-muted);
-      font-size: 12.5px;
+      font-size: 11.5px;
       text-align: justify;
     }
 
     .skills-grid {
       display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 6px 12px;
-      font-size: 12px;
+      grid-template-columns: 145px 1fr;
+      gap: 3px 10px;
+      font-size: 11px;
     }
 
     .skill-cat {
@@ -121,7 +121,7 @@
     }
 
     .item {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.45rem;
     }
 
     .item:last-child {
@@ -133,7 +133,7 @@
       justify-content: space-between;
       align-items: baseline;
       font-weight: 600;
-      font-size: 13px;
+      font-size: 12px;
     }
 
     .item-hdr a {
@@ -147,47 +147,47 @@
     }
 
     .item-sub {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--accent);
       font-weight: 500;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
 
     .item-date {
-      font-size: 11.5px;
+      font-size: 10.5px;
       color: var(--text-muted);
       font-weight: 400;
       font-family: 'JetBrains Mono', monospace;
     }
 
     ul.bullets {
-      padding-left: 1rem;
-      margin-top: 3px;
+      padding-left: 0.9rem;
+      margin-top: 2px;
     }
 
     ul.bullets li {
-      font-size: 12px;
+      font-size: 11px;
       color: var(--text-muted);
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .tech-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 11px;
+      font-size: 10px;
       color: var(--text-muted);
       background: var(--bg-subtle);
-      padding: 2px 6px;
+      padding: 1px 5px;
       border-radius: 3px;
       display: inline-block;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       border: 1px solid var(--border);
     }
 
     .cert-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6px 16px;
-      font-size: 12px;
+      gap: 4px 12px;
+      font-size: 11px;
     }
 
     .cert-item a {
@@ -197,8 +197,8 @@
     }
 
     @page {
-      size: letter portrait;
-      margin: 10mm 12mm;
+      size: A4 portrait;
+      margin: 8mm 10mm;
     }
 
     @media print {
@@ -256,7 +256,7 @@
       <div class="skills-grid">
         <div class="skill-cat">Autonomous &amp; Controls:</div>
         <div class="skill-list">Autonomous Systems, PID Control, Sensor Fusion, EKF (Extended Kalman Filter), RANSAC,
-          ROS2 Control, Visual Servoing, Trajectory Planning, Kinematics</div>
+          ROS2 Control (ros2_control), Visual Servoing, Trajectory Planning, Kinematics</div>
 
         <div class="skill-cat">UAV &amp; Multirotors:</div>
         <div class="skill-list">MultiRotor UAVs, Pixhawk Flight Controller, ArduPilot, PX4 Autopilot, QGroundControl,
@@ -270,16 +270,18 @@
         <div class="skill-list">OpenCV, YOLOv8 / YOLOv4-Tiny, Raspberry Pi Cam v3 NoIR, ESP-CAM, ArUco Marker
           Geolocation, Pinhole Camera Model</div>
 
-        <div class="skill-cat">Languages &amp; Simulation:</div>
-        <div class="skill-list">C++, Python, Gazebo, MuJoCo, RViz2, ArduPilot SITL, MATLAB / Simulink</div>
+        <div class="skill-cat">Languages &amp; Concurrency:</div>
+        <div class="skill-list">C++, Python, Multithreading, Async I/O, Gazebo, MuJoCo, RViz2, ArduPilot SITL, MATLAB /
+          Simulink</div>
 
         <div class="skill-cat">Embedded &amp; Compute Hardware:</div>
         <div class="skill-list">NVIDIA Jetson Nano &amp; AGX Xavier, Raspberry Pi 4/5, ESP32-S3 / ESP-CAM,
-          Microprocessors, Arduino, LiDAR, MPU9250 / MPU6050 IMU, Encoder Motors, Barometer, NRF24L01, LoRa Module,
+          Microprocessors, Arduino, RPLidar A1M8, LiDAR, MPU9250 / MPU6050 IMU, Encoder Motors, Barometer, NRF24L01,
+          LoRa Module,
           ST7920 Display, Custom MOSFET ESC</div>
 
         <div class="skill-cat">CAD, Tools &amp; OS:</div>
-        <div class="skill-list">Fusion 360, 3D Printing, TinkerCad, Git, Linux (Ubuntu 22.04), KML / GIS</div>
+        <div class="skill-list">Fusion 360, 3D Printing, TinkerCad, Git, Linux (Ubuntu 22.04)</div>
       </div>
     </section>
 
@@ -344,7 +346,8 @@
         <div class="tech-tag">ROS2 Humble · LiDAR · IMU · OpenCV · ArUco · MoveIt2 · UR5 Arm · Visual Servoing</div>
         <ul class="bullets">
           <li>Engineered a fully autonomous agricultural robot for crop monitoring and fruit harvesting; achieved
-            <strong>Top 10 / 400+ teams </strong>.</li>
+            <strong>Top 10 / 400+ teams </strong>.
+          </li>
           <li>Built a multi-sensor perception pipeline (LiDAR + ultrasonic + IMU) enabling collision-free lane
             navigation across field rows.</li>
           <li>Developed ArUco marker-based fruit classification and automated pick-and-place routines with a UR5 arm via
@@ -354,12 +357,25 @@
 
       <div class="item">
         <div class="item-hdr">
+          <span><a href="https://github.com/WareOps" target="_blank">WareOps — Autonomous Warehouse Auditing Robot &amp; Active Vision System &#x1F517; [GitHub Org]</a></span>
+          <span class="item-date">Dec 2025 &ndash; Aug 2026</span>
+        </div>
+        <div class="tech-tag">ROS2 Humble &middot; Nav2 &middot; AMCL &middot; SLAM Toolbox &middot; ros2_control &middot; RPLidar A1M8 &middot; OpenCV &middot; PyZbar &middot; Gazebo Ignition &middot; ESP32-CAM</div>
+        <ul class="bullets">
+          <li>Engineered an end-to-end AMR system for automated warehouse auditing: autonomous rack-to-rack transit using Nav2, AMCL localization, and SLAM Toolbox occupancy mapping.</li>
+          <li>Built a 2-DOF active vision scanning mast with vertical tilt &amp; horizontal pan gimbal sweeps; dual QR pipeline (OpenCV WeChat QR + PyZbar) for reliable multi-tier rack scanning.</li>
+          <li>Achieved full sim-hardware parity: Gazebo Ignition warehouse environment (custom SDF + URDF Xacro) mirroring the hardware stack — RPi 4, RPLidar A1M8, Arduino Nano via <code>ros2_control</code>, and ESP32-CAM WiFi bridge.</li>
+        </ul>
+      </div>
+
+      <div class="item">
+        <div class="item-hdr">
           <span><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank">Disaster Surveillance Drone —
               NIDAR 2026 🔗 [GitHub]</a></span>
-          <span class="item-date">Jan 2026 – Jun 2026</span>
+          <span class="item-date">Jun 2025 – Jan 2026</span>
         </div>
-        <div class="tech-tag">Python · MAVSDK · ArduPilot SITL · MAVLink · QGroundControl · Mission Planner · YOLOv8 ·
-          KML</div>
+        <div class="tech-tag">Python · MAVSDK · ArduPilot SITL · MAVLink · QGroundControl · Mission Planner · YOLOv8
+        </div>
         <ul class="bullets">
           <li>Architected a polygon-based autonomous survey UAV covering <strong>75+ acres in &lt;20 minutes</strong> at
             25m altitude via optimized zigzag mission paths.</li>
@@ -374,7 +390,7 @@
         <div class="item-hdr">
           <span><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank">Autonomous Drone Survey &amp;
               Target Detection — SAE Aerothon 2025 🔗 [GitHub]</a></span>
-          <span class="item-date">Jan 2025 – Jun 2025</span>
+          <span class="item-date">May 2025 – Nov 2025</span>
         </div>
         <div class="tech-tag">Python · ROS2 · DroneKit · Pixhawk · ArduPilot · MAVLink · Gazebo · YOLOv4-Tiny · PID
           Control</div>
@@ -392,7 +408,7 @@
         <div class="item-hdr">
           <span><a href="https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project"
               target="_blank">Differential Drive Robot — ROS2 Navigation &amp; SLAM 🔗 [GitHub]</a> (★ 7 Stars)</span>
-          <span class="item-date">Jan 2024 – Jun 2024</span>
+          <span class="item-date">Jun 2025 – July 2025</span>
         </div>
         <div class="tech-tag">C++ · Python · ROS2 Humble · Gazebo · Nav2 · SLAM Toolbox · AMCL · URDF/xacro · EKF</div>
         <ul class="bullets">
@@ -409,7 +425,7 @@
         <div class="item-hdr">
           <span><a href="https://youtube.com/playlist?list=PLQcgql__dXrcVR0A4IEijRmWpTvdtAOpG&si=FmyR1rqhcqY7-uyH"
               target="_blank">ESP32-S3 Quadcopter Drone 🔗 [YouTube]</a></span>
-          <span class="item-date">Jun 2024 – Dec 2024</span>
+          <span class="item-date">Dec 2025 – Jan 2025</span>
         </div>
         <div class="tech-tag">ESP32-S3 · MPU6050 IMU · Barometer · Custom MOSFET ESC · Embedded C · TinkerCad</div>
         <ul class="bullets">
@@ -423,7 +439,7 @@
         <div class="item-hdr">
           <span><a href="https://github.com/Humobot1812/Robotic_arm" target="_blank">Modular Robotic Arm Platform 🔗
               [GitHub]</a></span>
-          <span class="item-date">Aug 2024 – Present</span>
+          <span class="item-date">Feb 2026 – Present</span>
         </div>
         <div class="tech-tag">Servo Motors · Arduino · Kinematics · Trajectory Planning · 3D CAD</div>
         <ul class="bullets">
@@ -438,14 +454,19 @@
       <div class="sec-title">Key Achievements &amp; Certifications</div>
       <div class="cert-grid">
         <div class="cert-item">🏆 <strong>e-Yantra Robotics (IIT Bombay):</strong> Top 10 / 400+ Teams (<a
-            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/eyantra_certificate.pdf" target="_blank">Certificate</a>)
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/eyantra_certificate.pdf"
+            target="_blank">Certificate</a>)
         </div>
         <div class="cert-item">🤖 <strong>DD Robocon 2025:</strong> Stage-2 Qualification (<a
-            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Robocon_certificate.jpeg" target="_blank">Certificate</a>)
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Robocon_certificate.jpeg"
+            target="_blank">Certificate</a>)
         </div>
-        <div class="cert-item">✈️ <strong>SAE Aerothon 2025:</strong> Phase 2 Certificate</div>
+        <div class="cert-item">✈️ <strong>SAE Aerothon 2025:</strong> Phase 2 Certificate (<a
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Aerothon_2025.png"
+            target="_blank">Certificate</a>)</div>
         <div class="cert-item">🚁 <strong>NIDAR 2026:</strong> National UAV Challenge (<a
-            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Nidar_certificate.jpeg" target="_blank">Certificate</a>)</div>
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Nidar_certificate.jpeg"
+            target="_blank">Certificate</a>)</div>
       </div>
     </section>
   </div>

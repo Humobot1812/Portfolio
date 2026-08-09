@@ -735,6 +735,7 @@ function initSkillsGraph() {
     // LANGUAGES
     { label: 'C++', cat: 'prog', level: 'Core Architecture & Robotics' },
     { label: 'Python', cat: 'prog', level: 'AI, ROS2 & Scripting' },
+    { label: 'Multithreading & Async', cat: 'prog', level: 'High-Performance Concurrency' },
     { label: 'MATLAB / Simulink', cat: 'prog', level: 'Simulation & Analysis' },
 
     // FRAMEWORKS
@@ -781,6 +782,7 @@ function initSkillsGraph() {
     { label: 'ESP32-S3', cat: 'hw', level: 'Dual-Core Microcontroller' },
     { label: 'Microprocessors', cat: 'hw', level: 'Digital Logic & Architecture' },
     { label: 'Arduino', cat: 'hw', level: 'MCU Prototyping' },
+    { label: 'RPLidar A1M8', cat: 'hw', level: 'Laser Scanner & 2D SLAM' },
     { label: 'LiDAR', cat: 'hw', level: 'Laser Distance Sensing' },
     { label: 'MPU9250 IMU', cat: 'hw', level: '9-DOF Inertial Sensor' },
     { label: 'Barometer', cat: 'hw', level: 'Altitude Sensing' },
@@ -958,6 +960,17 @@ function initSkillsGraph() {
     }
     hoveredNode = found;
     canvas.style.cursor = hoveredNode ? 'pointer' : 'crosshair';
+
+    if (hoveredNode && tooltip) {
+      const screenX = (hoveredNode.x - camera.x) * camera.zoom + width / 2;
+      const screenY = (hoveredNode.y - camera.y) * camera.zoom + height / 2;
+      tooltip.innerHTML = `<strong>${hoveredNode.label}</strong>${hoveredNode.level ? `<br><span style="color:var(--accent2);">${hoveredNode.level}</span>` : ''}`;
+      tooltip.style.left = `${screenX}px`;
+      tooltip.style.top = `${screenY}px`;
+      tooltip.classList.add('visible');
+    } else if (tooltip) {
+      tooltip.classList.remove('visible');
+    }
   });
 
   canvas.addEventListener('mousedown', () => {

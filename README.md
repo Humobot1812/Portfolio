@@ -14,11 +14,12 @@ A high-end, multi-page, 3D interactive portfolio website built for a **Robotics 
 ## 🚀 Featured Robotics Projects
 
 1. **e-Yantra KrishiCobot (IIT Bombay)** — *Top 10 / 400+ Teams*: Autonomous agricultural cobot with ROS2, SLAM, and UR5 arm pick-and-place manipulation.
-2. **ROS2 Differential Drive Robot**: Autonomous navigation, SLAM Toolbox mapping, and AMCL localization pipeline.
-3. **Disaster Surveillance Drone (NIDAR Challenge)**: Polygon-based ~75 acre autonomous survey drone with human YOLO detection and failsafes.
-4. **Autonomous Survey & Target Detection Drone (SAE Aerothon)**: Target tracking with pixel-to-GPS coordinate conversion.
-5. **ESP32-S3 Quadcopter**: Scratch-built quadcopter with custom MOSFET ESC design.
-6. **Modular Robotic Arm & Snake Robot**: 5-DOF robotic manipulator and biomimetic serpent locomotion.
+2. **WareOps Autonomous Warehouse AMR**: Hardware & ROS2 simulation ecosystem featuring `ros2_control`, RPLidar A1M8 2D SLAM, OpenCV inventory scanning, and multithreaded architecture.
+3. **ROS2 Differential Drive Robot**: Autonomous navigation, SLAM Toolbox mapping, and AMCL localization pipeline.
+4. **Disaster Surveillance Drone (NIDAR Challenge)**: Polygon-based ~75 acre autonomous survey drone with human YOLO detection and failsafes.
+5. **Autonomous Survey & Target Detection Drone (SAE Aerothon)**: Target tracking with pixel-to-GPS coordinate conversion.
+6. **ESP32-S3 Quadcopter**: Scratch-built quadcopter with custom MOSFET ESC design.
+7. **Modular Robotic Arm & Snake Robot**: 5-DOF robotic manipulator and biomimetic serpent locomotion.
 
 ---
 
