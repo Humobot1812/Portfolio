@@ -63,11 +63,11 @@ function initRobot() {
   const scene = new THREE.Scene();
   const getW = () => container.clientWidth || 400;
   const getH = () => container.clientHeight || 480;
-  
+
   // Adjusted camera to see the wider fleet, slightly lower and further back
   const camera = new THREE.PerspectiveCamera(45, getW() / getH(), 0.1, 1000);
   camera.position.set(0, 0.5, 11);
-  
+
   const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
   renderer.setSize(getW(), getH());
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -76,7 +76,7 @@ function initRobot() {
   // Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
   scene.add(ambientLight);
-  
+
   const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
   dirLight.position.set(5, 10, 7);
   scene.add(dirLight);
@@ -99,7 +99,7 @@ function initRobot() {
 
   const fleet = new THREE.Group();
   scene.add(fleet);
-  
+
   const interactableBots = [];
 
   // --- 1. DRONE (Quadrotor) ---
@@ -107,14 +107,14 @@ function initRobot() {
   drone.position.set(0, 2, -1);
   drone.userData = { targetX: 0, targetY: 2, isSelected: false };
   interactableBots.push(drone);
-  
+
   // Wrap drone body elements in a sub-group so we can apply the hover sine wave to the sub-group, leaving the root group free for lerping Y.
   const droneVisuals = new THREE.Group();
   drone.add(droneVisuals);
-  
+
   const dBody = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 0.8), matDark);
   droneVisuals.add(dBody);
-  
+
   const dCore = new THREE.Mesh(new THREE.SphereGeometry(0.2, 16, 16), matCyan);
   dCore.position.y = 0.2;
   droneVisuals.add(dCore);
@@ -125,18 +125,18 @@ function initRobot() {
     { x: 0.6, z: 0.6 }, { x: -0.6, z: 0.6 },
     { x: 0.6, z: -0.6 }, { x: -0.6, z: -0.6 }
   ];
-  
+
   armOffsets.forEach(pos => {
     const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.05, 0.05, 1.4, 8), matMetal);
     arm.rotation.x = Math.PI / 2;
     arm.rotation.z = Math.atan2(pos.x, pos.z);
     arm.position.set(pos.x / 2, 0, pos.z / 2);
     droneVisuals.add(arm);
-    
+
     const motor = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.12, 0.2, 16), matDark);
     motor.position.set(pos.x, 0.1, pos.z);
     droneVisuals.add(motor);
-    
+
     const prop = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.02, 16), matGlass);
     prop.position.set(pos.x, 0.2, pos.z);
     droneVisuals.add(prop);
@@ -149,51 +149,51 @@ function initRobot() {
   armBot.position.set(-2.8, -1.2, 0);
   armBot.userData = { targetX: -2.8, targetY: -1.2, isSelected: false };
   interactableBots.push(armBot);
-  
+
   const aBase = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.7, 0.4, 16), matDark);
   aBase.position.y = 0.2;
   armBot.add(aBase);
-  
+
   const shoulder = new THREE.Group();
   shoulder.position.y = 0.4;
   armBot.add(shoulder);
-  
+
   const sJoint = new THREE.Mesh(new THREE.SphereGeometry(0.4, 16, 16), matMetal);
   shoulder.add(sJoint);
-  
+
   const upperArm = new THREE.Group();
   upperArm.position.y = 0;
   shoulder.add(upperArm);
-  
+
   const uBone = new THREE.Mesh(new THREE.BoxGeometry(0.3, 1.2, 0.3), matDark);
   uBone.position.y = 0.6;
   upperArm.add(uBone);
-  
+
   const elbow = new THREE.Group();
   elbow.position.y = 1.3;
   upperArm.add(elbow);
-  
+
   const eJoint = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.4, 16), matMetal);
   eJoint.rotation.z = Math.PI / 2;
   elbow.add(eJoint);
-  
+
   const forearm = new THREE.Mesh(new THREE.BoxGeometry(0.25, 1.0, 0.25), matDark);
   forearm.position.y = 0.5;
   elbow.add(forearm);
-  
+
   // Gripper with fingers
   const gripperBase = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.1, 0.1), matCyan);
   gripperBase.position.y = 1.05;
   elbow.add(gripperBase);
-  
+
   const fingerL = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.1), matCyan);
   fingerL.position.set(-0.15, 0.15, 0);
   gripperBase.add(fingerL);
-  
+
   const fingerR = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.3, 0.1), matCyan);
   fingerR.position.set(0.15, 0.15, 0);
   gripperBase.add(fingerR);
-  
+
   armBot.userData.fingerL = fingerL;
   armBot.userData.fingerR = fingerR;
   armBot.userData.coreMat = gripperBase;
@@ -206,46 +206,46 @@ function initRobot() {
   dog.rotation.y = -Math.PI / 6;
   dog.userData = { targetX: 2.8, targetZ: 0.5, isSelected: false };
   interactableBots.push(dog);
-  
+
   const dogBody = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.4, 1.6), matDark);
   dogBody.position.y = 0.8;
   dog.add(dogBody);
-  
+
   const dogHead = new THREE.Mesh(new THREE.BoxGeometry(0.4, 0.3, 0.5), matMetal);
   dogHead.position.set(0, 1.1, 0.9);
   dog.add(dogHead);
-  
+
   const dogEye = new THREE.Mesh(new THREE.PlaneGeometry(0.3, 0.15), matMag);
   dogEye.position.set(0, 1.1, 1.16);
   dog.add(dogEye);
   dog.userData.coreMat = dogEye;
-  
+
   const dogLegs = [];
   const legPos = [
     { x: 0.45, z: 0.6 }, { x: -0.45, z: 0.6 },
     { x: 0.45, z: -0.6 }, { x: -0.45, z: -0.6 }
   ];
-  
+
   legPos.forEach(pos => {
     const hip = new THREE.Group();
     hip.position.set(pos.x, 0.8, pos.z);
-    
+
     const hipJoint = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.2, 16), matMetal);
     hipJoint.rotation.z = Math.PI / 2;
     hip.add(hipJoint);
-    
+
     const thigh = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.6, 0.15), matDark);
     thigh.position.y = -0.3;
     hip.add(thigh);
-    
+
     const knee = new THREE.Group();
     knee.position.y = -0.6;
     hip.add(knee);
-    
+
     const calf = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.6, 0.1), matMetal);
     calf.position.y = -0.3;
     knee.add(calf);
-    
+
     dog.add(hip);
     dogLegs.push({ hip, knee, offset: pos.z > 0 ? 0 : Math.PI });
   });
@@ -256,21 +256,21 @@ function initRobot() {
   rover.position.set(0, -1.8, 2.5);
   rover.userData = { targetX: 0, targetZ: 2.5, isSelected: false };
   interactableBots.push(rover);
-  
+
   const rChassis = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.4, 1.4), matDark);
   rChassis.position.y = 0.4;
   rover.add(rChassis);
-  
+
   const rLidar = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 0.2, 16), matCyan);
   rLidar.position.set(0, 0.7, 0);
   rover.add(rLidar);
   rover.userData.coreMat = rLidar;
-  
+
   const wheelOffsets = [
     { x: 0.7, z: 0.5 }, { x: -0.7, z: 0.5 },
     { x: 0.7, z: -0.5 }, { x: -0.7, z: -0.5 }
   ];
-  
+
   const rWheels = [];
   wheelOffsets.forEach(pos => {
     const wheel = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 0.15, 16), matMetal);
@@ -300,17 +300,17 @@ function initRobot() {
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
   let selectedRobot = null;
-  
+
   container.addEventListener('click', (e) => {
     const rect = container.getBoundingClientRect();
     mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    
+
     raycaster.setFromCamera(mouse, camera);
-    
+
     // Check if we clicked a robot
     const intersectsBots = raycaster.intersectObjects(interactableBots, true);
-    
+
     if (intersectsBots.length > 0) {
       let obj = intersectsBots[0].object;
       while (obj && !interactableBots.includes(obj)) {
@@ -327,7 +327,7 @@ function initRobot() {
         return;
       }
     }
-    
+
     // Move selected robot
     if (selectedRobot) {
       if (selectedRobot === dog || selectedRobot === rover) {
@@ -368,7 +368,7 @@ function initRobot() {
       bot.position.x += (bot.userData.targetX - bot.position.x) * 0.03;
       if (bot === dog || bot === rover) {
         bot.position.z += (bot.userData.targetZ - bot.position.z) * 0.03;
-        
+
         // Face direction of movement (3D angle)
         const dx = bot.userData.targetX - bot.position.x;
         const dz = bot.userData.targetZ - bot.position.z;
@@ -381,7 +381,7 @@ function initRobot() {
         }
       } else {
         bot.position.y += (bot.userData.targetY - bot.position.y) * 0.03;
-        
+
         // Face direction of movement (Left/Right)
         const dx = bot.userData.targetX - bot.position.x;
         if (Math.abs(dx) > 0.1) {
@@ -412,7 +412,7 @@ function initRobot() {
     shoulder.rotation.y = Math.sin(time * 0.8) * 1.5;
     upperArm.rotation.x = Math.sin(time * 1.2) * 0.5 + 0.5;
     elbow.rotation.x = Math.cos(time * 1.2) * 0.8 - 0.5;
-    
+
     // Gripper fingers open and close
     const fingerOffset = 0.15 + Math.sin(time * 2) * 0.05;
     armBot.userData.fingerL.position.x = -fingerOffset;
@@ -756,74 +756,75 @@ function initSkillsGraph() {
 
   const rawSkills = [
     // LANGUAGES
-    { label: 'C++', cat: 'prog', level: 'Core Architecture & Robotics' },
-    { label: 'Python', cat: 'prog', level: 'AI, ROS2 & Scripting' },
-    { label: 'Multithreading  & Async', cat: 'prog', level: 'High-Performance Concurrency' },
-    { label: 'MATLAB / Simulink', cat: 'prog', level: 'Simulation & Analysis' },
+    { label: 'Python', cat: 'prog', level: 'AI, ROS 2 & Autonomy Scripting' },
+    { label: 'C++', cat: 'prog', level: 'Core Robotics & Systems' },
 
-    // FRAMEWORKS
-    { label: 'ROS2 Humble', cat: 'ros', level: 'Robotics Middleware' },
-    { label: 'ROS2 Control', cat: 'ros', level: 'Hardware Interfaces' },
-    { label: 'Nav2', cat: 'ros', level: 'Autonomous Navigation' },
-    { label: 'SLAM Toolbox', cat: 'ros', level: '2D Mapping' },
-    { label: 'ORB-SLAM3', cat: 'ros', level: 'Visual Feature SLAM' },
-    { label: 'MoveIt2', cat: 'ros', level: 'Arm Manipulation' },
-    { label: 'AMCL', cat: 'ros', level: 'Adaptive Monte Carlo' },
-    { label: 'TF2', cat: 'ros', level: 'Transform Tree' },
-    { label: 'URDF/xacro', cat: 'ros', level: 'Robot Kinematic Model' },
+    // ROBOTICS & AUTONOMOUS SYSTEMS
+    { label: 'ROS 2 (Humble)', cat: 'ros', level: 'Robotics Middleware' },
+    { label: 'Nav2', cat: 'ros', level: 'Autonomous Navigation Stack' },
+    { label: 'ros2_control', cat: 'ros', level: 'Hardware Control Interfaces' },
+    { label: 'SLAM Toolbox', cat: 'ros', level: '2D Mapping & SLAM' },
+    { label: 'AMCL', cat: 'ros', level: 'Adaptive Monte Carlo Localization' },
+    { label: 'TF2', cat: 'ros', level: 'Transform Tree Framework' },
+    { label: 'URDF / Xacro', cat: 'ros', level: 'Kinematic & Robot Modeling' },
+    { label: 'MoveIt 2', cat: 'ros', level: 'Manipulator Motion Planning' },
+    { label: 'Kinematics', cat: 'ros', level: 'Forward & Inverse Kinematics' },
+    { label: 'Trajectory Planning', cat: 'ros', level: 'Path & Motion Planning' },
+    { label: 'Sensor Fusion', cat: 'ros', level: 'Multi-Sensor Data Fusion' },
     { label: 'EKF', cat: 'ros', level: 'Extended Kalman Filter' },
-    { label: 'PID Control', cat: 'ros', level: 'Feedback Control' },
-    { label: 'RANSAC', cat: 'ros', level: 'Outlier Rejection' },
-    { label: 'Sensor Fusion', cat: 'ros', level: 'IMU + Odometry + LiDAR' },
+    { label: 'RANSAC', cat: 'ros', level: 'Model Fitting & Outlier Rejection' },
 
-    // UAV / DRONE
-    { label: 'MultiRotor UAVs', cat: 'uav', level: 'Drone Airframe & Flight' },
-    { label: 'Pixhawk', cat: 'uav', level: 'Flight Controller HW' },
+    // UAV & FLIGHT SYSTEMS
     { label: 'ArduPilot', cat: 'uav', level: 'Autopilot Firmware' },
     { label: 'PX4', cat: 'uav', level: 'Autopilot Flight Stack' },
-    { label: 'QGround  Control', cat: 'uav', level: 'GCS Telemetry' },
-    { label: 'Mission Planner', cat: 'uav', level: 'Autonomous Waypoints' },
+    { label: 'Pixhawk', cat: 'uav', level: 'Flight Controller Hardware' },
     { label: 'MAVLink', cat: 'uav', level: 'Telemetry Protocol' },
-    { label: 'DroneKit', cat: 'uav', level: 'Python UAV Control' },
-    { label: 'ArduPilot SITL', cat: 'uav', level: 'Simulation-in-the-Loop' },
-    { label: 'Visual Servoing', cat: 'uav', level: 'Target Tracking' },
-    { label: 'LoRa Module', cat: 'uav', level: 'Long-Range RF Telemetry' },
+    { label: 'MAVSDK', cat: 'uav', level: 'API for UAV Autonomy' },
+    { label: 'DroneKit', cat: 'uav', level: 'Python Drone Control' },
+    { label: 'QGroundControl', cat: 'uav', level: 'Ground Control Station' },
+    { label: 'Mission Planner', cat: 'uav', level: 'GCS & Mission Design' },
+    { label: 'ArduPilot SITL', cat: 'uav', level: 'Software-In-The-Loop Sim' },
+    { label: 'PID Control', cat: 'uav', level: 'Feedback Control Loops' },
 
-    // VISION
+    // COMPUTER VISION & PERCEPTION
     { label: 'OpenCV', cat: 'vision', level: 'Computer Vision Pipeline' },
-    { label: 'YOLOv8', cat: 'vision', level: 'Object Detection AI' },
-    { label: 'RPi Cam v3 NoIR', cat: 'vision', level: 'Night Vision Optics' },
-    { label: 'ESP-CAM', cat: 'vision', level: 'Embedded Camera Stream' },
-    { label: 'ArUco Markers', cat: 'vision', level: 'Visual Target Geolocation' },
-    { label: 'Pixel-to-GPS Calculator', cat: 'vision', level: 'Geospatial Projection' },
-    { label: 'Pin-Hole Camera-Model', cat: 'vision', level: 'Geospatial Projection' },
+    { label: 'YOLOv8', cat: 'vision', level: 'Real-Time Object Detection' },
+    { label: 'YOLOv4-Tiny', cat: 'vision', level: 'Lightweight AI Detection' },
+    { label: 'ArUco', cat: 'vision', level: 'Fiducial Marker Tracking' },
+    { label: 'Visual Servoing', cat: 'vision', level: 'Vision-Guided Control' },
+    { label: 'Pinhole Camera Model', cat: 'vision', level: 'Camera Calibration & Optics' },
+    { label: 'ArUco Marker Geolocation', cat: 'vision', level: 'Spatial Position Estimation' },
+    { label: 'ORB-SLAM3', cat: 'vision', level: 'Visual-Inertial SLAM' },
 
-    // HARDWARE
-    { label: 'Jetson AGX Xavier', cat: 'hw', level: 'Edge Supercomputer' },
-    { label: 'Jetson Nano', cat: 'hw', level: 'Edge Compute Node' },
-    { label: 'Raspberry Pi 4/5', cat: 'hw', level: 'SBC Processor' },
+    // EMBEDDED SYSTEMS & ELECTRONICS
     { label: 'ESP32-S3', cat: 'hw', level: 'Dual-Core Microcontroller' },
-    { label: 'Microprocessor', cat: 'hw', level: 'Digital Logic & Architecture' },
-    { label: 'Arduino', cat: 'hw', level: 'MCU Prototyping' },
-    { label: 'RPLidar A1M8', cat: 'hw', level: 'Laser Scanner & 2D SLAM' },
-    { label: 'LiDAR', cat: 'hw', level: 'Laser Distance Sensing' },
-    { label: 'MPU9250 IMU', cat: 'hw', level: '9-DOF Inertial Sensor' },
-    { label: 'Barometer', cat: 'hw', level: 'Altitude Sensing' },
-    { label: 'Encoder Motors', cat: 'hw', level: 'Wheel Odometry' },
-    { label: 'Coreless DC Motors', cat: 'hw', level: 'Micro UAV Actuators' },
-    { label: 'Custom  MOSFET ESC', cat: 'hw', level: 'Motor Speed Control' },
-    { label: 'ST7920 Display', cat: 'hw', level: 'SPI Graphics Display' },
-    { label: 'NRF24L01', cat: 'hw', level: 'RF Transceiver' },
-    { label: '3D Printing', cat: 'hw', level: 'Rapid Structural Fabrication' },
+    { label: 'ESP32-CAM', cat: 'hw', level: 'Wi-Fi Vision Module' },
+    { label: 'Arduino', cat: 'hw', level: 'Microcontroller Prototyping' },
+    { label: 'STM32', cat: 'hw', level: 'ARM Cortex MCU' },
+    { label: 'UART / I²C / SPI / PWM', cat: 'hw', level: 'Bus & Control Protocols' },
+    { label: 'MPU9250 / MPU6050', cat: 'hw', level: 'Inertial Measurement Units' },
+    { label: 'Encoder Motors', cat: 'hw', level: 'Wheel & Joint Odometry' },
+    { label: 'Barometer', cat: 'hw', level: 'Pressure & Altitude Sensing' },
+    { label: 'NRF24L01 / LoRa', cat: 'hw', level: 'Wireless RF Modules' },
+    { label: 'ST7920 Display', cat: 'hw', level: 'SPI LCD Display' },
+    { label: 'Custom MOSFET ESC', cat: 'hw', level: 'Motor Speed Controller' },
 
-    // TOOLS
-    { label: 'Gazebo', cat: 'tools', level: '3D Robotics Simulator' },
-    { label: 'MuJoCo', cat: 'tools', level: 'Contact Physics Sim' },
-    { label: 'RViz2', cat: 'tools', level: 'ROS2 Data Visualization' },
-    { label: 'Fusion 360', cat: 'tools', level: 'CAD Mechanical Design' },
-    { label: 'TinkerCad', cat: 'tools', level: 'Schematic Prototyping' },
-    { label: 'Git / GitHub', cat: 'tools', level: 'Version Control' },
-    { label: 'Ubuntu Linux', cat: 'tools', level: 'OS Target' }
+    // COMPUTE & SENSORS
+    { label: 'Raspberry Pi 4/5', cat: 'hw', level: 'Single-Board Computer' },
+    { label: 'NVIDIA Jetson Nano/AGX Xavier', cat: 'hw', level: 'Edge AI Compute' },
+    { label: 'RPLidar A1M8 / LiDAR', cat: 'hw', level: 'Laser Distance & 2D SLAM' },
+    { label: 'Raspberry Pi Camera v3 NoIR', cat: 'hw', level: 'Infrared & Optics Sensor' },
+
+    // SIMULATION & ENGINEERING TOOLS
+    { label: 'Gazebo', cat: 'tools', level: '3D Physics Simulator' },
+    { label: 'RViz2', cat: 'tools', level: 'ROS 2 Visualization Tool' },
+    { label: 'MuJoCo', cat: 'tools', level: 'Physics Engine' },
+    { label: 'MATLAB / Simulink', cat: 'tools', level: 'System Modeling' },
+    { label: 'Fusion 360', cat: 'tools', level: 'CAD & Mechanical Design' },
+    { label: '3D Printing', cat: 'tools', level: 'Additive Manufacturing' },
+    { label: 'TinkerCAD', cat: 'tools', level: 'Schematic Prototyping' },
+    { label: 'Git', cat: 'tools', level: 'Version Control System' },
+    { label: 'Linux (Ubuntu 22.04)', cat: 'tools', level: 'Primary Operating System' }
   ];
 
   // Build Graph Nodes & Links
