@@ -265,6 +265,38 @@
     }
 
     /* ── TABLES / KEY-VALUE (Skills & Languages) ── */
+    .sec-title {
+      font-size: 12.6pt;
+      font-style: italic;
+      font-weight: normal;
+      color: var(--cv-blue);
+      border-bottom: 0.75pt solid var(--rule-color);
+      padding-bottom: 1.5pt;
+      margin-top: 10pt;
+      margin-bottom: 5.5pt;
+      letter-spacing: 0.02em;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 215px 1fr;
+      gap: 3pt 14pt;
+      margin-top: 2pt;
+    }
+
+    .skill-cat {
+      font-weight: bold;
+      color: #000000;
+      font-size: 9.8pt;
+      line-height: 1.32;
+    }
+
+    .skill-list {
+      color: var(--text-main);
+      font-size: 9.8pt;
+      line-height: 1.32;
+    }
+
     .skills-table {
       width: 100%;
       border-collapse: collapse;
@@ -848,52 +880,37 @@
     <!-- ══════════════════════════════════════════════════════════
          TECHNICAL SKILLS (FULL RESUME SPECIFICATION)
     ══════════════════════════════════════════════════════════ -->
-    <div class="section">
-      <div class="section-title">Technical skills</div>
-      <table class="skills-table">
-        <tr>
-          <td class="skill-label">Robotics &amp; Autonomous Systems</td>
-          <td class="skill-val">ROS 2 (Humble), Nav2, ros2_control, SLAM Toolbox, AMCL, TF2, URDF/Xacro, MoveIt 2,
-            Kinematics (FK/IK, D-H Parameters), Trajectory Planning, Sensor Fusion, EKF (robot_localization), RANSAC,
-            LiDAR SLAM</td>
-        </tr>
-        <tr>
-          <td class="skill-label">UAV &amp; Flight Systems</td>
-          <td class="skill-val">ArduPilot, PX4, Pixhawk (2.4.8, 6C), MAVLink v2, MAVSDK, DroneKit, QGroundControl,
-            Mission Planner, ArduPilot SITL, PID Control, Geofencing, RTL Failsafe</td>
-        </tr>
-        <tr>
-          <td class="skill-label">Computer Vision &amp; Perception</td>
-          <td class="skill-val">OpenCV, YOLOv8, YOLOv4-Tiny, ArUco, Visual Servoing (IBVS), Pinhole Camera Model, ArUco
-            Marker Geolocation, ORB-SLAM3, PyZbar, WeChat QR, Thermal Imaging</td>
-        </tr>
-        <tr>
-          <td class="skill-label">Embedded Systems &amp; Electronics</td>
-          <td class="skill-val">ESP32-S3, ESP32-CAM, Arduino (Uno, Nano, Mega), STM32, UART, I²C, SPI, PWM,
-            MPU9250/MPU6050 IMU, Encoder Motors, Barometer (BMP280), NRF24L01, LoRa, ST7920 Graphic Display, Custom
-            MOSFET ESC Design</td>
-        </tr>
-        <tr>
-          <td class="skill-label">Compute, Sensors &amp; Hardware</td>
-          <td class="skill-val">Raspberry Pi 4/5, NVIDIA Jetson Nano/AGX Xavier, RPLidar A1M8, LiDAR, Raspberry Pi
-            Camera v3 NoIR, Gas Sensor Arrays (CO, H₂S, CH₄, LPG)</td>
-        </tr>
-        <tr>
-          <td class="skill-label">Simulation &amp; Engineering Tools</td>
-          <td class="skill-val">Gazebo (Ignition / Classic), RViz2, MuJoCo, MATLAB/Simulink, Autodesk Fusion 360, 3D
-            Printing (FDM/FFF), TinkerCAD, PlatformIO, Git, Linux (Ubuntu 22.04)</td>
-        </tr>
-        <tr>
-          <td class="skill-label">GCS &amp; Telemetry Systems</td>
-          <td class="skill-val">C++17, Qt 6, QML, Flask, WebSocket, Real-time HUD, OpenStreetMap Tactical Map, GStreamer
-            H.264 Video Streaming</td>
-        </tr>
-        <tr>
-          <td class="skill-label">Programming Languages</td>
-          <td class="skill-val">Python, C++</td>
-        </tr>
-      </table>
-    </div>
+    <section>
+      <div class="sec-title">Technical Skills</div>
+      <div class="skills-grid">
+        <div class="skill-cat">Robotics &amp; Autonomous Systems:</div>
+        <div class="skill-list">ROS 2 (Humble), Nav2, ros2_control, SLAM Toolbox, AMCL, TF2, URDF/Xacro, MoveIt 2,
+          Kinematics, Trajectory Planning, Sensor Fusion, EKF, RANSAC</div>
+
+        <div class="skill-cat">UAV &amp; Flight Systems:</div>
+        <div class="skill-list">ArduPilot, PX4, Pixhawk, MAVLink, MAVSDK, DroneKit, QGroundControl, Mission Planner,
+          ArduPilot SITL, PID Control</div>
+
+        <div class="skill-cat">Computer Vision &amp; Perception:</div>
+        <div class="skill-list">OpenCV, YOLOv8, YOLOv4-Tiny, ArUco, Visual Servoing, Pinhole Camera Model, ArUco Marker
+          Geolocation, ORB-SLAM3</div>
+
+        <div class="skill-cat">Embedded Systems &amp; Electronics:</div>
+        <div class="skill-list">ESP32-S3, ESP32-CAM, Arduino, STM32, UART, I²C, SPI, PWM, MPU9250/MPU6050, Encoder
+          Motors, Barometer, NRF24L01, LoRa, ST7920 Display, Custom MOSFET ESC</div>
+
+        <div class="skill-cat">Compute, Sensors &amp; Hardware:</div>
+        <div class="skill-list">Raspberry Pi 4/5, NVIDIA Jetson Nano/AGX Xavier, RPLidar A1M8, LiDAR, Raspberry Pi
+          Camera v3 NoIR</div>
+
+        <div class="skill-cat">Simulation &amp; Engineering Tools:</div>
+        <div class="skill-list">Gazebo, RViz2, MuJoCo, MATLAB/Simulink, Fusion 360, 3D Printing, TinkerCAD, Git, Linux
+          (Ubuntu 22.04)</div>
+
+        <div class="skill-cat">Programming Languages:</div>
+        <div class="skill-list">Python, C++</div>
+      </div>
+    </section>
 
     <!-- ══════════════════════════════════════════════════════════
          LANGUAGE PROFICIENCY
