@@ -457,13 +457,15 @@ function initCursor() {
   document.body.appendChild(cursor); document.body.appendChild(dot);
   let cx = 0, cy = 0, dx = 0, dy = 0;
   document.addEventListener('mousemove', e => { dx = e.clientX; dy = e.clientY; });
+  document.addEventListener('mousedown', () => cursor.classList.add('clicking'));
+  document.addEventListener('mouseup', () => cursor.classList.remove('clicking'));
   (function moveCursor() {
     cx += (dx - cx) * 0.15; cy += (dy - cy) * 0.15;
-    cursor.style.left = cx - 10 + 'px'; cursor.style.top = cy - 10 + 'px';
-    dot.style.left = dx - 3 + 'px'; dot.style.top = dy - 3 + 'px';
+    cursor.style.left = cx - 11 + 'px'; cursor.style.top = cy - 11 + 'px';
+    dot.style.left = dx - 2.5 + 'px'; dot.style.top = dy - 2.5 + 'px';
     requestAnimationFrame(moveCursor);
   })();
-  document.querySelectorAll('a,button,.pcard,.pill,.stab,.filt-btn,.cert-link,.plink,.btn-p,.btn-o').forEach(el => {
+  document.querySelectorAll('a,button,.pcard,.filt-btn,.cert-link,.plink,.btn-p,.btn-o,.gpill').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
@@ -474,6 +476,7 @@ function initLoader() {
   const loader = document.getElementById('loader');
   const fill = document.getElementById('loader-fill');
   const log = document.getElementById('loader-log');
+  const percentEl = document.getElementById('loaderPercent');
   const logs = [
     'Initializing neural interface...',
     'Loading sensor arrays...',
@@ -481,26 +484,31 @@ function initLoader() {
     'Establishing MAVLink connection...',
     'Compiling ROS2 nodes...',
     'Mapping environment...',
-    'System ready.'
+    'All systems nominal.'
   ];
   let progress = 0;
   let logIdx = 0;
   const interval = setInterval(() => {
-    progress += Math.random() * 18 + 5;
+    progress += Math.random() * 14 + 4;
     if (progress > 100) progress = 100;
     fill.style.width = progress + '%';
+    if (percentEl) percentEl.textContent = Math.floor(progress) + '%';
     if (logIdx < logs.length && progress > (logIdx + 1) * 14) {
-      log.textContent = logs[logIdx]; logIdx++;
+      if (log) log.textContent = logs[logIdx]; logIdx++;
     }
     if (progress >= 100) {
       clearInterval(interval);
-      log.textContent = 'System ready.';
+      if (log) log.textContent = 'All systems nominal.';
+      if (percentEl) percentEl.textContent = '100%';
       setTimeout(() => {
         loader.classList.add('hidden');
-        navigateTo('home');
-      }, 400);
+        // Support hash routing on initial load
+        const hash = window.location.hash.replace('#', '');
+        const validPages = ['home','about','projects','experience','achievements','contact'];
+        navigateTo(validPages.includes(hash) ? hash : 'home');
+      }, 500);
     }
-  }, 200);
+  }, 180);
 }
 
 // ===== PAGE NAVIGATION =====
@@ -516,27 +524,24 @@ function navigateTo(pageId) {
   target.classList.add('active');
   window.scrollTo(0, 0);
 
+  // Update URL hash for deep-linking & browser back support
+  if (history.replaceState) {
+    history.replaceState(null, '', pageId === 'home' ? window.location.pathname : '#' + pageId);
+  }
+
   // Close mobile navigation drawer if active
   const navToggle = document.getElementById('navToggle');
   const navLinks = document.getElementById('navLinks');
   if (navToggle) navToggle.classList.remove('active');
   if (navLinks) navLinks.classList.remove('open');
 
-  // Always dispatch resize event after showing a new section so canvases initialize their buffers correctly
+  // Dispatch resize so canvases reinitialize buffers correctly
   setTimeout(() => { window.dispatchEvent(new Event('resize')); }, 50);
 
   target.querySelectorAll('.fade-up').forEach(el => {
     el.classList.remove('vis');
     obs.observe(el);
   });
-
-  if (pageId === 'about') {
-    setTimeout(() => {
-      document.querySelectorAll('.skills-panel.active .sbar-fill').forEach(bar => {
-        bar.style.transform = `scaleX(${bar.dataset.w})`;
-      });
-    }, 300);
-  }
 
   currentPage = pageId;
   document.querySelectorAll('.nav-links a').forEach(a => {
@@ -546,6 +551,13 @@ function navigateTo(pageId) {
     unlockSectionBadge(pageId);
   }
 }
+
+// Browser back/forward button support
+window.addEventListener('popstate', () => {
+  const hash = window.location.hash.replace('#', '');
+  const validPages = ['home','about','projects','experience','achievements','contact'];
+  navigateTo(validPages.includes(hash) ? hash : 'home');
+});
 
 // ===== SCROLL OBSERVER =====
 const obs = new IntersectionObserver((entries) => {
@@ -653,7 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // ===== GAMIFICATION =====
-const gameState = { score: 0, completed: new Set(), bonusUnlocked: false, steps: ['about', 'projects', 'experience', 'achievements', 'contact'] };
+const gameState = { score: 0, completed: new Set(), bonusUnlocked: false, steps: ['about', 'projects', 'experience', 'achievements', 'contact', 'gcs'] };
 
 function saveGameState() {
   localStorage.setItem('portfolioGameState', JSON.stringify({ score: gameState.score, completed: [...gameState.completed], bonusUnlocked: gameState.bonusUnlocked }));
@@ -725,12 +737,14 @@ function initSkillsGraph() {
   let width = container.clientWidth || 800;
   let height = container.clientHeight || 480;
 
+  let camera; // declared here so resize() can safely reference it
+
   function resize() {
     let newWidth = container.clientWidth;
     if (newWidth === 0) return; // Ignore resize if hidden
 
-    // Auto-center camera if it was initialized at a different width and no node is focused
-    if (width !== newWidth && !focusedNode && typeof camera !== 'undefined') {
+    // Auto-center camera after resize if no node is focused
+    if (camera && width !== newWidth && !focusedNode) {
       camera.targetX = newWidth / 2;
       camera.targetY = height / 2;
     }
@@ -921,7 +935,7 @@ function initSkillsGraph() {
   });
 
   // Viewport & Interaction
-  let camera = {
+  camera = {
     x: width / 2,
     y: height / 2,
     zoom: 1.0,

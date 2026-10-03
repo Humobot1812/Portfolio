@@ -4,11 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abhinav Goel — Robotics Engineer</title>
+  <title>Abhinav Goel — Robotics Engineer | AMR · UAV · SLAM · ROS2</title>
   <meta name="description"
-    content="Portfolio of Abhinav Goel — Robotics Engineer specializing in AMRs, Drones, Manipulators, and Quadruped Bots. ROS2, SLAM, Computer Vision.">
+    content="Portfolio of Abhinav Goel — Robotics Engineer specializing in Autonomous Mobile Robots, Drones (UAVs), Manipulators, and Quadruped Bots. ROS2, SLAM, Computer Vision, MAVLink.">
+  <meta name="author" content="Abhinav Goel">
+  <meta property="og:title" content="Abhinav Goel — Robotics Engineer">
+  <meta property="og:description" content="AMR · UAV · SLAM · ROS2 · Computer Vision Portfolio">
+  <meta property="og:url" content="https://Humobot1812.github.io/Portfolio/">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23030014'/><polygon points='16,3 29,9 29,23 16,29 3,23 3,9' stroke='%2300f0ff' stroke-width='2' fill='none'/><circle cx='16' cy='16' r='4' fill='%2300f0ff'/></svg>">
   <link
-    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@300;400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,7 +23,9 @@
 
   <!-- LOADER -->
   <div class="loader-screen" id="loader">
-    <div class="loader-text">INITIALIZING SYSTEMS</div>
+    <div class="loader-logo">SYS_INIT · <span>AG_v3.0</span></div>
+    <div class="loader-percent" id="loaderPercent">0%</div>
+    <div class="loader-text" id="loaderText">INITIALIZING SYSTEMS</div>
     <div class="loader-bar">
       <div class="loader-fill" id="loader-fill"></div>
     </div>
@@ -28,9 +36,9 @@
   <canvas id="particles"></canvas>
 
   <!-- NAV -->
-  <nav>
+  <nav id="mainNav">
     <a href="#" class="nav-logo">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <svg width="16" height="16" viewBox="0 0 18 18" fill="none">
         <polygon points="9,1 17,5 17,13 9,17 1,13 1,5" stroke="#00f0ff" stroke-width="1.2" fill="none" />
         <circle cx="9" cy="9" r="2.5" fill="#00f0ff" />
       </svg>
@@ -58,50 +66,59 @@
   <section id="home" class="page">
     <div class="hero-layout">
       <div class="hero-left">
-        <div class="hero-tag">Robotics Engineer · Autonomous Systems · UAV</div>
+        <div class="hero-eyebrow">
+          Robotics Engineer
+          <span class="hero-eyebrow-dot"></span>
+          Autonomous Systems
+          <span class="hero-eyebrow-dot"></span>
+          UAV
+        </div>
         <h1 class="glitch-text">Abhinav<br><span class="acc">Goel.</span></h1>
-        <p class="hero-bio">Building machines that perceive, decide, and act. ROS2 navigation, SLAM, sensor fusion, and
-          drone systems — from simulation to real-world deployment.</p>
+        <p class="hero-bio">Building machines that perceive, decide, and act. ROS2 navigation, SLAM, sensor
+          fusion, and drone systems — from simulation to real-world deployment.</p>
         <div class="hero-ctas">
-          <a href="#" data-nav="projects" class="btn-p">View Projects</a>
+          <a href="#" data-nav="projects" class="btn-p">View Projects →</a>
           <a href="assets/resume/Abhinav_Goel_Robotics_Engineer_Resume.pdf" target="_blank" rel="noopener"
             class="btn-o">Resume PDF 📄</a>
+          <a href="assets/resume/Abhinav_Goel_CV.html" target="_blank" rel="noopener"
+            class="btn-o">Full CV 📋</a>
           <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5" target="_blank" rel="noopener"
             class="btn-o">LinkedIn ↗</a>
           <a href="https://github.com/Humobot1812" target="_blank" rel="noopener" class="btn-o">GitHub ↗</a>
-          <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener" class="btn-o">YouTube
-            ↗</a>
+          <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener"
+            class="btn-o">YouTube ↗</a>
         </div>
         <div class="hero-stats">
-          <div class="stat-item"><span class="num">Top 10</span><span class="lbl">e-Yantra 2025-26</span></div>
-          <div class="stat-item"><span class="num">400+</span><span class="lbl">teams beaten</span></div>
-          <div class="stat-item"><span class="num">6+</span><span class="lbl">major projects</span></div>
-          <div class="stat-item"><span class="num">9</span><span class="lbl">GitHub repos</span></div>
+          <div class="stat-item"><span class="num">Top 10</span><span class="lbl">e-Yantra 2025–26</span></div>
+          <div class="stat-item"><span class="num">400+</span><span class="lbl">Teams beaten</span></div>
+          <div class="stat-item"><span class="num">12+</span><span class="lbl">Major projects</span></div>
+          <div class="stat-item"><span class="num">13</span><span class="lbl">GitHub repos</span></div>
         </div>
       </div>
       <div class="hero-visual">
         <div id="robot-canvas"></div>
       </div>
     </div>
-    <div style="max-width:1140px;margin:2rem auto 0;padding:0 3rem;">
-      <div class="game-panel">
-        <div class="game-header">Mission Control</div>
-        <div class="game-status"><span class="game-level">Level 1 — Explorer</span><span id="gameXP">0 XP</span></div>
-        <div class="game-score">Score <span id="gameScore">0</span></div>
-        <div class="game-progress">
-          <div class="progress-fill" id="gameProgress"></div>
-        </div>
-        <div class="badge-grid">
-          <span class="badge-pill locked" data-badge="about">About</span>
-          <span class="badge-pill locked" data-badge="projects">Projects</span>
-          <span class="badge-pill locked" data-badge="experience">Experience</span>
-          <span class="badge-pill locked" data-badge="achievements">Achievements</span>
-          <span class="badge-pill locked" data-badge="contact">Contact</span>
-          <span class="badge-pill locked" data-badge="bonus">Bonus</span>
-        </div>
-        <div class="game-tip">Navigate pages, apply filters, and explore projects to unlock badges and earn XP.</div>
+
+    <!-- Mission Control -->
+    <div class="game-panel">
+      <div class="game-header">Mission Control</div>
+      <div class="game-status"><span class="game-level">Level 1 — Explorer</span><span id="gameXP">0 XP</span></div>
+      <div class="game-score">Score <span id="gameScore">0</span></div>
+      <div class="game-progress">
+        <div class="progress-fill" id="gameProgress"></div>
       </div>
+      <div class="badge-grid">
+        <span class="badge-pill locked" data-badge="about">About</span>
+        <span class="badge-pill locked" data-badge="projects">Projects</span>
+        <span class="badge-pill locked" data-badge="experience">Experience</span>
+        <span class="badge-pill locked" data-badge="achievements">Achievements</span>
+        <span class="badge-pill locked" data-badge="contact">Contact</span>
+        <span class="badge-pill locked" data-badge="bonus">Bonus ⚡</span>
+      </div>
+      <div class="game-tip">Navigate pages, apply filters, and explore projects to unlock badges and earn XP.</div>
     </div>
+
     <div class="scroll-hint">
       <div class="scroll-arrow"></div>
     </div>
@@ -116,20 +133,22 @@
       <div class="ag">
         <div class="about-text">
           <div class="profile-frame"><img src="assets/images/profile.png" alt="Abhinav Goel" /></div>
-          <p>I'm a Robotics Engineer and B.Tech student at PDPM Indian Institute of Information Technology, Design and
-            Manufacturing, Jabalpur, pursuing Electronics and Communication Engineering. My work spans the full stack —
-            from hardware fabrication to ROS2 navigation pipelines.</p>
+          <p>I'm a Robotics Engineer and B.Tech student at PDPM Indian Institute of Information Technology, Design
+            and Manufacturing, Jabalpur, pursuing Electronics and Communication Engineering. My work spans the
+            full stack — from hardware fabrication to ROS2 navigation pipelines.</p>
           <p>Core expertise in ROS2-based navigation and SLAM, sensor fusion, computer vision, and drone autopilot
-            systems. I've ranked Top 10 nationally in the e-Yantra Robotics Competition against 400+ teams.</p>
-          <p>Currently leading robotics initiatives at the Electronics &amp; Robotics Society and contributing to UAV
-            development at the Aero Fabrication Club at IIITDM.</p>
+            systems. I've ranked <strong style="color:var(--accent)">Top 10 nationally</strong> in the e-Yantra
+            Robotics Competition against 400+ teams.</p>
+          <p>Currently leading robotics initiatives at the Electronics &amp; Robotics Society and contributing
+            to UAV development at the Aero Fabrication Club at IIITDM Jabalpur.</p>
           <div class="edu-block">
             <div class="edu-d">Bachelor of Technology (B.Tech)</div>
-            <div class="edu-i">PDPM Indian Institute of Information Technology, Design and Manufacturing, Jabalpur</div>
+            <div class="edu-i">PDPM Indian Institute of Information Technology, Design and Manufacturing, Jabalpur
+            </div>
             <div class="edu-i">Electronics and Communication Engineering</div>
             <div class="edu-t">Aug 2024 — Aug 2028 · Jabalpur, Madhya Pradesh</div>
             <div style="margin-top:.8rem;"><a href="https://www.iiitdmj.ac.in/" target="_blank" rel="noopener"
-                style="font-family:var(--mono);font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">iiitdmj.ac.in
+                style="font-family:var(--mono);font-size:11px;color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(0,240,255,0.3);">iiitdmj.ac.in
                 ↗</a></div>
           </div>
         </div>
@@ -153,8 +172,8 @@
             <div class="skills-graph-body" id="skillsGraphBox">
               <canvas id="skillsGraphCanvas"></canvas>
               <div class="graph-tooltip" id="graphTooltip"></div>
-              <div class="graph-instructions">💡 Click any bubble to zoom &amp; inspect skills · Drag bubbles to test
-                string physics</div>
+              <div class="graph-instructions">💡 Click any bubble to zoom &amp; inspect · Drag to test physics
+              </div>
             </div>
           </div>
         </div>
@@ -169,21 +188,26 @@
         <div class="sec-line"></div>
       </div>
       <div class="proj-filter">
+        <span class="proj-filter-label">Filter:</span>
         <button class="filt-btn active" data-filter="all">All</button>
         <button class="filt-btn" data-filter="uav">UAV / Drone</button>
         <button class="filt-btn" data-filter="ros">ROS2 / SLAM</button>
         <button class="filt-btn" data-filter="hardware">Hardware</button>
+        <button class="filt-btn" data-filter="gcs">GCS / Software</button>
       </div>
       <div class="projects-grid" id="projGrid">
 
-        <!-- Project 1 — KrishiCobot -->
+        <!-- ── Project 01 — KrishiCobot ── -->
         <div class="pcard featured fade-up" data-cats="ros">
           <div class="pcard-img">
             <img src="assets/images/eyantra.png" alt="e-Yantra KrishiCobot" />
             <span class="status-tag status-completed">Completed</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">01 — FEATURED · ⭐ TOP 10 / 400+</div>
+            <div class="pcard-meta">
+              <div class="pcard-num">01 — FEATURED · ⭐ TOP 10 / 400+</div>
+              <div class="pcard-stars">★ 2</div>
+            </div>
             <h3>e-Yantra KrishiCobot</h3>
             <div class="pcard-venue">IIT Bombay · Aug 2025 – May 2026</div>
             <p class="pcard-desc">Autonomous agricultural robot for crop monitoring and manipulation — ranked Top 10
@@ -197,38 +221,37 @@
                 class="ptag">Nav2</span><span class="ptag">OpenCV</span><span class="ptag">MoveIt2</span><span
                 class="ptag">YOLO</span></div>
             <div class="pcard-links">
-              <a href="https://github.com/Humobot1812/Krishi_Cobot" target="_blank" rel="noopener" class="plink">GitHub
-                ↗</a>
+              <a href="https://github.com/Humobot1812/Krishi_Cobot" target="_blank" rel="noopener"
+                class="plink">GitHub ↗</a>
               <a href="https://youtube.com/playlist?list=PLQcgql__dXre4uqwJgKRXPLFkSnAbvKIY&si=e7F3CfF8ZO15Nm7-"
                 target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 2 — WareOps -->
+        <!-- ── Project 02 — WareOps ── -->
         <div class="pcard featured fade-up" data-cats="ros hardware">
           <div class="pcard-img">
             <img src="assets/images/WareOps.png" alt="WareOps Autonomous Warehouse AMR" />
             <span class="status-tag status-completed">Completed</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">02 — FEATURED · WAREHOUSE AMR</div>
-            <h3>WareOps — Autonomous Warehouse Auditing Robot &amp; Active Vision System</h3>
-            <div class="pcard-venue">WareOps Organization · Dec 2025 – Aug 2026 · Hardware &amp; ROS2 Stack</div>
-            <p class="pcard-desc">End-to-end ROS2 AMR that autonomously navigates warehouse aisles, sweeps multi-tier
-              racks with a 2-DOF active camera mast, scans QR codes, and audits stock against a master database in real
-              time.</p>
+            <div class="pcard-meta">
+              <div class="pcard-num">02 — FEATURED · WAREHOUSE AMR</div>
+            </div>
+            <h3>WareOps — Autonomous Warehouse Auditing Robot</h3>
+            <div class="pcard-venue">WareOps Org · Dec 2025 – Aug 2026</div>
+            <p class="pcard-desc">End-to-end ROS2 AMR that autonomously navigates warehouse aisles, sweeps
+              multi-tier racks with a 2-DOF active camera mast, and audits stock in real time.</p>
             <ul class="pcard-bullets">
-              <li>Nav2 + AMCL + SLAM Toolbox for accurate autonomous rack-to-rack transit</li>
-              <li>2-DOF gimbal vision mast with dual QR engine (OpenCV WeChat + PyZbar) for multi-level rack scanning
-              </li>
-              <li>Full sim-hardware parity: Gazebo Ignition + RPi 4, RPLidar A1M8, Arduino Nano via ros2_control &amp;
-                ESP32-CAM WiFi bridge</li>
+              <li>Nav2 + AMCL + SLAM Toolbox for accurate rack-to-rack transit</li>
+              <li>2-DOF gimbal vision mast with dual QR engine for multi-level scanning</li>
+              <li>Full sim-hardware parity: Gazebo Ignition + RPi 4, RPLidar A1M8</li>
             </ul>
             <div class="ptags"><span class="ptag">ROS2 Humble</span><span class="ptag">Nav2</span><span
-                class="ptag">SLAM Toolbox</span><span class="ptag">ros2_control</span><span class="ptag">RPLidar
-                A1M8</span><span class="ptag">OpenCV</span><span class="ptag">Gazebo Ignition</span><span
-                class="ptag">ESP32-CAM</span></div>
+                class="ptag">SLAM Toolbox</span><span class="ptag">ros2_control</span><span
+                class="ptag">RPLidar A1M8</span><span class="ptag">OpenCV</span><span
+                class="ptag">Gazebo Ignition</span></div>
             <div class="pcard-links">
               <a href="https://github.com/WareOps" target="_blank" rel="noopener" class="plink">GitHub Org ↗</a>
               <a href="https://youtube.com/playlist?list=PLdkPHi9wHG-M&si=mLF6lWjfnwmRlD9_" target="_blank"
@@ -237,22 +260,141 @@
           </div>
         </div>
 
-        <!-- Project 3 — Diff Drive -->
+        <!-- ── Project 03 — CAVE DIVER (NEW) ── -->
+        <div class="pcard featured fade-up" data-cats="ros hardware">
+          <div class="pcard-img">
+            <img src="assets/images/Cave_diver.png" alt="CAVE_DIVER — 6-Wheeled Subterranean Rover" />
+            <span class="status-tag status-completed">Completed</span>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-meta">
+              <div class="pcard-num">03 — FEATURED · ★ NEW</div>
+              <div class="pcard-stars">★ 1</div>
+            </div>
+            <h3>CAVE_DIVER — 6-Wheeled Subterranean Rover</h3>
+            <div class="pcard-venue">Personal Project · Sep 2026</div>
+            <p class="pcard-desc">Autonomous 6-wheeled subterranean rover with rocker suspension, dual RGB/thermal
+              vision on a 2-DOF gimbal, 6-channel hazardous gas telemetry, LiDAR SLAM, and a browser-based Ground
+              Control Station for GPS-denied cave exploration.</p>
+            <ul class="pcard-bullets">
+              <li>Rocker-bogie suspension for traversing uneven subterranean terrain</li>
+              <li>Dual RGB + thermal camera on 2-DOF gimbal for multi-spectral imaging</li>
+              <li>6-channel gas sensor telemetry (CO, H₂S, CH₄ etc.) in real time</li>
+              <li>LiDAR SLAM + browser GCS for GPS-denied operation</li>
+            </ul>
+            <div class="ptags"><span class="ptag">ROS2</span><span class="ptag">LiDAR SLAM</span><span
+                class="ptag">Thermal Imaging</span><span class="ptag">Gazebo Ignition</span><span
+                class="ptag">Flask GCS</span><span class="ptag">OpenCV</span><span class="ptag">Python</span>
+            </div>
+            <div class="pcard-links">
+              <a href="https://github.com/Humobot1812/CAVE_DIVER_6_Wheeled_Rover" target="_blank" rel="noopener"
+                class="plink">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Project 04 — DroneGCS (NEW) ── -->
+        <div class="pcard featured fade-up" data-cats="uav gcs">
+          <div class="pcard-img">
+            <img src="assets/images/drone_gcs.png" alt="DroneGCS — Tactical Multi-UAV Ground Control Station" />
+            <span class="status-tag status-progress">In Progress</span>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-meta">
+              <div class="pcard-num">04 — FEATURED · ★ NEW</div>
+              <div class="pcard-stars">★ 1</div>
+            </div>
+            <h3>DroneGCS — Tactical Multi-UAV Ground Control Station</h3>
+            <div class="pcard-venue">Personal Project · Sep 2026 – Present</div>
+            <p class="pcard-desc">Full-featured Multi-UAV GCS built with C++17, Qt6, QML &amp; MAVLink v2.
+              Features real-time HUD telemetry, interactive tactical map, autonomous mission planning, and live
+              video streaming.</p>
+            <ul class="pcard-bullets">
+              <li>Real-time HUD: altitude, speed, battery, GPS, flight mode telemetry</li>
+              <li>Interactive tactical map with multi-drone tracking and waypoint planning</li>
+              <li>MAVLink v2 integration with ArduPilot / PX4 compatibility</li>
+              <li>Live video streaming with onboard camera feeds</li>
+            </ul>
+            <div class="ptags"><span class="ptag">C++17</span><span class="ptag">Qt6</span><span
+                class="ptag">QML</span><span class="ptag">MAVLink v2</span><span class="ptag">ArduPilot</span><span
+                class="ptag">PX4</span><span class="ptag">Pixhawk</span></div>
+            <div class="pcard-links">
+              <a href="https://github.com/Humobot1812/DroneGCS" target="_blank" rel="noopener"
+                class="plink">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Project 05 — SafePilot (NEW) ── -->
+        <div class="pcard fade-up" data-cats="uav gcs">
+          <div class="pcard-img">
+            <svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="480" height="190" fill="#030014"/>
+              <!-- Shield icon -->
+              <path d="M240,20 L270,35 L270,65 Q270,90 240,100 Q210,90 210,65 L210,35 Z" fill="none" stroke="#32d74b" stroke-width="2" opacity="0.8"/>
+              <path d="M227,60 L237,70 L255,50" stroke="#32d74b" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <!-- Geofence ring -->
+              <circle cx="240" cy="100" r="65" fill="none" stroke="#32d74b" stroke-width="1" stroke-dasharray="8 4" opacity="0.5"/>
+              <circle cx="240" cy="100" r="45" fill="none" stroke="#00f0ff" stroke-width="0.8" opacity="0.4"/>
+              <!-- Joystick visualization -->
+              <rect x="40" y="60" width="100" height="80" rx="8" fill="#08021a" stroke="#00f0ff" stroke-width="0.8" opacity="0.7"/>
+              <circle cx="90" cy="100" r="22" fill="#0d0330" stroke="#00f0ff" stroke-width="1"/>
+              <circle cx="95" cy="95" r="8" fill="#00f0ff" opacity="0.8"/>
+              <text x="55" y="155" font-family="Space Mono" font-size="7" fill="#5a5f7a">JOYSTICK TELEOP</text>
+              <!-- MAVSDK label -->
+              <rect x="340" y="60" width="120" height="80" rx="8" fill="#08021a" stroke="#bf5af2" stroke-width="0.8" opacity="0.7"/>
+              <text x="355" y="88" font-family="Space Mono" font-size="8" fill="#bf5af2">MAVSDK</text>
+              <text x="355" y="104" font-family="Space Mono" font-size="7" fill="#5a5f7a">Autonomous</text>
+              <text x="355" y="116" font-family="Space Mono" font-size="7" fill="#5a5f7a">Assistance</text>
+              <text x="355" y="128" font-family="Space Mono" font-size="7" fill="#32d74b">GEOFENCE ON</text>
+              <text x="50" y="30" font-family="Space Mono" font-size="8" fill="#32d74b">SafePilot — BEGINNER-SAFE DRONE CONTROLLER</text>
+              <text x="50" y="42" font-family="Space Mono" font-size="6" fill="#5a5f7a">ROS 2 · MAVSDK · MIT License</text>
+            </svg>
+            <span class="status-tag status-progress">In Progress</span>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-meta">
+              <div class="pcard-num">05 — ★ NEW</div>
+              <div class="pcard-stars">★ 1</div>
+            </div>
+            <h3>SafePilot — Beginner-Safe ROS2 Drone Controller</h3>
+            <div class="pcard-venue">Open Source · Sep 2026 – Present</div>
+            <p class="pcard-desc">Open-source ROS2 drone controller making piloting safe and accessible for
+              beginners — joystick teleoperation, geofencing, and autonomous assistance via MAVSDK.</p>
+            <ul class="pcard-bullets">
+              <li>Joystick teleoperation with software-enforced safety limits</li>
+              <li>Geofencing with automatic RTL on boundary breach</li>
+              <li>Autonomous assistance modes via MAVSDK integration</li>
+            </ul>
+            <div class="ptags"><span class="ptag">ROS2</span><span class="ptag">MAVSDK</span><span
+                class="ptag">MAVLink</span><span class="ptag">Python</span><span
+                class="ptag">Geofencing</span></div>
+            <div class="pcard-links">
+              <a href="https://github.com/Humobot1812/SafePilot" target="_blank" rel="noopener"
+                class="plink">GitHub ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Project 06 — Diff Drive ── -->
         <div class="pcard fade-up" data-cats="ros">
           <div class="pcard-img">
             <img src="assets/images/Differential_drive_bot.png" alt="Differential Drive Robot" />
             <span class="status-tag status-completed">Completed</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">03</div>
+            <div class="pcard-meta">
+              <div class="pcard-num">06</div>
+              <div class="pcard-stars">★ 7</div>
+            </div>
             <h3>Differential Drive Robot — ROS2</h3>
             <div class="pcard-venue">Jun – Jul 2025 · ★ 7 GitHub Stars</div>
-            <p class="pcard-desc">Full SLAM, localization, and autonomous nav pipeline. Includes a YouTube tutorial
-              series covering the complete build.</p>
+            <p class="pcard-desc">Full SLAM, localization, and autonomous nav pipeline. Includes a YouTube
+              tutorial series covering the complete build.</p>
             <ul class="pcard-bullets">
               <li>2D occupancy map generation with SLAM Toolbox in Gazebo maze</li>
               <li>AMCL localization + Nav2 path planning with obstacle avoidance</li>
-              <li>Tutorial series published: full pipeline from URDF to nav2</li>
+              <li>Tutorial series: full pipeline from URDF to nav2</li>
             </ul>
             <div class="ptags"><span class="ptag">ROS2 Humble</span><span class="ptag">SLAM Toolbox</span><span
                 class="ptag">Nav2</span><span class="ptag">Gazebo</span><span class="ptag">AMCL</span><span
@@ -261,41 +403,39 @@
               <a href="https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project" target="_blank"
                 rel="noopener" class="plink">GitHub ↗</a>
               <a href="https://youtube.com/playlist?list=PLQcgql__dXrdPEn6yGiKLtTjNABXvn0qj" target="_blank"
-                rel="noopener" class="plink">YouTube Demo ↗</a>
+                rel="noopener" class="plink">YouTube ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 3 — Disaster Drone -->
+        <!-- ── Project 07 — Disaster Drone ── -->
         <div class="pcard fade-up" data-cats="uav">
           <div class="pcard-img">
             <span class="status-tag status-completed">Completed</span>
-            <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <rect width="480" height="180" fill="#050118" />
-              <polygon points="80,50 380,50 380,140 80,140" fill="none" stroke="#00f0ff" stroke-width="1.2"
+            <svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="480" height="190" fill="#050118" />
+              <polygon points="80,50 380,50 380,150 80,150" fill="none" stroke="#00f0ff" stroke-width="1.2"
                 stroke-dasharray="6 3" opacity=".7" />
-              <g stroke="#00f0ff" stroke-width=".8" opacity=".45" fill="none">
-                <line x1="95" y1="65" x2="365" y2="65" />
-                <line x1="365" y1="65" x2="365" y2="82" />
-                <line x1="365" y1="82" x2="95" y2="82" />
-                <line x1="95" y1="82" x2="95" y2="99" />
-                <line x1="95" y1="99" x2="365" y2="99" />
-                <line x1="365" y1="99" x2="365" y2="116" />
-                <line x1="365" y1="116" x2="95" y2="116" />
-                <line x1="95" y1="116" x2="95" y2="130" />
-                <line x1="95" y1="130" x2="365" y2="130" />
+              <g stroke="#00f0ff" stroke-width=".8" opacity=".4" fill="none">
+                <line x1="95" y1="65" x2="365" y2="65" /><line x1="365" y1="65" x2="365" y2="85" />
+                <line x1="365" y1="85" x2="95" y2="85" /><line x1="95" y1="85" x2="95" y2="105" />
+                <line x1="95" y1="105" x2="365" y2="105" /><line x1="365" y1="105" x2="365" y2="125" />
+                <line x1="365" y1="125" x2="95" y2="125" />
               </g>
-              <g transform="translate(230,82)">
+              <g transform="translate(230,92)">
                 <circle r="14" fill="none" stroke="#00f0ff" stroke-width=".8" opacity=".35" />
                 <circle r="5" fill="#00f0ff" opacity=".9" />
               </g>
-              <rect x="8" y="8" width="120" height="20" rx="2" fill="#030014" opacity=".7" /><text x="14" y="20"
-                font-family="Space Mono" font-size="7" fill="#00f0ff">MISSION: ACTIVE</text><text x="390" y="175"
-                font-family="Space Mono" font-size="7" fill="#5a5f7a" text-anchor="end">GEOFENCE + RTL ENABLED</text>
+              <rect x="8" y="8" width="130" height="20" rx="2" fill="#030014" opacity=".7" />
+              <text x="14" y="20" font-family="Space Mono" font-size="7" fill="#00f0ff">MISSION: ACTIVE · ~75 ACRES</text>
+              <text x="390" y="182" font-family="Space Mono" font-size="7" fill="#5a5f7a"
+                text-anchor="end">GEOFENCE + RTL ENABLED</text>
             </svg>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">03</div>
+            <div class="pcard-meta">
+              <div class="pcard-num">07</div>
+            </div>
             <h3>Disaster Surveillance Drone</h3>
             <div class="pcard-venue">NIDAR Challenge · Jul 2025 – Jan 2026</div>
             <p class="pcard-desc">Autonomous UAV for area surveying and disaster response, covering ~75 acres with
@@ -303,7 +443,7 @@
             <ul class="pcard-bullets">
               <li>Polygon-based survey mission with ~75 acre coverage</li>
               <li>Geofence protection, auto RTL failsafe, human YOLO detection</li>
-              <li>Full mission lifecycle automation: takeoff → survey → RTL</li>
+              <li>Full mission lifecycle: takeoff → survey → RTL</li>
             </ul>
             <div class="ptags"><span class="ptag">ArduPilot</span><span class="ptag">DroneKit</span><span
                 class="ptag">YOLO</span><span class="ptag">MAVLink</span><span class="ptag">Python</span></div>
@@ -311,93 +451,119 @@
               <a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank" rel="noopener"
                 class="plink">GitHub ↗</a>
               <a href="https://youtube.com/playlist?list=PLQcgql__dXrco9mI7xbGSEP1FIZtFDI6o&si=xrpweUrkJfku5C6P"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
+                target="_blank" rel="noopener" class="plink">YouTube ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 4 — SAE Drone -->
+        <!-- ── Project 08 — SAE Drone ── -->
         <div class="pcard fade-up" data-cats="uav">
           <div class="pcard-img">
             <span class="status-tag status-completed">Completed</span>
-            <svg viewBox="0 0 480 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-              <rect width="480" height="180" fill="#050118" />
-              <rect x="30" y="20" width="200" height="145" fill="#0a0520" stroke="#00f0ff" stroke-width=".6"
-                opacity=".4" />
+            <svg viewBox="0 0 480 190" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+              <rect width="480" height="190" fill="#050118" />
+              <rect x="30" y="20" width="200" height="155" fill="#0a0520" stroke="#00f0ff" stroke-width=".6" opacity=".4" />
               <rect x="95" y="65" width="70" height="55" fill="none" stroke="#ff2d55" stroke-width="1.4" opacity=".9" />
               <text x="97" y="63" font-family="Space Mono" font-size="7" fill="#ff2d55">TARGET</text>
-              <circle cx="130" cy="80" r="8" fill="#00f0ff" opacity=".25" />
-              <line x1="130" y1="88" x2="130" y2="108" stroke="#00f0ff" stroke-width="2" opacity=".3" />
-              <rect x="250" y="20" width="200" height="145" fill="#060220" stroke="#00f0ff" stroke-width=".4"
-                opacity=".25" /><text x="258" y="38" font-family="Space Mono" font-size="7" fill="#00f0ff"
-                opacity=".5">GPS COORDINATE CONVERSION</text><text x="258" y="62" font-family="Space Mono" font-size="7"
-                fill="#5a5f7a">pixel_x: 234</text><text x="258" y="74" font-family="Space Mono" font-size="7"
-                fill="#5a5f7a">pixel_y: 102</text><text x="258" y="90" font-family="Space Mono" font-size="7"
-                fill="#00f0ff">→ lat: 23.1765</text><text x="258" y="102" font-family="Space Mono" font-size="7"
-                fill="#00f0ff">→ lon: 79.9534</text>
+              <circle cx="130" cy="92" r="8" fill="#00f0ff" opacity=".25" />
+              <rect x="250" y="20" width="200" height="155" fill="#060220" stroke="#00f0ff" stroke-width=".4" opacity=".25" />
+              <text x="258" y="40" font-family="Space Mono" font-size="7" fill="#00f0ff" opacity=".6">GPS COORD CONVERSION</text>
+              <text x="258" y="64" font-family="Space Mono" font-size="7" fill="#5a5f7a">pixel_x: 234</text>
+              <text x="258" y="76" font-family="Space Mono" font-size="7" fill="#5a5f7a">pixel_y: 102</text>
+              <text x="258" y="92" font-family="Space Mono" font-size="7" fill="#00f0ff">→ lat: 23.1765</text>
+              <text x="258" y="104" font-family="Space Mono" font-size="7" fill="#00f0ff">→ lon: 79.9534</text>
             </svg>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">04</div>
+            <div class="pcard-meta"><div class="pcard-num">08</div></div>
             <h3>Autonomous Survey &amp; Target Detection Drone</h3>
             <div class="pcard-venue">SAE Aerothon · Jan – Jun 2025</div>
-            <p class="pcard-desc">ROS2-based drone for area surveying and real-time target detection using pixel-to-GPS
-              coordinate conversion.</p>
+            <p class="pcard-desc">ROS2-based drone for area surveying and real-time target detection using
+              pixel-to-GPS coordinate conversion.</p>
             <ul class="pcard-bullets">
               <li>GPS coordinate conversion from camera pixel coordinates</li>
               <li>PID centering control loop for precision lock-on during flight</li>
-              <li>Complete ROS2 autonomous drone stack with ArduPilot integration</li>
+              <li>Complete ROS2 autonomous stack with ArduPilot integration</li>
             </ul>
             <div class="ptags"><span class="ptag">ROS2</span><span class="ptag">MAVLink</span><span
                 class="ptag">GPS</span><span class="ptag">PID</span><span class="ptag">OpenCV</span></div>
             <div class="pcard-links">
-              <a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank" rel="noopener"
+              <a href="https://github.com/Humobot1812/Aerothon-25" target="_blank" rel="noopener"
                 class="plink">GitHub ↗</a>
-              <a href="https://youtube.com/playlist?list=PLQcgql__dXrco9mI7xbGSEP1FIZtFDI6o&si=xrpweUrkJfku5C6P"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 5 — ESP32 Quadcopter -->
+        <!-- ── Project 09 — Smart ESP32 Transmitter (UPGRADED) ── -->
+        <div class="pcard fade-up" data-cats="hardware">
+          <div class="pcard-img">
+            <img src="assets/images/custom_transmitter_receiver.jpeg" alt="Smart ESP32 Transmitter" />
+            <span class="status-tag status-completed">Completed</span>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-meta">
+              <div class="pcard-num">09</div>
+              <div class="pcard-stars">★ 1</div>
+            </div>
+            <h3>Smart Multi-Protocol ESP32 Transmitter</h3>
+            <div class="pcard-venue">Personal Project · Apr – Jul 2026</div>
+            <p class="pcard-desc">Dual-ESP32 smart robotics transmitter with graphical LCD, multi-protocol
+              communication (NRF24L01, ESP-NOW, WiFi &amp; Bluetooth), and modular architecture.</p>
+            <ul class="pcard-bullets">
+              <li>Multi-protocol: NRF24L01, ESP-NOW, WiFi &amp; Bluetooth in one unit</li>
+              <li>Graphical ST7920 LCD with real-time RSSI and battery display</li>
+              <li>MPU6050 gyro for tilt-control input mode</li>
+            </ul>
+            <div class="ptags"><span class="ptag">ESP32</span><span class="ptag">NRF24L01</span><span
+                class="ptag">ESP-NOW</span><span class="ptag">ST7920 LCD</span><span
+                class="ptag">MPU6050</span><span class="ptag">C++</span></div>
+            <div class="pcard-links">
+              <a href="https://github.com/Humobot1812/Smart-Multi-Protocol-ESP32-Transmitter" target="_blank"
+                rel="noopener" class="plink">GitHub ↗</a>
+              <a href="https://youtube.com/playlist?list=PLQcgql__dXrcIQ--fLJ0yJLYn_Ju9vp3u&si=Dvn5uvtKMw8JZxeg"
+                target="_blank" rel="noopener" class="plink">YouTube ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Project 10 — ESP32 Quadcopter ── -->
         <div class="pcard fade-up" data-cats="hardware uav">
           <div class="pcard-img">
             <img src="assets/images/esp32_drone.jpeg" alt="ESP32 Quadcopter" />
-            <span class="status-tag status-progress">In progress</span>
+            <span class="status-tag status-progress">In Progress</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">05</div>
+            <div class="pcard-meta"><div class="pcard-num">10</div></div>
             <h3>ESP32-S3 Quadcopter Drone</h3>
             <div class="pcard-venue">Jan – Feb 2026</div>
-            <p class="pcard-desc">Custom quadcopter built from scratch with a MOSFET-based ESC design and manual flight
-              firmware on ESP32-S3.</p>
+            <p class="pcard-desc">Custom quadcopter built from scratch with a MOSFET-based ESC design and manual
+              flight firmware on ESP32-S3.</p>
             <ul class="pcard-bullets">
               <li>Custom MOSFET-based ESC design with optimized motor thrust</li>
               <li>Altitude sensing with barometric pressure sensor</li>
-              <li>Manual flight control firmware flashed on ESP32-S3</li>
+              <li>Manual flight control firmware on ESP32-S3</li>
             </ul>
             <div class="ptags"><span class="ptag">ESP32-S3</span><span class="ptag">Custom ESC</span><span
-                class="ptag">Firmware</span><span class="ptag">Barometer</span><span class="ptag">Motor Drivers</span>
-            </div>
+                class="ptag">Firmware</span><span class="ptag">Barometer</span></div>
             <div class="pcard-links">
               <a href="https://youtube.com/playlist?list=PLQcgql__dXrcVR0A4IEijRmWpTvdtAOpG&si=FmyR1rqhcqY7-uyH"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
+                target="_blank" rel="noopener" class="plink">YouTube ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 6 — Modular Robotic Arm -->
+        <!-- ── Project 11 — Modular Robotic Arm ── -->
         <div class="pcard fade-up" data-cats="hardware">
           <div class="pcard-img">
             <img src="assets/images/roobotic_arm.png" alt="Modular Robotic Arm" />
-            <span class="status-tag status-progress">In progress</span>
+            <span class="status-tag status-progress">In Progress</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">06</div>
+            <div class="pcard-meta"><div class="pcard-num">11</div></div>
             <h3>Modular Robotic Arm</h3>
             <div class="pcard-venue">Personal Project · Electronics &amp; Hardware</div>
-            <p class="pcard-desc">Custom modular robotic arm prototype for precision pick-and-place operations with
-              joint-level motion control.</p>
+            <p class="pcard-desc">Custom modular robotic arm prototype for precision pick-and-place operations
+              with joint-level motion control.</p>
             <ul class="pcard-bullets">
               <li>5-DOF modular arm with servo motor control</li>
               <li>Inverse kinematics and trajectory planning</li>
@@ -406,54 +572,26 @@
             <div class="ptags"><span class="ptag">Servo Motors</span><span class="ptag">Arduino</span><span
                 class="ptag">Kinematics</span><span class="ptag">3D Design</span></div>
             <div class="pcard-links">
-              <a href="https://github.com/Humobot1812/Robotic_arm" target="_blank" rel="noopener" class="plink">GitHub
-                ↗</a>
-              <a href="https://youtube.com/playlist?list=PLQcgql__dXrfH8nIemp8dex-iXVDAhFrE&si=xd14ZPkgHzhpryBj"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 7 — Wireless Transmitter/Receiver -->
-        <div class="pcard fade-up" data-cats="hardware">
-          <div class="pcard-img">
-            <img src="assets/images/custom_transmitter_receiver.jpeg" alt="Wireless Transmitter Receiver System" />
-            <span class="status-tag status-progress">In progress</span>
-          </div>
-          <div class="pcard-body">
-            <div class="pcard-num">07</div>
-            <h3>Wireless Transmitter-Receiver System</h3>
-            <div class="pcard-venue">Personal Project · RF &amp; Embedded Systems</div>
-            <p class="pcard-desc">Custom RF communication system with long-range wireless control for autonomous
-              robotics.</p>
-            <ul class="pcard-bullets">
-              <li>433MHz RF module integration and protocol design</li>
-              <li>Reliable packet transmission with error detection</li>
-              <li>Range testing and signal strength optimization</li>
-            </ul>
-            <div class="ptags"><span class="ptag">RF Modules</span><span class="ptag">Arduino</span><span
-                class="ptag">Protocol Design</span><span class="ptag">Embedded C</span></div>
-            <div class="pcard-links">
-              <a href="https://github.com/Humobot1812/Custom_Transmitter_Receiver_system" target="_blank" rel="noopener"
+              <a href="https://github.com/Humobot1812/Robotic_arm" target="_blank" rel="noopener"
                 class="plink">GitHub ↗</a>
-              <a href="https://youtube.com/playlist?list=PLQcgql__dXrcIQ--fLJ0yJLYn_Ju9vp3u&si=Dvn5uvtKMw8JZxeg"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
+              <a href="https://youtube.com/playlist?list=PLQcgql__dXrfH8nIemp8dex-iXVDAhFrE&si=xd14ZPkgHzhpryBj"
+                target="_blank" rel="noopener" class="plink">YouTube ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 8 — Snake Robot -->
-        <div class="pcard fade-up" data-cats="ros">
+        <!-- ── Project 12 — Snake Robot ── -->
+        <div class="pcard fade-up" data-cats="hardware ros">
           <div class="pcard-img">
             <img src="assets/images/snake_robot.png" alt="Snake Robot Prototype" />
             <span class="status-tag status-completed">Completed</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">08</div>
+            <div class="pcard-meta"><div class="pcard-num">12</div></div>
             <h3>Snake Robot Prototype</h3>
             <div class="pcard-venue">Personal Project · Biologically-Inspired Robotics</div>
-            <p class="pcard-desc">Modular snake-like robot inspired by biological serpent locomotion for traversing
-              confined spaces.</p>
+            <p class="pcard-desc">Modular snake-like robot inspired by biological serpent locomotion for
+              traversing confined spaces.</p>
             <ul class="pcard-bullets">
               <li>Modular segmented design with servo actuators</li>
               <li>Sinusoidal gait pattern generation for locomotion</li>
@@ -462,26 +600,26 @@
             <div class="ptags"><span class="ptag">Servo Motors</span><span class="ptag">Arduino</span><span
                 class="ptag">Biomimetics</span><span class="ptag">Locomotion</span></div>
             <div class="pcard-links">
-              <a href="https://github.com/Humobot1812/Snake_Robot" target="_blank" rel="noopener" class="plink">GitHub
-                ↗</a>
+              <a href="https://github.com/Humobot1812/Snake_Robot" target="_blank" rel="noopener"
+                class="plink">GitHub ↗</a>
               <a href="https://youtube.com/playlist?list=PLQcgql__dXrfZkettRaDpBSPST9bW0gwt&si=dhCV2RtG4I8fGrmc"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
+                target="_blank" rel="noopener" class="plink">YouTube ↗</a>
             </div>
           </div>
         </div>
 
-        <!-- Project 9 — Hostel Attendance -->
+        <!-- ── Project 13 — Hostel Attendance ── -->
         <div class="pcard fade-up" data-cats="hardware">
           <div class="pcard-img">
             <img src="assets/images/hostel_attendance_sysytem.jpeg" alt="Hostel Attendance System" />
             <span class="status-tag status-completed">Completed</span>
           </div>
           <div class="pcard-body">
-            <div class="pcard-num">09</div>
+            <div class="pcard-meta"><div class="pcard-num">13</div></div>
             <h3>Hostel Attendance System</h3>
             <div class="pcard-venue">Campus Project · IoT &amp; Automation</div>
-            <p class="pcard-desc">RFID-based automated hostel attendance and visitor tracking system with real-time
-              monitoring.</p>
+            <p class="pcard-desc">RFID-based automated hostel attendance and visitor tracking system with
+              real-time monitoring.</p>
             <ul class="pcard-bullets">
               <li>RFID card reader with student database integration</li>
               <li>Web dashboard for attendance reports and occupancy</li>
@@ -493,7 +631,7 @@
               <a href="https://github.com/Humobot1812/Hostel_Attendance_system" target="_blank" rel="noopener"
                 class="plink">GitHub ↗</a>
               <a href="https://youtube.com/playlist?list=PLQcgql__dXrdcgOFiZDvgCmWUzh8-lwnc&si=dHdzUSWQC3W3dL-Y"
-                target="_blank" rel="noopener" class="plink">YouTube Demo ↗</a>
+                target="_blank" rel="noopener" class="plink">YouTube ↗</a>
             </div>
           </div>
         </div>
@@ -510,7 +648,7 @@
       </div>
       <div class="exp-list">
         <div class="exp-item fade-up">
-          <div class="exp-date">Aug 2024<br>Present</div>
+          <div class="exp-date">March 2026<br>Present</div>
           <div>
             <div class="exp-role">Coordinator — Electronics &amp; Robotics Society</div>
             <div class="exp-org">PDPM IIITDM Jabalpur</div>
@@ -548,14 +686,15 @@
         <div class="ach-card fade-up">
           <span class="ach-icon">🏆</span>
           <h3>e-Yantra Robotics Competition</h3>
-          <p>Ranked Top 10 out of 400+ teams nationally in e-Yantra 2025–26 at IIT Bombay with KrishiCobot project.</p>
+          <p>Ranked Top 10 out of 400+ teams nationally in e-Yantra 2025–26 at IIT Bombay with KrishiCobot
+            project.</p>
           <span class="ach-badge">Top 10 / 400+ Teams</span>
         </div>
         <div class="ach-card fade-up">
           <span class="ach-icon">🚁</span>
           <h3>SAE Aerothon 2025</h3>
-          <p>Developed and presented an autonomous drone survey and target detection system. Earned Phase 2 Certificate.
-          </p>
+          <p>Developed and presented an autonomous drone survey and target detection system. Earned Phase 2
+            Certificate.</p>
           <span class="ach-badge">Phase 2 Certificate</span>
         </div>
         <div class="ach-card fade-up">
@@ -568,16 +707,15 @@
         <div class="ach-card fade-up">
           <span class="ach-icon">🤖</span>
           <h3>DD Robocon 2025 Stage-2 Qualification</h3>
-          <p>The Electronics and Robotics Society (ERS), IIITDM Jabalpur, successfully qualified Team Barbarick for
-            Stage 2 of DD Robocon 2024–25, achieving a score of 86/100.</p>
+          <p>The Electronics and Robotics Society (ERS), IIITDM Jabalpur, qualified Team Barbarick for Stage 2
+            of DD Robocon 2024–25, achieving a score of 86/100.</p>
           <img src="assets/images/Robocon.png" alt="DD Robocon Bot"
             style="width:100%;border-radius:8px;margin-top:1rem;" />
-          <span class="ach-badge">Qualified Team</span>
+          <span class="ach-badge">Qualified Team · 86/100</span>
         </div>
       </div>
-      <div
-        style="font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem;">
-        // Certifications</div>
+
+      <div class="certs-section-label">// Certifications</div>
       <div class="cert-list">
         <div class="cert-item">
           <div class="cert-dot"></div>
@@ -603,12 +741,12 @@
       <div class="cert-gallery">
         <a href="assets/Certificates/eyantra_certificate.pdf" target="_blank" rel="noopener"
           class="cert-link"><span>e-Yantra Certificate</span><strong>View PDF</strong></a>
-        <a href="assets/Certificates/Robocon_certificate.jpeg" target="_blank" rel="noopener" class="cert-link"><span>DD
-            Robocon Certificate</span><strong>View Image</strong></a>
+        <a href="assets/Certificates/Robocon_certificate.jpeg" target="_blank" rel="noopener"
+          class="cert-link"><span>DD Robocon Certificate</span><strong>View Image</strong></a>
         <a href="assets/Certificates/Nidar_certificate.jpeg" target="_blank" rel="noopener"
           class="cert-link"><span>NIDAR Certificate</span><strong>View Image</strong></a>
-        <a href="assets/Certificates/Aerothon_2025.png" target="_blank" rel="noopener" class="cert-link"><span>SAE
-            Aerothon Certificate</span><strong>View Image</strong></a>
+        <a href="assets/Certificates/Aerothon_2025.png" target="_blank" rel="noopener"
+          class="cert-link"><span>SAE Aerothon Certificate</span><strong>View Image</strong></a>
       </div>
     </div>
   </section>
@@ -622,22 +760,21 @@
             <div class="sec-line"></div>
           </div>
           <h2>Let's build<br>something real.</h2>
-          <p>Open to research collaborations, robotics internships, UAV projects, and interesting problems in autonomous
-            systems.</p>
-          <a href="mailto:abhinav.goel.robotics@gmail.com" class="btn-p">Send Email</a>
+          <p>Open to research collaborations, robotics internships, UAV projects, and interesting problems in
+            autonomous systems.</p>
+          <a href="mailto:abhinav.goel.robotics@gmail.com" class="btn-p">Send Email ✉</a>
         </div>
         <div>
           <div class="contact-links">
-            <a href="mailto:abhinav.goel.robotics@gmail.com" class="clink"><span
-                class="icon">✉</span>abhinav.goel.robotics@gmail.com</a>
-            <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5" target="_blank" rel="noopener" class="clink"><span
-                class="icon">in</span>linkedin.com/in/abhinav-g-1b878a2b5</a>
-            <a href="https://github.com/Humobot1812" target="_blank" rel="noopener" class="clink"><span
-                class="icon">⌥</span>github.com/Humobot1812</a>
-            <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener" class="clink"><span
-                class="icon">▶</span>youtube.com/@The_IIITians_World</a>
-            <a href="tel:+918384857368" class="clink"><span class="icon">#</span>+91 83848 57368</a>
-            <div class="clink" style="cursor:default;"><span class="icon">◎</span>Muzaffarnagar, Uttar Pradesh</div>
+            <a href="mailto:abhinav.goel.robotics@gmail.com" class="clink"><i class="icon">✉</i>abhinav.goel.robotics@gmail.com</a>
+            <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5" target="_blank" rel="noopener"
+              class="clink"><i class="icon">in</i>linkedin.com/in/abhinav-g-1b878a2b5</a>
+            <a href="https://github.com/Humobot1812" target="_blank" rel="noopener"
+              class="clink"><i class="icon">⌥</i>github.com/Humobot1812</a>
+            <a href="https://www.youtube.com/@The_IIITians_World" target="_blank" rel="noopener"
+              class="clink"><i class="icon">▶</i>youtube.com/@The_IIITians_World</a>
+            <a href="tel:+918384857368" class="clink"><i class="icon">#</i>+91 83848 57368</a>
+            <div class="clink" style="cursor:default;"><i class="icon">◎</i>Muzaffarnagar, Uttar Pradesh</div>
           </div>
         </div>
       </div>
@@ -649,7 +786,8 @@
     <p>Robotics Engineer · PDPM IIITDM Jabalpur · <span class="ft-acc">Muzaffarnagar, UP</span></p>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+    crossorigin="anonymous"></script>
   <script src="app.js"></script>
 </body>
 

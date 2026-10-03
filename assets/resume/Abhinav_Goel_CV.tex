@@ -1,0 +1,269 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[left=18mm,right=18mm,top=14mm,bottom=14mm]{geometry}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{tabularx}
+\usepackage{enumitem}
+
+\definecolor{cvblue}{RGB}{22,66,125}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=cvblue,
+    urlcolor=cvblue
+}
+
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+% Section styling matching Broteen Das's CV
+\newcommand{\cvsection}[1]{%
+  \vspace{7pt}%
+  {\color{cvblue}\itshape\large #1}\\[-4pt]%
+  {\color{cvblue}\rule{\textwidth}{0.75pt}}\vspace{3pt}%
+}
+
+% Item header macros
+\newcommand{\entryheader}[4]{%
+  \textbf{#1} \hfill \textit{#2}\\%
+  \textit{#3} \hfill \textit{#4}\\%
+}
+
+\begin{document}
+
+% ─────────────────────────────────────────────────────────
+% HEADER
+% ─────────────────────────────────────────────────────────
+\begin{center}
+  {\Huge\itshape\color{cvblue} Abhinav Goel}\\[4pt]
+  \textit{Residence/Domicile:} Muzaffarnagar, Uttar Pradesh, India - 251001\\
+  \textit{E-mail:} \href{mailto:abhinav.goel.robotics@gmail.com}{abhinav.goel.robotics@gmail.com} \ \textcolor{cvblue}{\ding{96}} \ \textit{Phone number:} +91-8384857368\\
+  \textit{Place of birth:} Muzaffarnagar, Uttar Pradesh, India \ \textcolor{cvblue}{\ding{96}} \ \textit{Date of birth:} 18-12-2004\\
+  \textit{LinkedIn:} \href{https://www.linkedin.com/in/abhinav-g-1b878a2b5}{Abhinav Goel} \ \textcolor{cvblue}{\ding{96}} \ \textit{GitHub:} \href{https://github.com/Humobot1812}{Humobot1812} \ \textcolor{cvblue}{\ding{96}} \ \textit{Portfolio:} \href{https://Humobot1812.github.io/Portfolio/}{Humobot1812.github.io/Portfolio}
+\end{center}
+
+% ─────────────────────────────────────────────────────────
+% EDUCATION
+% ─────────────────────────────────────────────────────────
+\cvsection{Education}
+
+\textbf{B. Tech. in Electronics and Communication Engineering} \hfill \textit{PDPM IIITDMJ}\\
+\textit{Bachelor's Degree Program} \hfill \textit{August 2024 - Present}\\
+\textit{Semester IV (CPI - 8.5)}\\[4pt]
+
+\textbf{Senior Secondary (Higher Secondary)} \hfill \textit{PR Public School, Muzaffarnagar}\\
+\textit{Central Board of Secondary Education (CBSE)} \hfill \textit{July 2022 - July 2024}\\
+\textit{Percentage: 93.6\%}\\[4pt]
+
+\textbf{Secondary (High School)} \hfill \textit{Shardein School, Muzaffarnagar}\\
+\textit{Central Board of Secondary Education (CBSE)} \hfill \textit{April 2020 - July 2022}\\
+\textit{Percentage: 98.4\%}
+
+% ─────────────────────────────────────────────────────────
+% AREAS OF INTEREST
+% ─────────────────────────────────────────────────────────
+\cvsection{Areas of interest}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Autonomous Mobile Robots (AMRs), SLAM and Navigation (ROS 2, Nav2)
+  \item Unmanned Aerial Vehicles (UAVs) \& Autonomous Aerial Flight Systems
+  \item Robotic Manipulation, Visual Servoing \& Kinematics
+  \item Computer Vision, Spatial Geolocation \& Multi-Spectral Perception
+  \item Tactical Ground Control Stations (GCS) \& Human-Machine Interfaces (Qt6 / C++)
+  \item Embedded Systems, Flight Controllers \& Discrete Power Electronics
+  \item Subterranean, Field Exploration \& Bio-Inspired Legged Robotics
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────
+% HONORS AND KEY ACHIEVEMENTS
+% ─────────────────────────────────────────────────────────
+\cvsection{Honors and key achievements}
+\begin{itemize}[leftmargin=1.2rem,itemsep=2.5pt,topsep=2pt,parsep=0pt]
+  \item \textbf{e-Yantra Robotics Competition (e-YRC 2025–26), IIT Bombay:} Top 10 National Finalist among 400+ participating teams across India in the \textit{KrishiCobot} theme, designing an autonomous agricultural harvesting mobile manipulator with ROS 2, UR5 visual servoing, and precision vision pipelines. [\href{https://Humobot1812.github.io/Portfolio/assets/Certificates/eyantra_certificate.pdf}{Certificate}]
+  \item \textbf{DD Robocon 2025 (Doordarshan \& IIT Delhi):} Achieved Stage-2 National Qualification representing Team Barbarick with an evaluation score of 86/100, designing competition-grade holonomic robot chassis and actuation mechanisms. [\href{https://Humobot1812.github.io/Portfolio/assets/Certificates/Robocon_certificate.jpeg}{Certificate}]
+  \item \textbf{SAE Aerothon 2025 (SAE India):} Phase 2 National Qualification in the premier aerial robotics challenge, demonstrating an autonomous fixed-altitude surveillance quadcopter with ground target pixel-to-GPS conversion. [\href{https://Humobot1812.github.io/Portfolio/assets/Certificates/Aerothon_2025.png}{Certificate}]
+  \item \textbf{NIDAR 2026 (National Innovation Challenge for Drone Application and Research):} National Finalist, Aero Fabrication Club, developing an autonomous disaster surveillance UAV with 75+ acre automated polygon coverage and real-time survivor detection. [\href{https://Humobot1812.github.io/Portfolio/assets/Certificates/Nidar_certificate.jpeg}{Certificate}]
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────
+% RESEARCH AND DEVELOPMENT EXPERIENCE
+% ─────────────────────────────────────────────────────────
+\cvsection{Research and development experience}
+
+\textbf{Autonomous Agricultural Harvesting Robot (KrishiCobot)} \hfill \textit{August 2025 - May 2026}\\
+\textit{e-Yantra Robotics Competition 2025–26, IIT Bombay} \hfill \textit{\href{https://github.com/Humobot1812/Krishi_Cobot}{github.com/Humobot1812/Krishi\_Cobot}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Architected and developed a full-stack autonomous harvesting robot integrating an AMR mobile base with a 6-DOF UR5 robotic arm, operating autonomously in complex orchard rows within Gazebo Ignition.
+  \item Constructed a multi-sensor navigation pipeline fusing 2D planar LiDAR, ultrasonic range arrays, IMU, and wheel odometry inside ROS 2 Nav2, utilizing AMCL localization to achieve repeatable navigation in narrow crop corridors.
+  \item Developed a two-tier perception pipeline integrating YOLOv8 for fruit classification and ArUco markers for 6-DOF pose estimation, projecting camera coordinates to 3D robot base frame with millimeter precision.
+  \item Engineered Cartesian trajectory generation via MoveIt 2 alongside Image-Based Visual Servoing (IBVS) to continuously update end-effector paths in real time based on active camera tracking.
+  \item Coordinated subsystems through a ROS 2 action server and behavior tree framework; achieved a Top 10 national rank out of 400+ teams across India.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Autonomous Warehouse Stock Auditing AMR \& Active Vision System (WareOps)} \hfill \textit{December 2025 - August 2026}\\
+\textit{Robotics \& Autonomous Systems Lab, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/WareOps}{github.com/WareOps}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Engineered an autonomous mobile robot for automated warehouse stock auditing, featuring autonomous aisle navigation, active mast scanning, and automated digital ledger reporting.
+  \item Configured the ROS 2 Nav2 stack with SLAM Toolbox for initial mapping and AMCL for runtime localization, tuning DWB local planner costmap critics for smooth traversal of narrow rack aisles.
+  \item Designed and fabricated a 2-DOF pan-tilt motorized vision mast controlled by ROS 2 action servers to sweep multiple storage rack tiers during audit waypoints.
+  \item Implemented a dual-engine QR reading pipeline executing OpenCV WeChat QR detector in parallel with PyZbar for high-accuracy barcode and QR decoding on damaged labels, logging results into an SQLite database.
+  \item Maintained 1:1 hardware-simulation parity between Gazebo Ignition and physical hardware comprising Raspberry Pi 4, RPLidar A1M8, Arduino Nano via ros2\_control, and ESP32-CAM Wi-Fi video streaming.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Autonomous 6-Wheeled Subterranean Exploration Rover (CAVE\_DIVER)} \hfill \textit{September 2026 - Present}\\
+\textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/CAVE_DIVER_6_Wheeled_Rover}{github.com/Humobot1812/CAVE\_DIVER\_6\_Wheeled\_Rover}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Engineered an autonomous 6-wheeled robotic rover for exploration, 3D structural mapping, and environmental hazard assessment in GPS-denied cave and subterranean environments.
+  \item Designed a rocker-bogie passive suspension mechanism modeled in Autodesk Fusion 360 and 3D-printed in PETG, enabling all 6 driven wheels to maintain continuous terrain contact across obstacles up to 1.5× wheel diameter.
+  \item Developed a multi-spectral perception system featuring a 2-DOF gimbal carrying a low-light Raspberry Pi Camera v3 NoIR alongside a FLIR-compatible thermal sensor for human heat signature and hazard detection.
+  \item Integrated an onboard 6-channel hazardous gas telemetry suite monitoring CO, H\textsubscript{2}S, CH\textsubscript{4}, LPG, and smoke concentrations at 1 Hz with automated threshold alarming and safety interlocks.
+  \item Deployed SLAM Toolbox in lifelong mapping mode for 2D LiDAR-based mapping and pose estimation in GPS-denied subterranean tunnels, paired with a custom web-based Flask Ground Control Station.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Tactical Multi-UAV Ground Control Station (DroneGCS)} \hfill \textit{September 2026 - Present}\\
+\textit{Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/DroneGCS}{github.com/Humobot1812/DroneGCS}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Developed an open-source tactical Ground Control Station in C++17 and Qt 6 / QML for simultaneous command, control, and telemetry tracking of multiple UAVs operating ArduPilot and PX4 autopilots.
+  \item Engineered a real-time Heads-Up Display (HUD) parsing MAVLink v2 telemetry packets (HEARTBEAT, ATTITUDE, GPS\_RAW\_INT, SYS\_STATUS, VFR\_HUD) at 10 Hz, rendering pitch/roll artificial horizon, airspeed, altitude, and heading compass.
+  \item Integrated a dynamic OpenStreetMap interactive tactical map via QtLocation plugin, supporting real-time multi-UAV GPS position tracking, multi-waypoint mission editing, and polygon geofence deployment.
+  \item Implemented asynchronous C++ network backends for MAVLink over UDP/TCP and serial connections, handling automated parameter management and command protocols.
+  \item Integrated GStreamer-accelerated H.264 video pipelines for ultra-low latency live onboard camera streaming with multi-drone telemetry overlay.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Beginner-Safe ROS 2 Drone Controller Stack (SafePilot)} \hfill \textit{September 2026 - Present}\\
+\textit{Open-Source UAV Development} \hfill \textit{\href{https://github.com/Humobot1812/SafePilot}{github.com/Humobot1812/SafePilot}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Created an open-source ROS 2 package wrapping MAVSDK to implement software-enforced flight safety envelopes and autonomous flight assistance for research and beginner UAV pilots.
+  \item Developed a joystick teleoperation node with dynamic velocity and attitude clamps that restrict maximum bank angles, descent rates, and horizontal accelerations to prevent vehicle loss-of-control.
+  \item Implemented a 10 Hz 3D cylindrical geofencing monitor that applies progressive resistive velocity damping as the vehicle nears boundary walls and triggers autonomous Return-to-Launch (RTL) upon perimeter breach.
+  \item Integrated autonomous assistance flight modes including altitude-hold with planar joystick nudging and automated landing sequences with precision descent profiling.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Autonomous Disaster Surveillance UAV \& Victim Detection} \hfill \textit{June 2025 - January 2026}\\
+\textit{NIDAR 2026 National UAV Challenge, Aero Fabrication Club} \hfill \textit{\href{https://github.com/Humobot1812/Autonomous_drone}{github.com/Humobot1812/Autonomous\_drone}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Developed an autonomous aerial surveillance system for large-area disaster relief and victim localization, capable of autonomously covering 75+ acres within 20 minutes at 25 m altitude.
+  \item Built a computational geometry pipeline using Shapely and KML boundary parsing to generate optimized boustrophedon (zigzag) survey flight paths with parameterized lane overlap.
+  \item Deployed a fine-tuned YOLOv8 human detection model on the companion computer processing downward camera feeds at 15 FPS, triggering autonomous loiter and target-centering routines upon detection.
+  \item Automated the complete mission lifecycle through MAVSDK Python, handling automated pre-arm checks, guided takeoff, survey path traversal, interrupt-driven victim loiter, geofence compliance, and failsafe RTL.
+  \item Conducted extensive Software-In-The-Loop (SITL) validation in ArduPilot SITL with simulated visual streams prior to field trials.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Autonomous Aerial Survey \& Ground Target Geolocation Drone} \hfill \textit{January 2025 - June 2025}\\
+\textit{SAE Aerothon 2025, Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Aerothon-25}{github.com/Humobot1812/Aerothon-25}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Engineered an autonomous UAV platform selected for national-level presentation at SAE Aerothon 2025, integrating a Pixhawk flight controller, Raspberry Pi companion computer, and ArduPilot autopilot.
+  \item Derived and implemented a pinhole camera projection algorithm converting 2D pixel coordinates of detected targets into georeferenced latitude/longitude coordinates accurate to within $\pm$3 m from 30 m flight altitude.
+  \item Trained and deployed YOLOv4-Tiny on the companion computer for real-time target panel classification and bounding-box estimation at 12 FPS.
+  \item Developed a visual PID control loop computing lateral and longitudinal velocity commands to center detected targets beneath the vehicle during loiter maneuvers.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Differential Drive Mobile Robot — ROS 2 Navigation \& SLAM} \hfill \textit{June 2025 - July 2025}\\
+\textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project}{Differential-Drive-ROS2}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Modeled and simulated a 4-wheeled differential-drive autonomous robot from scratch using URDF/Xacro, integrating collision models, wheel inertia matrices, LiDAR, and IMU sensor plugins in Gazebo.
+  \item Configured SLAM Toolbox in asynchronous mode to generate 2D occupancy grid maps in simulation mazes, tuning scan-matching thresholds for sharp wall boundaries and minimal odometry drift.
+  \item Implemented AMCL particle filtering for real-time localization on saved maps, tuning covariance parameters for rapid recovery during kidnapping and slippage conditions.
+  \item Configured Nav2 with NavFn global planner and DWB local planner, optimizing obstacle avoidance critics for smooth trajectory generation through narrow doorway clearances.
+  \item Integrated robot\_localization Extended Kalman Filter (EKF) fusing wheel odometry and IMU data to ensure drift-free state estimation; authored a 12-part public tutorial series earning 7 GitHub stars.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Smart Multi-Protocol ESP32 Robotics Transmitter \& Receiver System} \hfill \textit{April 2026 - July 2026}\\
+\textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Smart-Multi-Protocol-ESP32-Transmitter}{Smart-ESP32-Transmitter}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Designed and built a modular dual-ESP32 smart remote control transmitter supporting four switchable wireless protocols: NRF24L01+ (2.4 GHz low latency), ESP-NOW (peer-to-peer 250 m), Wi-Fi UDP, and Bluetooth Classic.
+  \item Developed firmware utilizing the U8g2 graphics library on a 128×64 ST7920 graphical LCD, rendering real-time RSSI signal strength, battery levels, channel bar graphs, and an interactive menu.
+  \item Incorporated an MPU6050 6-axis IMU enabling tilt-based gesture control, mapping physical transmitter pitch and roll directly into motor velocity and steering commands.
+  \item Built a companion modular receiver unit outputting multichannel servo PWM and serial telemetry back to the handheld unit.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Custom ESP32-S3 Quadcopter Drone with Discrete MOSFET ESCs} \hfill \textit{January 2026 - February 2026}\\
+\textit{Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://www.youtube.com/@The_IIITians_World}{The\_IIITians\_World}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Designed and assembled custom 3-phase Electronic Speed Controllers (ESCs) using discrete N-channel MOSFETs and gate drivers, eliminating commercial off-the-shelf ESCs.
+  \item Implemented 6-step trapezoidal commutation firmware on an ESP32-S3 microcontroller, achieving smooth BLDC motor speed control with configurable acceleration ramps.
+  \item Programmed a 500 Hz flight control PID loop reading angular rates and accelerations from an MPU6050 sensor to stabilize roll, pitch, and yaw axes in real time.
+  \item Integrated a BMP280 barometric pressure sensor with accelerometer Z-axis data through a complementary filter for reliable relative altitude estimation and hover stabilization.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Modular 5-DOF Robotic Arm with Geometric Inverse Kinematics} \hfill \textit{January 2025 - March 2025}\\
+\textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Robotic_arm}{github.com/Humobot1812/Robotic\_arm}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Designed and 3D-printed a 5-DOF articulated serial robotic arm utilizing high-torque MG996R and DS3225 metal-gear servo actuators.
+  \item Established Denavit-Hartenberg (DH) kinematic frames and derived closed-form geometric inverse kinematics equations for real-time Cartesian point-to-point positioning on an Arduino microcontroller.
+  \item Implemented cubic polynomial trajectory interpolation to ensure smooth acceleration and deceleration profiles, eliminating mechanical vibrations during rapid motion.
+  \item Designed a compliant parallel-jaw gripper capable of securely grasping objects up to 60 mm in diameter.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Serpentine Snake Robot Prototype with Sinusoidal Locomotion Gaits} \hfill \textit{October 2024 - December 2024}\\
+\textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Snake_Robot}{github.com/Humobot1812/Snake\_Robot}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Designed and constructed an 8-segment bio-inspired snake robot using modular 3D-printed body links interconnected with high-torque servo joints.
+  \item Implemented Hirose serpenoid curve mathematical equations for gait generation, generating traveling sinusoidal waves with controllable amplitude, frequency, and phase offset.
+  \item Evaluated multiple locomotion modes including lateral undulation for planar movement, sidewinding for loose terrain, and concertina locomotion for crawling through confined PVC pipes.
+\end{itemize}
+
+\vspace{3pt}
+\textbf{Hostel Attendance \& Access Control Automation System} \hfill \textit{August 2024 - November 2024}\\
+\textit{Campus Automation Project, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Hostel_Attendance_system}{Hostel\_Attendance\_system}}
+\begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
+  \item Engineered an automated student check-in/check-out system deployed in the institute hostel, utilizing MFRC522 RFID reader hardware interfaced with ESP8266 Wi-Fi microcontrollers.
+  \item Developed a Python Flask REST backend backed by SQLite to record real-time gate entry and exit events with cryptographic timestamp verification.
+  \item Built a responsive administrative dashboard providing hostel authorities with real-time student presence counts, entry violation alerts, and downloadable attendance reports.
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────
+% CERTIFICATIONS
+% ─────────────────────────────────────────────────────────
+\cvsection{Certifications}
+\begin{itemize}[leftmargin=1.2rem,itemsep=2pt,topsep=2pt,parsep=0pt]
+  \item \textbf{e-Yantra Robotics Competition (e-YRC 2025–26) Finalist:} Awarded by IIT Bombay for securing Top 10 nationally among 400+ collegiate teams in the autonomous KrishiCobot agricultural robotics theme (August 2025 – May 2026).
+  \item \textbf{DD Robocon 2025 Stage-2 Certificate:} Awarded by Doordarshan \& IIT Delhi for qualifying Stage 2 with Team Barbarick, scoring 86/100 in technical design and mechanism evaluations (2025).
+  \item \textbf{SAE Aerothon 2025 National Aerial Robotics Certificate:} Awarded by SAE India for qualifying Phase 2 in the national autonomous UAV surveillance challenge (June 2025).
+  \item \textbf{NIDAR 2026 National UAV Challenge:} Certified participant in National Innovation Challenge for Drone Application and Research (January 2026).
+  \item \textbf{Hands-on Introduction to Autonomous Systems with ROS 2 \& Embedded Hardware:} PDPM IIITDMJ Student Technical Workshop (2024).
+\end{itemize}
+
+% ─────────────────────────────────────────────────────────
+% TECHNICAL SKILLS
+% ─────────────────────────────────────────────────────────
+\cvsection{Technical skills}
+\begin{tabularx}{\textwidth}{@{}p{4.2cm}X@{}}
+  \textbf{Programming Languages} & Python, C++, C, JavaScript, Bash\\[2pt]
+  \textbf{Tools and Frameworks} & ROS2 Humble, Nav2, ros2\_control, SLAM Toolbox, AMCL, Gazebo Ignition/Classic, RViz2, MoveIt 2, ArduPilot SITL, MAVSDK, DroneKit, Qt 6, QML, Flask, OpenCV, PlatformIO\\[2pt]
+  \textbf{Hardware and Systems} & Raspberry Pi 4/5, NVIDIA Jetson Nano, Pixhawk (2.4.8, 6C), Arduino (Uno, Nano, Mega), ESP32, ESP32-S3, ESP32-CAM, STM32, RPLidar A1M8, Discrete MOSFET ESCs, MPU6050/9250 IMU, BMP280\\[2pt]
+  \textbf{Technologies} & Autonomous Mobile Robots, Simultaneous Localization and Mapping (SLAM), Robot Operating System (ROS 2), Unmanned Aerial Vehicles (UAVs), Ground Control Stations (GCS), Computer Vision, Visual Servoing, Object Detection (YOLOv8), MAVLink Protocol, Embedded Systems, IoT, Cyber Physical Systems\\
+\end{tabularx}
+
+% ─────────────────────────────────────────────────────────
+% LANGUAGE PROFICIENCY
+% ─────────────────────────────────────────────────────────
+\cvsection{Language proficiency}
+\begin{tabularx}{\textwidth}{@{}p{4.2cm}X@{}}
+  \textbf{English, Hindi} & Full Professional Proficiency\\
+\end{tabularx}
+
+% ─────────────────────────────────────────────────────────
+% MEMBERSHIPS
+% ─────────────────────────────────────────────────────────
+\cvsection{Memberships}
+\begin{itemize}[leftmargin=1.2rem,itemsep=2pt,topsep=2pt,parsep=0pt]
+  \item \textbf{Electronics and Robotics Society of PDPM IIITDMJ} (Coordinator, August 2024 – March 2026)
+  \item \textbf{Aero Fabrication Club of PDPM IIITDMJ} (Core Committee Member, August 2024 – Present)
+\end{itemize}
+
+\end{document}

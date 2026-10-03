@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abhinav Goel — Curriculum Vitae</title>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font@master/fonts.css">
+  <style>
+    :root {
+      --cv-blue: #16427d;
+      --text-main: #111111;
+      --text-muted: #2b2b2b;
+      --rule-color: #16427d;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Computer Modern Serif', 'Latin Modern Roman', 'STIX Two Text', 'Times New Roman', Times, serif;
+      color: var(--text-main);
+      background: #eef1f6;
+      font-size: 10.2pt;
+      line-height: 1.38;
+      padding: 30px 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Print action bar */
+    .action-bar {
+      max-width: 820px;
+      margin: 0 auto 16px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 18px;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 13px;
+    }
+
+    .action-bar-left {
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .action-bar-left strong {
+      color: #0f172a;
+    }
+
+    .btn-print {
+      background: #16427d;
+      color: #ffffff;
+      border: none;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s ease;
+    }
+
+    .btn-print:hover {
+      background: #0f2e59;
+    }
+
+    /* Paper Page Simulation */
+    .page-sheet {
+      max-width: 820px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 48px 56px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+      min-height: 1100px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      margin-bottom: 14pt;
+    }
+
+    h1.applicant-name {
+      font-size: 24pt;
+      font-style: italic;
+      font-weight: normal;
+      color: var(--cv-blue);
+      margin-bottom: 7pt;
+      letter-spacing: 0.01em;
+    }
+
+    .contact-line {
+      font-size: 9.8pt;
+      line-height: 1.48;
+      color: var(--text-main);
+    }
+
+    .field-label {
+      font-style: italic;
+    }
+
+    .sep-star {
+      color: var(--cv-blue);
+      margin: 0 5pt;
+      font-size: 9pt;
+      vertical-align: 0.5px;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    a.link-web {
+      color: #11386d;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    a.link-web:hover {
+      color: #000;
+    }
+
+    /* ── SECTION TITLES ── */
+    .section {
+      margin-bottom: 10pt;
+    }
+
+    .section-title {
+      font-size: 12.6pt;
+      font-style: italic;
+      font-weight: normal;
+      color: var(--cv-blue);
+      border-bottom: 0.75pt solid var(--rule-color);
+      padding-bottom: 1.5pt;
+      margin-top: 10pt;
+      margin-bottom: 5.5pt;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── ENTRIES / ITEMS ── */
+    .entry {
+      margin-bottom: 6pt;
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-row1 {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .entry-title {
+      font-weight: bold;
+      font-size: 10.2pt;
+      color: #000000;
+    }
+
+    .entry-right {
+      font-style: italic;
+      font-size: 10pt;
+      text-align: right;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .entry-row2 {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-top: 0.5pt;
+    }
+
+    .entry-sub {
+      font-style: italic;
+      font-size: 9.8pt;
+      color: var(--text-muted);
+    }
+
+    .entry-sub-right {
+      font-style: italic;
+      font-size: 9.6pt;
+      text-align: right;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .entry-row3 {
+      font-style: italic;
+      font-size: 9.6pt;
+      color: var(--text-muted);
+      margin-top: 0.5pt;
+    }
+
+    /* ── BULLETS ── */
+    ul.cv-bullets {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 2pt;
+      margin-bottom: 2pt;
+    }
+
+    ul.cv-bullets>li {
+      position: relative;
+      padding-left: 14pt;
+      margin-bottom: 1.6pt;
+      text-align: justify;
+      font-size: 9.8pt;
+      line-height: 1.32;
+    }
+
+    ul.cv-bullets>li::before {
+      content: "•";
+      position: absolute;
+      left: 3pt;
+      top: 0;
+      font-size: 9pt;
+      color: #000000;
+    }
+
+    /* Simple interest bullets */
+    ul.interest-list {
+      list-style-type: none;
+      padding-left: 0;
+      margin-top: 2pt;
+    }
+
+    ul.interest-list>li {
+      position: relative;
+      padding-left: 14pt;
+      margin-bottom: 1.8pt;
+      font-size: 9.8pt;
+    }
+
+    ul.interest-list>li::before {
+      content: "•";
+      position: absolute;
+      left: 3pt;
+      top: 0;
+      font-size: 9pt;
+      color: #000000;
+    }
+
+    /* ── TABLES / KEY-VALUE (Skills & Languages) ── */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2pt;
+    }
+
+    .skills-table td {
+      vertical-align: top;
+      padding: 1.6pt 0;
+      font-size: 9.8pt;
+      line-height: 1.32;
+    }
+
+    .skills-table td.skill-label {
+      width: 185px;
+      font-weight: bold;
+      color: #000000;
+      padding-right: 14px;
+    }
+
+    .skills-table td.skill-val {
+      color: var(--text-main);
+    }
+
+    .lang-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2pt;
+    }
+
+    .lang-table td {
+      vertical-align: top;
+      padding: 1.2pt 0;
+      font-size: 9.8pt;
+    }
+
+    .lang-table td.lang-name {
+      width: 185px;
+      font-weight: bold;
+      color: #000000;
+      padding-right: 14px;
+    }
+
+    /* ── PRINT MEDIA QUERY ── */
+    @page {
+      size: A4 portrait;
+      margin: 14mm 18mm 14mm 18mm;
+    }
+
+    @media print {
+      body {
+        background: transparent;
+        padding: 0;
+        margin: 0;
+        font-size: 9.8pt;
+      }
+
+      .action-bar {
+        display: none !important;
+      }
+
+      .page-sheet {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        min-height: auto;
+      }
+
+      .entry {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      .section-title {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+
+      a.link-web {
+        text-decoration: underline !important;
+        color: inherit !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Screen Top Bar with Print/Save action -->
+  <div class="action-bar">
+    <div class="action-bar-left">
+      <span>📄</span>
+      <span><strong>Abhinav Goel — Curriculum Vitae</strong> &nbsp;|&nbsp; Academic &amp; Research Format</span>
+    </div>
+    <button class="btn-print" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+        <path d="M6 14h12v8H6z" />
+      </svg>
+      Print / Save as PDF
+    </button>
+  </div>
+
+  <div class="page-sheet">
+
+    <!-- ══════════════════════════════════════════════════════════
+         HEADER
+    ══════════════════════════════════════════════════════════ -->
+    <header>
+      <h1 class="applicant-name">Abhinav Goel</h1>
+      <div class="contact-line">
+        <span class="field-label">Residence/Domicile:</span> Muzaffarnagar, Uttar Pradesh, India - 251001
+      </div>
+      <div class="contact-line">
+        <span class="field-label">E-mail:</span> <a
+          href="mailto:abhinav.goel.robotics@gmail.com">abhinav.goel.robotics@gmail.com</a>
+        <span class="sep-star">✼</span>
+        <span class="field-label">Phone number:</span> <a href="tel:+918384857368">+91-8384857368</a>
+      </div>
+      <div class="contact-line">
+        <span class="field-label">Place of birth:</span> Muzaffarnagar, Uttar Pradesh, India
+        <span class="sep-star">✼</span>
+        <span class="field-label">Date of birth:</span> 18-12-2004
+      </div>
+      <div class="contact-line">
+        <span class="field-label">LinkedIn:</span> <a href="https://www.linkedin.com/in/abhinav-g-1b878a2b5"
+          target="_blank" class="link-web">Abhinav Goel</a>
+        <span class="sep-star">✼</span>
+        <span class="field-label">GitHub:</span> <a href="https://github.com/Humobot1812" target="_blank"
+          class="link-web">Humobot1812</a>
+        <span class="sep-star">✼</span>
+        <span class="field-label">Portfolio:</span> <a href="https://Humobot1812.github.io/Portfolio/" target="_blank"
+          class="link-web">Humobot1812.github.io/Portfolio</a>
+      </div>
+    </header>
+
+    <!-- ══════════════════════════════════════════════════════════
+         EDUCATION
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Education</div>
+
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">B. Tech. in Electronics and Communication Engineering</span>
+          <span class="entry-right">PDPM IIITDMJ</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Bachelor’s Degree Program</span>
+          <span class="entry-sub-right">August 2024 - Present</span>
+        </div>
+        <div class="entry-row3">
+          Semester IV (CPI - 8.5)
+        </div>
+      </div>
+
+      <div class="entry" style="margin-top: 6pt;">
+        <div class="entry-row1">
+          <span class="entry-title">Senior Secondary (Higher Secondary)</span>
+          <span class="entry-right">PR Public School, Muzaffarnagar</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Central Board of Secondary Education (CBSE)</span>
+          <span class="entry-sub-right">July 2022 - July 2024</span>
+        </div>
+        <div class="entry-row3">
+          Percentage: 93.6%
+        </div>
+      </div>
+
+      <div class="entry" style="margin-top: 6pt;">
+        <div class="entry-row1">
+          <span class="entry-title">Secondary (High School)</span>
+          <span class="entry-right">Shardein School, Muzaffarnagar</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Central Board of Secondary Education (CBSE)</span>
+          <span class="entry-sub-right">April 2020 - July 2022</span>
+        </div>
+        <div class="entry-row3">
+          Percentage: 98.4%
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         AREAS OF INTEREST
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Areas of interest</div>
+      <ul class="interest-list">
+        <li>Autonomous Mobile Robots (AMRs), SLAM and Navigation (ROS 2, Nav2)</li>
+        <li>Unmanned Aerial Vehicles (UAVs) &amp; Autonomous Aerial Flight Systems</li>
+        <li>Robotic Manipulation, Visual Servoing &amp; Kinematics</li>
+        <li>Computer Vision, Spatial Geolocation &amp; Multi-Spectral Perception</li>
+        <li>Tactical Ground Control Stations (GCS) &amp; Human-Machine Interfaces (Qt6 / C++)</li>
+        <li>Embedded Systems, Flight Controllers &amp; Discrete Power Electronics</li>
+        <li>Subterranean, Field Exploration &amp; Bio-Inspired Legged Robotics</li>
+      </ul>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         PUBLICATIONS & HONORS
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Honors and key achievements</div>
+      <ul class="cv-bullets">
+        <li><strong>e-Yantra Robotics Competition (e-YRC 2025–26), IIT Bombay:</strong> Top 10 National Finalist among
+          400+ participating teams across India in the <em>KrishiCobot</em> theme, designing an autonomous agricultural
+          harvesting mobile manipulator with ROS 2, UR5 visual servoing, and precision vision pipelines. [<a
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/eyantra_certificate.pdf" target="_blank"
+            class="link-web">Certificate</a>]</li>
+        <li><strong>DD Robocon 2025 (Doordarshan &amp; IIT Delhi):</strong> Achieved Stage-2 National Qualification
+          representing Team Barbarick with an evaluation score of 86/100, designing competition-grade holonomic robot
+          chassis and actuation mechanisms. [<a
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Robocon_certificate.jpeg" target="_blank"
+            class="link-web">Certificate</a>]</li>
+        <li><strong>SAE Aerothon 2025 (SAE India):</strong> Phase 2 National Qualification in the premier aerial
+          robotics challenge, demonstrating an autonomous fixed-altitude surveillance quadcopter with ground target
+          pixel-to-GPS conversion. [<a
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Aerothon_2025.png" target="_blank"
+            class="link-web">Certificate</a>]</li>
+        <li><strong>NIDAR 2026 (National Innovation Challenge for Drone Application and Research):</strong> National
+          Finalist, Aero Fabrication Club, developing an autonomous disaster surveillance UAV with 75+ acre automated
+          polygon coverage and real-time survivor detection. [<a
+            href="https://Humobot1812.github.io/Portfolio/assets/Certificates/Nidar_certificate.jpeg" target="_blank"
+            class="link-web">Certificate</a>]</li>
+      </ul>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         RESEARCH AND DEVELOPMENT EXPERIENCE (PROJECTS)
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Research and development experience</div>
+
+      <!-- 01: KrishiCobot -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Autonomous Agricultural Harvesting Robot (KrishiCobot)</span>
+          <span class="entry-right">August 2025 - May 2026</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">e-Yantra Robotics Competition 2025–26, IIT Bombay</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Krishi_Cobot" target="_blank"
+              class="link-web">github.com/Humobot1812/Krishi_Cobot</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Architected and developed a full-stack autonomous harvesting robot integrating an AMR mobile base with a
+            6-DOF UR5 robotic arm, operating autonomously in complex orchard rows within Gazebo Ignition.</li>
+          <li>Constructed a multi-sensor navigation pipeline fusing 2D planar LiDAR, ultrasonic range arrays, IMU, and
+            wheel odometry inside ROS 2 Nav2, utilizing AMCL localization to achieve repeatable navigation in narrow
+            crop corridors.</li>
+          <li>Developed a two-tier perception pipeline integrating YOLOv8 for fruit classification and ArUco markers for
+            6-DOF pose estimation, projecting camera coordinates to 3D robot base frame with millimeter precision.</li>
+          <li>Engineered Cartesian trajectory generation via MoveIt 2 alongside Image-Based Visual Servoing (IBVS) to
+            continuously update end-effector paths in real time based on active camera tracking.</li>
+          <li>Coordinated subsystems through a ROS 2 action server and behavior tree framework; achieved a Top 10
+            national rank out of 400+ teams across India.</li>
+        </ul>
+      </div>
+
+      <!-- 02: WareOps -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Autonomous Warehouse Stock Auditing AMR &amp; Active Vision System (WareOps)</span>
+          <span class="entry-right">December 2025 - August 2026</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Robotics &amp; Autonomous Systems Lab, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/WareOps" target="_blank"
+              class="link-web">github.com/WareOps</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Engineered an autonomous mobile robot for automated warehouse stock auditing, featuring autonomous aisle
+            navigation, active mast scanning, and automated digital ledger reporting.</li>
+          <li>Configured the ROS 2 Nav2 stack with SLAM Toolbox for initial mapping and AMCL for runtime localization,
+            tuning DWB local planner costmap critics for smooth traversal of narrow rack aisles.</li>
+          <li>Designed and fabricated a 2-DOF pan-tilt motorized vision mast controlled by ROS 2 action servers to sweep
+            multiple storage rack tiers during audit waypoints.</li>
+          <li>Implemented a dual-engine QR reading pipeline executing OpenCV WeChat QR detector in parallel with PyZbar
+            for high-accuracy barcode and QR decoding on damaged labels, logging results into an SQLite database.</li>
+          <li>Maintained 1:1 hardware-simulation parity between Gazebo Ignition and physical hardware comprising
+            Raspberry Pi 4, RPLidar A1M8, Arduino Nano via ros2_control, and ESP32-CAM Wi-Fi video streaming.</li>
+        </ul>
+      </div>
+
+      <!-- 03: Cave Diver -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Autonomous 6-Wheeled Subterranean Exploration Rover (CAVE_DIVER)</span>
+          <span class="entry-right">September 2026 - Present</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Electronics and Robotics Society, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/CAVE_DIVER_6_Wheeled_Rover"
+              target="_blank" class="link-web">github.com/Humobot1812/CAVE_DIVER_6_Wheeled_Rover</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Engineered an autonomous 6-wheeled robotic rover for exploration, 3D structural mapping, and environmental
+            hazard assessment in GPS-denied cave and subterranean environments.</li>
+          <li>Designed a rocker-bogie passive suspension mechanism modeled in Autodesk Fusion 360 and 3D-printed in
+            PETG, enabling all 6 driven wheels to maintain continuous terrain contact across obstacles up to 1.5× wheel
+            diameter.</li>
+          <li>Developed a multi-spectral perception system featuring a 2-DOF gimbal carrying a low-light Raspberry Pi
+            Camera v3 NoIR alongside a FLIR-compatible thermal sensor for human heat signature and hazard detection.
+          </li>
+          <li>Integrated an onboard 6-channel hazardous gas telemetry suite monitoring CO, H₂S, CH₄, LPG, and smoke
+            concentrations at 1 Hz with automated threshold alarming and safety interlocks.</li>
+          <li>Deployed SLAM Toolbox in lifelong mapping mode for 2D LiDAR-based mapping and pose estimation in
+            GPS-denied subterranean tunnels, paired with a custom web-based Flask Ground Control Station.</li>
+        </ul>
+      </div>
+
+      <!-- 04: DroneGCS -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Tactical Multi-UAV Ground Control Station (DroneGCS)</span>
+          <span class="entry-right">September 2026 - Present</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Aero Fabrication Club, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/DroneGCS" target="_blank"
+              class="link-web">github.com/Humobot1812/DroneGCS</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Developed an open-source tactical Ground Control Station in C++17 and Qt 6 / QML for simultaneous command,
+            control, and telemetry tracking of multiple UAVs operating ArduPilot and PX4 autopilots.</li>
+          <li>Engineered a real-time Heads-Up Display (HUD) parsing MAVLink v2 telemetry packets (HEARTBEAT, ATTITUDE,
+            GPS_RAW_INT, SYS_STATUS, VFR_HUD) at 10 Hz, rendering pitch/roll artificial horizon, airspeed, altitude, and
+            heading compass.</li>
+          <li>Integrated a dynamic OpenStreetMap interactive tactical map via QtLocation plugin, supporting real-time
+            multi-UAV GPS position tracking, multi-waypoint mission editing, and polygon geofence deployment.</li>
+          <li>Implemented asynchronous C++ network backends for MAVLink over UDP/TCP and serial connections, handling
+            automated parameter management (PARAM_REQUEST_LIST / PARAM_SET) and command protocols.</li>
+          <li>Integrated GStreamer-accelerated H.264 video pipelines for ultra-low latency live onboard camera streaming
+            with multi-drone telemetry overlay.</li>
+        </ul>
+      </div>
+
+      <!-- 05: SafePilot -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Beginner-Safe ROS 2 Drone Controller Stack (SafePilot)</span>
+          <span class="entry-right">September 2026 - Present</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Open-Source UAV Development</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/SafePilot" target="_blank"
+              class="link-web">github.com/Humobot1812/SafePilot</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Created an open-source ROS 2 package wrapping MAVSDK to implement software-enforced flight safety
+            envelopes and autonomous flight assistance for research and beginner UAV pilots.</li>
+          <li>Developed a joystick teleoperation node with dynamic velocity and attitude clamps that restrict maximum
+            bank angles, descent rates, and horizontal accelerations to prevent vehicle loss-of-control.</li>
+          <li>Implemented a 10 Hz 3D cylindrical geofencing monitor that applies progressive resistive velocity damping
+            as the vehicle nears boundary walls and triggers autonomous Return-to-Launch (RTL) upon perimeter breach.
+          </li>
+          <li>Integrated autonomous assistance flight modes including altitude-hold with planar joystick nudging and
+            automated landing sequences with precision descent profiling.</li>
+        </ul>
+      </div>
+
+      <!-- 06: Disaster Drone NIDAR -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Autonomous Disaster Surveillance UAV &amp; Victim Detection</span>
+          <span class="entry-right">June 2025 - January 2026</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">NIDAR 2026 National UAV Challenge, Aero Fabrication Club</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Autonomous_drone" target="_blank"
+              class="link-web">github.com/Humobot1812/Autonomous_drone</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Developed an autonomous aerial surveillance system for large-area disaster relief and victim localization,
+            capable of autonomously covering 75+ acres within 20 minutes at 25 m altitude.</li>
+          <li>Built a computational geometry pipeline using Shapely and KML boundary parsing to generate optimized
+            boustrophedon (zigzag) survey flight paths with parameterized lane overlap.</li>
+          <li>Deployed a fine-tuned YOLOv8 human detection model on the companion computer processing downward camera
+            feeds at 15 FPS, triggering autonomous loiter and target-centering routines upon detection.</li>
+          <li>Automated the complete mission lifecycle through MAVSDK Python, handling automated pre-arm checks, guided
+            takeoff, survey path traversal, interrupt-driven victim loiter, geofence compliance, and failsafe RTL.</li>
+          <li>Conducted extensive Software-In-The-Loop (SITL) validation in ArduPilot SITL with simulated visual streams
+            prior to field trials.</li>
+        </ul>
+      </div>
+
+      <!-- 07: Aerothon 2025 -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Autonomous Aerial Survey &amp; Ground Target Geolocation Drone</span>
+          <span class="entry-right">January 2025 - June 2025</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">SAE Aerothon 2025, Aero Fabrication Club, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Aerothon-25" target="_blank"
+              class="link-web">github.com/Humobot1812/Aerothon-25</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Engineered an autonomous UAV platform selected for national-level presentation at SAE Aerothon 2025,
+            integrating a Pixhawk flight controller, Raspberry Pi companion computer, and ArduPilot autopilot.</li>
+          <li>Derived and implemented a pinhole camera projection algorithm converting 2D pixel coordinates of detected
+            targets into georeferenced latitude/longitude coordinates accurate to within ±3 m from 30 m flight altitude.
+          </li>
+          <li>Trained and deployed YOLOv4-Tiny on the companion computer for real-time target panel classification and
+            bounding-box estimation at 12 FPS.</li>
+          <li>Developed a visual PID control loop computing lateral and longitudinal velocity commands to center
+            detected targets beneath the vehicle during loiter maneuvers.</li>
+        </ul>
+      </div>
+
+      <!-- 08: Diff Drive Robot -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Differential Drive Mobile Robot — ROS 2 Navigation &amp; SLAM</span>
+          <span class="entry-right">June 2025 - July 2025</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Electronics and Robotics Society, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a
+              href="https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project" target="_blank"
+              class="link-web">github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Modeled and simulated a 4-wheeled differential-drive autonomous robot from scratch using URDF/Xacro,
+            integrating collision models, wheel inertia matrices, LiDAR, and IMU sensor plugins in Gazebo.</li>
+          <li>Configured SLAM Toolbox in asynchronous mode to generate 2D occupancy grid maps in simulation mazes,
+            tuning scan-matching thresholds for sharp wall boundaries and minimal odometry drift.</li>
+          <li>Implemented AMCL particle filtering for real-time localization on saved maps, tuning covariance parameters
+            for rapid recovery during kidnapping and slippage conditions.</li>
+          <li>Configured Nav2 with NavFn global planner and DWB local planner, optimizing obstacle avoidance critics for
+            smooth trajectory generation through narrow doorway clearances.</li>
+          <li>Integrated robot_localization Extended Kalman Filter (EKF) fusing wheel odometry and IMU data to ensure
+            drift-free state estimation; authored a 12-part public tutorial series earning 7 GitHub stars.</li>
+        </ul>
+      </div>
+
+      <!-- 09: ESP32 Transmitter -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Smart Multi-Protocol ESP32 Robotics Transmitter &amp; Receiver System</span>
+          <span class="entry-right">April 2026 - July 2026</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Electronics and Robotics Society, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Smart-Multi-Protocol-ESP32-Transmitter"
+              target="_blank" class="link-web">github.com/Humobot1812/Smart-Multi-Protocol-ESP32-Transmitter</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Designed and built a modular dual-ESP32 smart remote control transmitter supporting four switchable
+            wireless protocols: NRF24L01+ (2.4 GHz low latency), ESP-NOW (peer-to-peer 250 m), Wi-Fi UDP, and Bluetooth
+            Classic.</li>
+          <li>Developed firmware utilizing the U8g2 graphics library on a 128×64 ST7920 graphical LCD, rendering
+            real-time RSSI signal strength, battery levels, channel bar graphs, and an interactive menu.</li>
+          <li>Incorporated an MPU6050 6-axis IMU enabling tilt-based gesture control, mapping physical transmitter pitch
+            and roll directly into motor velocity and steering commands.</li>
+          <li>Built a companion modular receiver unit outputting multichannel servo PWM and serial telemetry back to the
+            handheld unit.</li>
+        </ul>
+      </div>
+
+      <!-- 10: Quadcopter Drone -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Custom ESP32-S3 Quadcopter Drone with Discrete MOSFET ESCs</span>
+          <span class="entry-right">January 2026 - February 2026</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Aero Fabrication Club, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://www.youtube.com/@The_IIITians_World" target="_blank"
+              class="link-web">youtube.com/@The_IIITians_World</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Designed and assembled custom 3-phase Electronic Speed Controllers (ESCs) using discrete N-channel MOSFETs
+            and gate drivers, eliminating commercial off-the-shelf ESCs.</li>
+          <li>Implemented 6-step trapezoidal commutation firmware on an ESP32-S3 microcontroller, achieving smooth BLDC
+            motor speed control with configurable acceleration ramps.</li>
+          <li>Programmed a 500 Hz flight control PID loop reading angular rates and accelerations from an MPU6050 sensor
+            to stabilize roll, pitch, and yaw axes in real time.</li>
+          <li>Integrated a BMP280 barometric pressure sensor with accelerometer Z-axis data through a complementary
+            filter for reliable relative altitude estimation and hover stabilization.</li>
+        </ul>
+      </div>
+
+      <!-- 11: Robotic Arm -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Modular 5-DOF Robotic Arm with Geometric Inverse Kinematics</span>
+          <span class="entry-right">January 2025 - March 2025</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Electronics and Robotics Society, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Robotic_arm" target="_blank"
+              class="link-web">github.com/Humobot1812/Robotic_arm</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Designed and 3D-printed a 5-DOF articulated serial robotic arm utilizing high-torque MG996R and DS3225
+            metal-gear servo actuators.</li>
+          <li>Established Denavit-Hartenberg (DH) kinematic frames and derived closed-form geometric inverse kinematics
+            equations for real-time Cartesian point-to-point positioning on an Arduino microcontroller.</li>
+          <li>Implemented cubic polynomial trajectory interpolation to ensure smooth acceleration and deceleration
+            profiles, eliminating mechanical vibrations during rapid motion.</li>
+          <li>Designed a compliant parallel-jaw gripper capable of securely grasping objects up to 60 mm in diameter.
+          </li>
+        </ul>
+      </div>
+
+      <!-- 12: Snake Robot -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Serpentine Snake Robot Prototype with Sinusoidal Locomotion Gaits</span>
+          <span class="entry-right">October 2024 - December 2024</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Electronics and Robotics Society, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Snake_Robot" target="_blank"
+              class="link-web">github.com/Humobot1812/Snake_Robot</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Designed and constructed an 8-segment bio-inspired snake robot using modular 3D-printed body links
+            interconnected with high-torque servo joints.</li>
+          <li>Implemented Hirose serpenoid curve mathematical equations for gait generation, generating traveling
+            sinusoidal waves with controllable amplitude, frequency, and phase offset.</li>
+          <li>Evaluated multiple locomotion modes including lateral undulation for planar movement, sidewinding for
+            loose terrain, and concertina locomotion for crawling through confined PVC pipes.</li>
+        </ul>
+      </div>
+
+      <!-- 13: Hostel Attendance -->
+      <div class="entry">
+        <div class="entry-row1">
+          <span class="entry-title">Hostel Attendance &amp; Access Control Automation System</span>
+          <span class="entry-right">August 2024 - November 2024</span>
+        </div>
+        <div class="entry-row2">
+          <span class="entry-sub">Campus Automation Project, PDPM IIITDMJ</span>
+          <span class="entry-sub-right"><a href="https://github.com/Humobot1812/Hostel_Attendance_system"
+              target="_blank" class="link-web">github.com/Humobot1812/Hostel_Attendance_system</a></span>
+        </div>
+        <ul class="cv-bullets">
+          <li>Engineered an automated student check-in/check-out system deployed in the institute hostel, utilizing
+            MFRC522 RFID reader hardware interfaced with ESP8266 Wi-Fi microcontrollers.</li>
+          <li>Developed a Python Flask REST backend backed by SQLite to record real-time gate entry and exit events with
+            cryptographic timestamp verification.</li>
+          <li>Built a responsive administrative dashboard providing hostel authorities with real-time student presence
+            counts, entry violation alerts, and downloadable attendance reports.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         CERTIFICATIONS
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Certifications</div>
+      <ul class="cv-bullets">
+        <li><strong>e-Yantra Robotics Competition (e-YRC 2025–26) Finalist:</strong> Awarded by IIT Bombay for securing
+          Top 10 nationally among 400+ collegiate teams in the autonomous KrishiCobot agricultural robotics theme
+          (August 2025 – May 2026).</li>
+        <li><strong>DD Robocon 2025 Stage-2 Certificate:</strong> Awarded by Doordarshan &amp; IIT Delhi for qualifying
+          Stage 2 with Team Barbarick, scoring 86/100 in technical design and mechanism evaluations (2025).</li>
+        <li><strong>SAE Aerothon 2025 National Aerial Robotics Certificate:</strong> Awarded by SAE India for qualifying
+          Phase 2 in the national autonomous UAV surveillance challenge (June 2025).</li>
+        <li><strong>NIDAR 2026 National UAV Challenge:</strong> Certified participant in National Innovation Challenge
+          for Drone Application and Research (January 2026).</li>
+        <li><strong>Hands-on Introduction to Autonomous Systems with ROS 2 &amp; Embedded Hardware:</strong> PDPM
+          IIITDMJ Student Technical Workshop (2024).</li>
+      </ul>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         TECHNICAL SKILLS (TABULAR SENIOR FORMAT)
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Technical skills</div>
+      <table class="skills-table">
+        <tr>
+          <td class="skill-label">Programming Languages</td>
+          <td class="skill-val">Python, C++, C, JavaScript, Bash</td>
+        </tr>
+        <tr>
+          <td class="skill-label">Tools and Frameworks</td>
+          <td class="skill-val">ROS2 Humble, Nav2, ros2_control, SLAM Toolbox, AMCL, Gazebo Ignition/Classic, RViz2,
+            MoveIt 2, ArduPilot SITL, MAVSDK, DroneKit, Qt 6, QML, Flask, OpenCV, PlatformIO</td>
+        </tr>
+        <tr>
+          <td class="skill-label">Hardware and Systems</td>
+          <td class="skill-val">Raspberry Pi 4/5, NVIDIA Jetson Nano, Pixhawk (2.4.8, 6C), Arduino (Uno, Nano, Mega),
+            ESP32, ESP32-S3, ESP32-CAM, STM32, RPLidar A1M8, Discrete MOSFET ESCs, MPU6050/9250 IMU, BMP280</td>
+        </tr>
+        <tr>
+          <td class="skill-label">Technologies</td>
+          <td class="skill-val">Autonomous Mobile Robots, Simultaneous Localization and Mapping (SLAM), Robot Operating
+            System (ROS 2), Unmanned Aerial Vehicles (UAVs), Ground Control Stations (GCS), Computer Vision, Visual
+            Servoing, Object Detection (YOLOv8), MAVLink Protocol, Embedded Systems, IoT, Cyber Physical Systems</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         LANGUAGE PROFICIENCY
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Language proficiency</div>
+      <table class="lang-table">
+        <tr>
+          <td class="lang-name">English, Hindi</td>
+          <td>Full Professional Proficiency</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         MEMBERSHIPS
+    ══════════════════════════════════════════════════════════ -->
+    <div class="section">
+      <div class="section-title">Memberships</div>
+      <ul class="cv-bullets">
+        <li><strong>Electronics and Robotics Society of PDPM IIITDMJ</strong> (Coordinator, August 2024 – March 2026)
+        </li>
+        <li><strong>Aero Fabrication Club of PDPM IIITDMJ</strong> (Core Committee Member, August 2024 – Present)</li>
+      </ul>
+    </div>
+
+  </div><!-- /page-sheet -->
+
+</body>
+
+</html>
