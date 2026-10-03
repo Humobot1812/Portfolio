@@ -31,14 +31,15 @@ Robotics-focused ECE undergraduate specializing in autonomous mobile robots, UAV
 
 ## 💼 LEADERSHIP & EXPERIENCE
 
-**Coordinator — Electronics and Robotics Society (ERS)**  
+**Coordinator (March 2026 – Present) | Member (Aug 2024 – March 2026) — Electronics and Robotics Society (ERS)**  
 *PDPM IIITDM Jabalpur* | Aug 2024 – Present  
-- Mentored **50+ junior students** in hands-on robotics, covering ROS 2, autonomous systems, embedded systems, and practical robot development.
+- Elected Coordinator in March 2026; mentoring **50+ junior students** in hands-on robotics, covering ROS 2, autonomous systems, embedded systems, and practical robot development.
+- Active society member since August 2024; engineered multiple society robotics projects including 5-DOF manipulators, differential drive AMRs, and bio-inspired snake robots.
 
-**Core Committee Member — Aero Fabrication Club**  
+**Core Committee Member (May 2025 – Present) | Member (Aug 2024 – May 2025) — Aero Fabrication Club**  
 *PDPM IIITDM Jabalpur* | Aug 2024 – Present  
-- Developed autonomous UAV systems and integrated flight electronics, including ESCs, Pixhawk flight controllers, sensors, and MAVLink-based communication for competition platforms.
-- Represented the institution in national UAV challenges (SAE Aerothon 2025, NIDAR 2026), leading autonomous mission planning and flight testing.
+- Elevated to Core Committee Member in May 2025; developed autonomous UAV systems, custom MOSFET ESCs, and integrated flight electronics with Pixhawk controllers and MAVLink-based communication.
+- Represented the institution in national UAV challenges (SAE Aerothon 2025, NIDAR 2026), leading autonomous mission planning, boustrophedon survey algorithms, and flight testing.
 
 ---
 
