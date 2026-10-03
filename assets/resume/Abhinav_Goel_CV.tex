@@ -93,137 +93,133 @@
 % ─────────────────────────────────────────────────────────
 \cvsection{Research and development experience}
 
-\textbf{Autonomous Agricultural Harvesting Robot (KrishiCobot)} \hfill \textit{August 2025 - May 2026}\\
+\textbf{Autonomous Agricultural Multi-Robot System (KrishiCobot)} \hfill \textit{August 2025 - May 2026}\\
 \textit{e-Yantra Robotics Competition 2025–26, IIT Bombay} \hfill \textit{\href{https://github.com/Humobot1812/Krishi_Cobot}{github.com/Humobot1812/Krishi\_Cobot}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Architected and developed a full-stack autonomous harvesting robot integrating an AMR mobile base with a 6-DOF UR5 robotic arm, operating autonomously in complex orchard rows within Gazebo Ignition.
-  \item Constructed a multi-sensor navigation pipeline fusing 2D planar LiDAR, ultrasonic range arrays, IMU, and wheel odometry inside ROS 2 Nav2, utilizing AMCL localization to achieve repeatable navigation in narrow crop corridors.
-  \item Developed a two-tier perception pipeline integrating YOLOv8 for fruit classification and ArUco markers for 6-DOF pose estimation, projecting camera coordinates to 3D robot base frame with millimeter precision.
-  \item Engineered Cartesian trajectory generation via MoveIt 2 alongside Image-Based Visual Servoing (IBVS) to continuously update end-effector paths in real time based on active camera tracking.
-  \item Coordinated subsystems through a ROS 2 action server and behavior tree framework; achieved a Top 10 national rank out of 400+ teams across India.
+  \item Developed a multi-robot agricultural system integrating an autonomous mobile robot (eBot) for greenhouse navigation with a dock-based UR5 manipulator for automated fruit and fertilizer handling in Gazebo.
+  \item Implemented a LiDAR-based RANSAC shape detector converting polar scans to Cartesian clusters, fitting lines and verifying vertex angles to classify triangular (fertilizer) and square (bad health) plant markers.
+  \item Engineered a vision pipeline utilizing ArUco markers, HSV color segmentation, contour centroid extraction, and IQR depth filtering, broadcasting dynamic TF2 transforms for targets and docking stations.
+  \item Programmed UR5 delta-twist servo control and PID positioning with intermediate waypoints to avoid kinematic singularities; qualified as a Top 10 National Finalist among 400+ collegiate teams across India.
 \end{itemize}
 
 \vspace{3pt}
 \textbf{Autonomous Warehouse Stock Auditing AMR \& Active Vision System (WareOps)} \hfill \textit{December 2025 - August 2026}\\
-\textit{Robotics \& Autonomous Systems Lab, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/WareOps}{github.com/WareOps}}
+\textit{Robotics \& Autonomous Systems, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/WareOps}{github.com/WareOps}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Engineered an autonomous mobile robot for automated warehouse stock auditing, featuring autonomous aisle navigation, active mast scanning, and automated digital ledger reporting.
-  \item Configured the ROS 2 Nav2 stack with SLAM Toolbox for initial mapping and AMCL for runtime localization, tuning DWB local planner costmap critics for smooth traversal of narrow rack aisles.
-  \item Designed and fabricated a 2-DOF pan-tilt motorized vision mast controlled by ROS 2 action servers to sweep multiple storage rack tiers during audit waypoints.
-  \item Implemented a dual-engine QR reading pipeline executing OpenCV WeChat QR detector in parallel with PyZbar for high-accuracy barcode and QR decoding on damaged labels, logging results into an SQLite database.
-  \item Maintained 1:1 hardware-simulation parity between Gazebo Ignition and physical hardware comprising Raspberry Pi 4, RPLidar A1M8, Arduino Nano via ros2\_control, and ESP32-CAM Wi-Fi video streaming.
+  \item Architected a distributed ROS 2 Humble AMR system splitting workloads over Wi-Fi between an onboard Raspberry Pi 4 (navigation/control) and a remote operator workstation (vision/logging/teleop).
+  \item Developed a custom C++ ros2\_control hardware interface plugin (diffdrive\_arduino) over USB serial with an Arduino Nano running ROSArduinoBridge firmware for motor PID control and quadrature encoder feedback.
+  \item Configured SLAM Toolbox for 2D mapping and Nav2 with AMCL for autonomous rack-to-rack path planning and obstacle avoidance using an RPLidar A1M8 in physical warehouse environments.
+  \item Engineered an active-vision scanning mast with an ESP32-CAM Wi-Fi MJPEG stream and HTTP pan-tilt servo tracking, running OpenCV WeChat QR and PyZbar to decode rack barcodes and log records to Excel and CSV ledgers.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Autonomous 6-Wheeled Subterranean Exploration Rover (CAVE\_DIVER)} \hfill \textit{September 2026 - Present}\\
-\textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/CAVE_DIVER_6_Wheeled_Rover}{github.com/Humobot1812/CAVE\_DIVER\_6\_Wheeled\_Rover}}
+\textbf{CAVE DIVER — Autonomous 6-Wheeled Subterranean Exploration Rover} \hfill \textit{September 2026 - Present}\\
+\textit{Smart India Hackathon 2026, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/CAVE_DIVER_6_Wheeled_Rover}{github.com/Humobot1812/CAVE\_DIVER\_6\_Wheeled\_Rover}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Engineered an autonomous 6-wheeled robotic rover for exploration, 3D structural mapping, and environmental hazard assessment in GPS-denied cave and subterranean environments.
-  \item Designed a rocker-bogie passive suspension mechanism modeled in Autodesk Fusion 360 and 3D-printed in PETG, enabling all 6 driven wheels to maintain continuous terrain contact across obstacles up to 1.5× wheel diameter.
-  \item Developed a multi-spectral perception system featuring a 2-DOF gimbal carrying a low-light Raspberry Pi Camera v3 NoIR alongside a FLIR-compatible thermal sensor for human heat signature and hazard detection.
-  \item Integrated an onboard 6-channel hazardous gas telemetry suite monitoring CO, H\textsubscript{2}S, CH\textsubscript{4}, LPG, and smoke concentrations at 1 Hz with automated threshold alarming and safety interlocks.
-  \item Deployed SLAM Toolbox in lifelong mapping mode for 2D LiDAR-based mapping and pose estimation in GPS-denied subterranean tunnels, paired with a custom web-based Flask Ground Control Station.
+  \item Engineered an autonomous 6-wheeled robotic rover platform in Ignition Gazebo (Fortress) with custom Armo\_bot URDF and cave SDF worlds for GPS-denied subterranean reconnaissance and hazard monitoring.
+  \item Integrated dual-spectrum visual inspection, capturing synchronized optical RGB (/camera/image\_raw) and LWIR thermal (/thermal/image\_raw) video feeds with tactical HUD overlays for survivor and obstacle detection.
+  \item Developed an atmospheric hazard telemetry suite continuously monitoring six environmental parameters: Temperature, Relative Humidity, CO\textsubscript{2}, O\textsubscript{2}, Methane (CH\textsubscript{4}), and Carbon Monoxide (CO).
+  \item Built a web Ground Control Station in Flask 3.1 \& HTML5/WebSocket (port 5001) rendering live dual feeds, gas dials, a 2D LiDAR radar sweep display, spotlight control, and QR matrix landmark navigation via ros\_gz\_bridge.
 \end{itemize}
 
 \vspace{3pt}
 \textbf{Tactical Multi-UAV Ground Control Station (DroneGCS)} \hfill \textit{September 2026 - Present}\\
 \textit{Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/DroneGCS}{github.com/Humobot1812/DroneGCS}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Developed an open-source tactical Ground Control Station in C++17 and Qt 6 / QML for simultaneous command, control, and telemetry tracking of multiple UAVs operating ArduPilot and PX4 autopilots.
-  \item Engineered a real-time Heads-Up Display (HUD) parsing MAVLink v2 telemetry packets (HEARTBEAT, ATTITUDE, GPS\_RAW\_INT, SYS\_STATUS, VFR\_HUD) at 10 Hz, rendering pitch/roll artificial horizon, airspeed, altitude, and heading compass.
-  \item Integrated a dynamic OpenStreetMap interactive tactical map via QtLocation plugin, supporting real-time multi-UAV GPS position tracking, multi-waypoint mission editing, and polygon geofence deployment.
-  \item Implemented asynchronous C++ network backends for MAVLink over UDP/TCP and serial connections, handling automated parameter management and command protocols.
-  \item Integrated GStreamer-accelerated H.264 video pipelines for ultra-low latency live onboard camera streaming with multi-drone telemetry overlay.
+  \item Developed a tactical Ground Control Station in C++17, Qt 6, and QML for multi-rotor, fixed-wing, and VTOL drones communicating via MAVLink v2 with ArduPilot and PX4 autopilots over UDP, TCP, and serial.
+  \item Integrated a native Tactical AI Copilot powered by Google Gemini AI, enabling natural language flight commands, automated RTL execution, and conversational telemetry SITREP briefings.
+  \item Built a Primary Flight Display (PFD) HUD with artificial horizon, Google Satellite imagery, and a live multi-channel Telemetry Oscilloscope plotting altitude, climb rate, battery voltage, and groundspeed.
+  \item Engineered a Geofence Safety Console for setting cylindrical boundaries, altitude ceilings, and keep-in/out corridors, with automated synchronization from flight controllers and low-latency GStreamer H.264 video.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Beginner-Safe ROS 2 Drone Controller Stack (SafePilot)} \hfill \textit{September 2026 - Present}\\
+\textbf{SafePilot — Intelligent Flight Assistance \& Safety Envelope System} \hfill \textit{September 2026 - Present}\\
 \textit{Open-Source UAV Development} \hfill \textit{\href{https://github.com/Humobot1812/SafePilot}{github.com/Humobot1812/SafePilot}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Created an open-source ROS 2 package wrapping MAVSDK to implement software-enforced flight safety envelopes and autonomous flight assistance for research and beginner UAV pilots.
-  \item Developed a joystick teleoperation node with dynamic velocity and attitude clamps that restrict maximum bank angles, descent rates, and horizontal accelerations to prevent vehicle loss-of-control.
-  \item Implemented a 10 Hz 3D cylindrical geofencing monitor that applies progressive resistive velocity damping as the vehicle nears boundary walls and triggers autonomous Return-to-Launch (RTL) upon perimeter breach.
-  \item Integrated autonomous assistance flight modes including altitude-hold with planar joystick nudging and automated landing sequences with precision descent profiling.
+  \item Created an open-source ROS 2 Humble package (safe\_pilot) wrapping MAVSDK to provide beginner-safe flight assistance and software-enforced safety envelopes for ArduPilot and PX4 drones.
+  \item Implemented 3D body-frame velocity teleoperation via gamepad/joystick with single-button discrete flight commands (Arm, Takeoff, Land, RTL, Hold, Kill) and live speed scaling via D-pad.
+  \item Engineered a multi-core AI hand gesture control worker process with CPU affinity pinning and MediaPipe Hand Landmarker (TFLite XNNPACK delegate) for touchless strafe, climb, and closed-fist yaw rotation.
+  \item Configured embedded polygon geofencing with altitude ceilings triggering automated auto-RTL on boundary breach, with one-command unified Gazebo Harmonic and ArduPilot SITL simulation launch.
 \end{itemize}
 
 \vspace{3pt}
 \textbf{Autonomous Disaster Surveillance UAV \& Victim Detection} \hfill \textit{June 2025 - January 2026}\\
 \textit{NIDAR 2026 National UAV Challenge, Aero Fabrication Club} \hfill \textit{\href{https://github.com/Humobot1812/Autonomous_drone}{github.com/Humobot1812/Autonomous\_drone}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Developed an autonomous aerial surveillance system for large-area disaster relief and victim localization, capable of autonomously covering 75+ acres within 20 minutes at 25 m altitude.
-  \item Built a computational geometry pipeline using Shapely and KML boundary parsing to generate optimized boustrophedon (zigzag) survey flight paths with parameterized lane overlap.
-  \item Deployed a fine-tuned YOLOv8 human detection model on the companion computer processing downward camera feeds at 15 FPS, triggering autonomous loiter and target-centering routines upon detection.
-  \item Automated the complete mission lifecycle through MAVSDK Python, handling automated pre-arm checks, guided takeoff, survey path traversal, interrupt-driven victim loiter, geofence compliance, and failsafe RTL.
-  \item Conducted extensive Software-In-The-Loop (SITL) validation in ArduPilot SITL with simulated visual streams prior to field trials.
+  \item Developed an autonomous aerial search and rescue platform for the NIDAR 2026 National UAV Challenge, integrating computer vision, GPS mapping, and autonomous navigation using MAVSDK Python.
+  \item Implemented an autonomous survey coverage system parsing .kml polygon boundary files to systematically sweep large disaster zones at 25 m altitude.
+  \item Deployed real-time AI human detection models on live downward camera feeds, converting pixel detections to geographic GPS coordinates and dynamically controlling camera pan/tilt tracking toward victims.
+  \item Validated complete mission execution (automated arming, takeoff, waypoint traversal, victim loiter, and RTL) across ArduPilot SITL simulation and physical multirotor hardware flight tests.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Autonomous Aerial Survey \& Ground Target Geolocation Drone} \hfill \textit{January 2025 - June 2025}\\
+\textbf{Autonomous Aerial Survey \& Ground Target Geolocation Drone} \hfill \textit{May 2025 - November 2025}\\
 \textit{SAE Aerothon 2025, Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Aerothon-25}{github.com/Humobot1812/Aerothon-25}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Engineered an autonomous UAV platform selected for national-level presentation at SAE Aerothon 2025, integrating a Pixhawk flight controller, Raspberry Pi companion computer, and ArduPilot autopilot.
-  \item Derived and implemented a pinhole camera projection algorithm converting 2D pixel coordinates of detected targets into georeferenced latitude/longitude coordinates accurate to within $\pm$3 m from 30 m flight altitude.
-  \item Trained and deployed YOLOv4-Tiny on the companion computer for real-time target panel classification and bounding-box estimation at 12 FPS.
-  \item Developed a visual PID control loop computing lateral and longitudinal velocity commands to center detected targets beneath the vehicle during loiter maneuvers.
+  \item Engineered an autonomous survey and object detection drone using ROS 2, DroneKit, and Pixhawk for competitive presentation at SAE Aerothon 2025.
+  \item Deployed YOLOv4-tiny using OpenCV DNN on an onboard companion computer for real-time edge target and hotspot identification during autonomous flight.
+  \item Designed an automated mission interrupt pipeline: switches from AUTO to GUIDED mode upon target detection, descends, performs PID-based visual centering and hover inspection, then climbs and resumes survey.
+  \item Derived an image pixel-to-GPS conversion algorithm considering camera FOV, altitude, and heading, applying Haversine spatial filtering ($<$0.8 m) to eliminate duplicate hotspot coordinate records.
 \end{itemize}
 
 \vspace{3pt}
 \textbf{Differential Drive Mobile Robot — ROS 2 Navigation \& SLAM} \hfill \textit{June 2025 - July 2025}\\
 \textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Differential-Drive-ROS2-Navigation-Project}{Differential-Drive-ROS2}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Modeled and simulated a 4-wheeled differential-drive autonomous robot from scratch using URDF/Xacro, integrating collision models, wheel inertia matrices, LiDAR, and IMU sensor plugins in Gazebo.
-  \item Configured SLAM Toolbox in asynchronous mode to generate 2D occupancy grid maps in simulation mazes, tuning scan-matching thresholds for sharp wall boundaries and minimal odometry drift.
-  \item Implemented AMCL particle filtering for real-time localization on saved maps, tuning covariance parameters for rapid recovery during kidnapping and slippage conditions.
-  \item Configured Nav2 with NavFn global planner and DWB local planner, optimizing obstacle avoidance critics for smooth trajectory generation through narrow doorway clearances.
-  \item Integrated robot\_localization Extended Kalman Filter (EKF) fusing wheel odometry and IMU data to ensure drift-free state estimation; authored a 12-part public tutorial series earning 7 GitHub stars.
+  \item Constructed a complete simulation and navigation stack for a 4-wheeled differential-drive robot (Armo\_description) using ROS 2 Humble and Gazebo Harmonic.
+  \item Modeled kinematic chains, wheel inertia matrices, collision geometries, 2D LiDAR, and IMU plugins using modular URDF/Xacro macros with gazebo\_bridge integration.
+  \item Integrated robot\_localization Extended Kalman Filter (EKF) fusing wheel odometry and IMU data to produce drift-free robot state estimation in complex maze environments.
+  \item Built 2D occupancy grid maps using SLAM Toolbox and configured Nav2 with AMCL particle filtering for autonomous obstacle avoidance, global path planning, and goal pose tracking.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Smart Multi-Protocol ESP32 Robotics Transmitter \& Receiver System} \hfill \textit{April 2026 - July 2026}\\
+\textbf{Smart Multi-Protocol ESP32 Robotics Transmitter System} \hfill \textit{April 2026 - July 2026}\\
 \textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Smart-Multi-Protocol-ESP32-Transmitter}{Smart-ESP32-Transmitter}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Designed and built a modular dual-ESP32 smart remote control transmitter supporting four switchable wireless protocols: NRF24L01+ (2.4 GHz low latency), ESP-NOW (peer-to-peer 250 m), Wi-Fi UDP, and Bluetooth Classic.
-  \item Developed firmware utilizing the U8g2 graphics library on a 128×64 ST7920 graphical LCD, rendering real-time RSSI signal strength, battery levels, channel bar graphs, and an interactive menu.
-  \item Incorporated an MPU6050 6-axis IMU enabling tilt-based gesture control, mapping physical transmitter pitch and roll directly into motor velocity and steering commands.
-  \item Built a companion modular receiver unit outputting multichannel servo PWM and serial telemetry back to the handheld unit.
+  \item Designed and built a modular smart transmitter utilizing a dual-ESP32 architecture: a Controller ESP32 reading inputs and a Dashboard ESP32 managing UI and RF transmission via UART.
+  \item Interfaced 2 analog joysticks, 5 potentiometers, a 4×4 matrix keypad, and digital push buttons for comprehensive multichannel robotics teleoperation.
+  \item Programmed a 128×64 ST7920 graphical LCD using the U8g2 library, featuring boot animations, keypad password security, real-time channel bar graphs, battery monitoring, and wheel ratio configuration.
+  \item Supported four switchable wireless protocols (NRF24L01+ 2.4 GHz, ESP-NOW 250 m, Wi-Fi UDP, and Bluetooth), with an onboard MPU6050 IMU enabling tilt-based gesture control.
 \end{itemize}
 
 \vspace{3pt}
 \textbf{Custom ESP32-S3 Quadcopter Drone with Discrete MOSFET ESCs} \hfill \textit{January 2026 - February 2026}\\
-\textit{Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://www.youtube.com/@The_IIITians_World}{The\_IIITians\_World}}
+\textit{Aero Fabrication Club, PDPM IIITDMJ} \hfill \textit{\href{https://youtube.com/playlist?list=PLQcgql__dXrcVR0A4IEijRmWpTvdtAOpG}{ESP32-Quadcopter-Playlist}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Designed and assembled custom 3-phase Electronic Speed Controllers (ESCs) using discrete N-channel MOSFETs and gate drivers, eliminating commercial off-the-shelf ESCs.
-  \item Implemented 6-step trapezoidal commutation firmware on an ESP32-S3 microcontroller, achieving smooth BLDC motor speed control with configurable acceleration ramps.
-  \item Programmed a 500 Hz flight control PID loop reading angular rates and accelerations from an MPU6050 sensor to stabilize roll, pitch, and yaw axes in real time.
-  \item Integrated a BMP280 barometric pressure sensor with accelerometer Z-axis data through a complementary filter for reliable relative altitude estimation and hover stabilization.
+  \item Designed and fabricated custom 3-phase Electronic Speed Controllers (ESCs) using discrete N-channel MOSFETs and gate drivers, eliminating commercial off-the-shelf ESC modules.
+  \item Implemented 6-step trapezoidal commutation firmware on an ESP32-S3 microcontroller, achieving smooth BLDC motor speed regulation with configurable acceleration profiles.
+  \item Programmed a 500 Hz flight stabilization PID loop sampling angular velocities and accelerations from an MPU6050 6-axis IMU for real-time roll, pitch, and yaw stabilization.
+  \item Integrated a BMP280 barometric pressure sensor for relative altitude estimation and hover stabilization, validating performance through physical motor bench testing and flight trials.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Modular 5-DOF Robotic Arm with Geometric Inverse Kinematics} \hfill \textit{March 2025 - Present}\\
+\textbf{5-DOF Intelligent Robotic Arm with AI Hand Tracking \& ESP32-CAM} \hfill \textit{March 2025 - Present}\\
 \textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Robotic_arm}{github.com/Humobot1812/Robotic\_arm}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Designed and 3D-printed a 5-DOF articulated serial robotic arm utilizing high-torque MG996R and DS3225 metal-gear servo actuators.
-  \item Established Denavit-Hartenberg (DH) kinematic frames and derived closed-form geometric inverse kinematics equations for real-time Cartesian point-to-point positioning on an Arduino microcontroller.
-  \item Implemented cubic polynomial trajectory interpolation to ensure smooth acceleration and deceleration profiles, eliminating mechanical vibrations during rapid motion.
-  \item Designed a compliant parallel-jaw gripper capable of securely grasping objects up to 60 mm in diameter.
+  \item Fabricated an articulated 5-DOF robotic arm (Base, Shoulder, Elbow, Wrist, Gripper) driven by an Arduino Uno interfacing with a PCA9685 16-channel I²C servo controller.
+  \item Mounted an ESP32-CAM on the end-effector providing real-time wireless Wi-Fi video streaming of manipulation tasks to a custom desktop operator dashboard.
+  \item Developed an AI vision teleoperation pipeline in Python using OpenCV and MediaPipe, tracking 21 hand landmarks to convert human hand motion into real-time arm servo commands.
+  \item Implemented pinch gesture recognition for gripper open/close and geometric Forward and Inverse Kinematics (FK/IK) with workspace boundary checks and KP gain tuning over USB serial.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Serpentine Snake Robot Prototype with Sinusoidal Locomotion Gaits} \hfill \textit{June 2025 - July 2025}\\
+\textbf{Bio-Inspired Serpentine Snake Robot Simulation} \hfill \textit{June 2025 - July 2025}\\
 \textit{Electronics and Robotics Society, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Snake_Robot}{github.com/Humobot1812/Snake\_Robot}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Designed and constructed an 8-segment bio-inspired snake robot using modular 3D-printed body links interconnected with high-torque servo joints.
-  \item Implemented Hirose serpenoid curve mathematical equations for gait generation, generating traveling sinusoidal waves with controllable amplitude, frequency, and phase offset.
-  \item Evaluated multiple locomotion modes including lateral undulation for planar movement, sidewinding for loose terrain, and concertina locomotion for crawling through confined PVC pipes.
+  \item Engineered a bio-inspired multi-segment snake robot simulation in ROS 2 Humble and Gazebo utilizing modular snake\_robot\_description and snake\_robot\_controller packages.
+  \item Constructed modular body segments interconnected with revolute joints in URDF/Xacro, configuring Gazebo physics plugins and ros\_gz\_bridge topic communications.
+  \item Developed a custom Python controller node generating traveling sinusoidal undulation waves by publishing coordinated phase-shifted joint position commands to actuate body links.
+  \item Implemented configurable motion parameters allowing real-time adjustment of wave amplitude, frequency, and inter-joint phase offsets for smooth snake-like planar locomotion.
 \end{itemize}
 
 \vspace{3pt}
-\textbf{Hostel Attendance \& Access Control Automation System} \hfill \textit{October 2025 - November 2025}\\
+\textbf{IoT Hostel Attendance System with ESP8266 \& RFID} \hfill \textit{October 2025 - November 2025}\\
 \textit{Campus Automation Project, PDPM IIITDMJ} \hfill \textit{\href{https://github.com/Humobot1812/Hostel_Attendance_system}{Hostel\_Attendance\_system}}
 \begin{itemize}[leftmargin=1.2rem,itemsep=1.5pt,topsep=2pt,parsep=0pt]
-  \item Engineered an automated student check-in/check-out system deployed in the institute hostel, utilizing MFRC522 RFID reader hardware interfaced with ESP8266 Wi-Fi microcontrollers.
-  \item Developed a Python Flask REST backend backed by SQLite to record real-time gate entry and exit events with cryptographic timestamp verification.
-  \item Built a responsive administrative dashboard providing hostel authorities with real-time student presence counts, entry violation alerts, and downloadable attendance reports.
+  \item Engineered an IoT-based hostel attendance system utilizing an ESP8266 (NodeMCU) and an MFRC522 RFID reader interfaced via SPI with MIFARE 1K RFID cards.
+  \item Programmed automatic entry/exit state machine logic: initial RFID scan marks Time In and subsequent scan marks Time Out, tracking Student ID and gate numbers automatically.
+  \item Integrated direct cloud logging: ESP8266 transmits HTTPS POST requests over Wi-Fi to a Google Apps Script Web App (sheet.gs), updating records in real-time Google Sheets without dedicated local servers.
+  \item Developed companion firmware (rfid\_tag.ino) for writing student credentials onto RFID tags; deployed and validated system functionality in institute hostel operations.
 \end{itemize}
 
 % ─────────────────────────────────────────────────────────
