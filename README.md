@@ -4,7 +4,6 @@
 [![Full CV](https://img.shields.io/badge/Full_CV-LaTeX_Academic_Format-16427d?style=for-the-badge&logo=latex)](assets/resume/Abhinav_Goel_CV.html)
 [![ROS2](https://img.shields.io/badge/ROS_2-Humble_|_Nav2_|_SLAM-32d74b?style=for-the-badge&logo=ros)](https://Humobot1812.github.io/Portfolio/)
 [![UAV](https://img.shields.io/badge/UAV-ArduPilot_|_PX4_|_MAVLink-ff9f0a?style=for-the-badge)](https://Humobot1812.github.io/Portfolio/)
-[![Qt6](https://img.shields.io/badge/GCS-C++17_|_Qt_6_|_QML-41cd52?style=for-the-badge&logo=qt)](https://Humobot1812.github.io/Portfolio/)
 [![License](https://img.shields.io/badge/License-MIT-bf5af2?style=for-the-badge)](LICENSE)
 
 High-performance, interactive 3D robotics portfolio and comprehensive research CV for **Abhinav Goel**, Robotics & Autonomous Systems undergraduate at **PDPM Indian Institute of Information Technology, Design and Manufacturing (IIITDM), Jabalpur**. Specializing in Autonomous Mobile Robots (AMRs), Multirotor UAVs, Ground Control Stations (GCS), Manipulators, and Full-Stack ROS 2 engineering.
